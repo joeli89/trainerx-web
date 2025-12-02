@@ -380,3 +380,134 @@ footer {
 html {
     scroll-behavior: smooth;
 }
+
+/* Welcome Card Styles */
+.welcome-card-container {
+    padding: 120px 16px 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+}
+
+.welcome-card {
+    background-color: var(--bg-contrast);
+    border-radius: 34px;
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-card-container.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    margin-bottom: 80px;
+}
+
+.welcome-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--label-contrast);
+    text-align: center;
+    opacity: 0.6;
+    letter-spacing: -0.01em;
+}
+
+.app-name-text {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.26px;
+    color: var(--label-contrast);
+    text-align: center;
+}
+
+.bottom-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Animated Tagline Container */
+.animated-tagline-container {
+    width: 100%;
+    height: 32px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.animated-tagline-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.26px;
+    color: var(--label-contrast);
+    text-align: center;
+    position: absolute;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.12s linear;
+}
+
+.animated-tagline-mask {
+    background-color: var(--bg-contrast);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 34px;
+    width: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    z-index: 1;
+    transition: transform 0.12s linear, width 0.12s linear;
+}
+
+.animated-tagline-cursor {
+    position: absolute;
+    width: 2px;
+    height: 28px;
+    background-color: var(--label-contrast);
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.12s linear;
+    animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}

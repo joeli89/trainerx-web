@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TrainerX - Your Personal Training Companion">
     <title>TrainerX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,71 +31,22 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h2>Welcome to TrainerX</h2>
-                <p>Your Personal Training Companion</p>
-                <button class="cta-button" id="getStartedBtn">Get Started</button>
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <div class="container">
-                <h2>Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">💪</div>
-                        <h3>Workout Tracking</h3>
-                        <p>Track your workouts and monitor your progress</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>Progress Analytics</h3>
-                        <p>Visualize your fitness journey with detailed analytics</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Goal Setting</h3>
-                        <p>Set and achieve your fitness goals</p>
+        <div class="welcome-card-container">
+            <div class="welcome-card">
+                <div class="top-section">
+                    <div class="welcome-text">Welcome to </div>
+                    <div class="app-name-text">trainerX</div>
+                </div>
+                <div class="bottom-section">
+                    <div class="animated-tagline-container">
+                        <div class="animated-tagline-mask"></div>
+                        <div class="animated-tagline-cursor"></div>
+                        <div class="animated-tagline-text"></div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="container">
-                <h2>About TrainerX</h2>
-                <p>TrainerX is designed to help you achieve your fitness goals through comprehensive workout tracking, progress monitoring, and personalized training plans.</p>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2>Contact Us</h2>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 TrainerX. All rights reserved.</p>
         </div>
-    </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>

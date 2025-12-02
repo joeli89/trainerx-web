@@ -120,6 +120,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
+
+    // Add fade-in animation to welcome card container
+    const welcomeCardContainer = document.querySelector('.welcome-card-container');
+    if (welcomeCardContainer) {
+        welcomeCardContainer.classList.add('fade-in');
+    }
+    
+    // Initialize animated tagline
+    const taglineContainer = document.querySelector('.animated-tagline-container');
+    if (taglineContainer) {
+        new AnimatedTagline(taglineContainer);
+    }
 });
 
 // Utility function to handle page visibility
@@ -141,3 +153,229 @@ window.addEventListener('resize', function() {
         }
     }
 });
+
+// Animated Tagline Component
+class AnimatedTagline {
+    constructor(container) {
+        this.container = container;
+        this.textElement = container.querySelector('.animated-tagline-text');
+        this.cursorElement = container.querySelector('.animated-tagline-cursor');
+        this.maskElement = container.querySelector('.animated-tagline-mask');
+        
+        this.taglines = [
+            "Your AI personal trainer",
+            "Learns how you train",
+            "Coaches you in real time",
+            "Plans that evolve",
+            "Accountability, automated",
+        ];
+        
+        this.currentIndex = 0;
+        this.containerWidth = 0;
+        this.centerX = 0;
+        this.currentX = 0;
+        this.labelWidth = 0;
+        this.isAnimating = false;
+        this.isAtStart = true;
+        this.layoutReady = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Wait for layout
+        setTimeout(() => {
+            this.updateLayout();
+            this.layoutReady = true;
+            this.updateText();
+            
+            // Wait for text to be measured, then reset to center and start
+            setTimeout(() => {
+                this.resetToCenter();
+                setTimeout(() => {
+                    this.startAnimation();
+                }, 200);
+            }, 150);
+        }, 100);
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            this.updateLayout();
+            if (this.isAtStart && !this.isAnimating) {
+                this.resetToCenter();
+            }
+        });
+    }
+    
+    updateLayout() {
+        const rect = this.container.getBoundingClientRect();
+        this.containerWidth = rect.width;
+        this.centerX = this.containerWidth / 2; // Center of container
+        // Initialize currentX at center (absolute position from left)
+        if (this.currentX === 0) {
+            this.currentX = this.centerX;
+        }
+        this.updateCursorPosition();
+        this.updateMaskWidth();
+    }
+    
+    updateText() {
+        this.textElement.textContent = this.taglines[this.currentIndex];
+        // Measure text width after it renders
+        requestAnimationFrame(() => {
+            // Force a reflow to ensure text is rendered
+            void this.textElement.offsetWidth;
+            this.labelWidth = this.textElement.offsetWidth + 4;
+        });
+    }
+    
+    resetToCenter() {
+        if (!this.layoutReady || this.labelWidth === 0) return;
+        
+        this.currentX = this.centerX;
+        this.isAtStart = true;
+        this.isAnimating = false;
+        this.updateCursorPosition();
+        this.updateMaskWidth();
+        this.updateTextPosition();
+    }
+    
+    updateCursorPosition() {
+        // currentX is absolute position from left edge of container
+        // Cursor CSS starts at left: 50%, so we offset by the difference
+        const offset = this.currentX - this.centerX;
+        this.cursorElement.style.transform = `translateX(calc(-50% + ${offset}px))`;
+    }
+    
+    updateMaskWidth() {
+        // Mask extends from left: 0 to cover everything left of the cursor
+        // Cursor center is at currentX (absolute position from left)
+        // Match React Native: width = currentX + 1 for slight overlap
+        this.maskElement.style.width = `${Math.max(0, this.currentX + 1)}px`;
+        this.maskElement.style.transform = `translateX(0)`;
+    }
+    
+    updateTextPosition() {
+        if (this.isAtStart) {
+            // Text starts at center + 4px offset
+            this.textElement.style.transform = `translateX(calc(-50% + 4px))`;
+        } else {
+            // Interpolate text position based on cursor position
+            // Maps currentX from [centerX, centerX + labelWidth/2] 
+            // to translateX from [centerX + 4, centerX - labelWidth/2]
+            const fromStart = this.centerX;
+            const fromEnd = this.centerX + this.labelWidth / 2;
+            const toStart = this.centerX + 4;
+            const toEnd = this.centerX - this.labelWidth / 2;
+            
+            const progress = (this.currentX - fromStart) / (fromEnd - fromStart);
+            const interpolatedX = toStart + (toEnd - toStart) * progress;
+            const offset = interpolatedX - this.centerX;
+            
+            this.textElement.style.transform = `translateX(calc(-50% + ${offset}px))`;
+        }
+    }
+    
+    animateToRight() {
+        if (!this.layoutReady || this.labelWidth === 0 || this.isAnimating) return;
+        
+        this.isAnimating = true;
+        
+        // Wait 2 seconds before starting
+        setTimeout(() => {
+            const targetX = this.centerX + this.labelWidth / 2;
+            const duration = 1200; // 1.2 seconds
+            const startX = this.currentX;
+            const distance = targetX - startX;
+            const startTime = performance.now();
+            
+            const animate = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const eased = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                
+                this.currentX = startX + distance * eased;
+                this.updateCursorPosition();
+                this.updateMaskWidth();
+                this.updateTextPosition();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    this.isAtStart = false;
+                    this.canGoToNext();
+                }
+            };
+            
+            requestAnimationFrame(animate);
+        }, 2000); // Initial delay of 2 seconds
+    }
+    
+    animateToCenter() {
+        if (!this.layoutReady || this.isAnimating) return;
+        
+        this.isAnimating = true;
+        
+        // Wait 2.5 seconds before returning
+        setTimeout(() => {
+            const targetX = this.centerX;
+            const startX = this.currentX;
+            const distance = targetX - startX;
+            const startTime = performance.now();
+            const duration = 1200; // 1.2 seconds
+            
+            const animate = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const eased = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                
+                this.currentX = startX + distance * eased;
+                this.updateCursorPosition();
+                this.updateMaskWidth();
+                this.updateTextPosition();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Move to next tagline
+                    this.currentIndex = (this.currentIndex + 1) % this.taglines.length;
+                    this.updateText();
+                    
+                    // Reset to center and start next cycle
+                    setTimeout(() => {
+                        this.resetToCenter();
+                        setTimeout(() => {
+                            this.startAnimation();
+                        }, 100);
+                    }, 50);
+                }
+            };
+            
+            requestAnimationFrame(animate);
+        }, 2500); // Delay before returning
+    }
+    
+    canGoToNext() {
+        this.isAnimating = false;
+        this.animateToCenter();
+    }
+    
+    startAnimation() {
+        if (!this.layoutReady || this.labelWidth === 0) {
+            // Retry after text is measured
+            setTimeout(() => this.startAnimation(), 100);
+            return;
+        }
+        
+        this.animateToRight();
+    }
+}
+
