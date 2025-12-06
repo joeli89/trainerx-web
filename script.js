@@ -183,6 +183,10 @@ class AnimatedTagline {
     }
     
     init() {
+        // Initialize mask to 0 width initially
+        this.maskElement.style.width = '0px';
+        this.maskElement.style.transform = 'translateX(0)';
+        
         // Wait for layout
         setTimeout(() => {
             this.updateLayout();
@@ -217,6 +221,7 @@ class AnimatedTagline {
         }
         this.updateCursorPosition();
         this.updateMaskWidth();
+        this.updateTextPosition();
     }
     
     updateText() {
@@ -230,14 +235,14 @@ class AnimatedTagline {
     }
     
     resetToCenter() {
-        if (!this.layoutReady || this.labelWidth === 0) return;
+        if (!this.layoutReady) return;
         
         this.currentX = this.centerX;
         this.isAtStart = true;
         this.isAnimating = false;
+        this.updateTextPosition();
         this.updateCursorPosition();
         this.updateMaskWidth();
-        this.updateTextPosition();
     }
     
     updateCursorPosition() {
@@ -249,10 +254,22 @@ class AnimatedTagline {
     
     updateMaskWidth() {
         // Mask extends from left: 0 to cover everything left of the cursor
-        // Cursor center is at currentX (absolute position from left)
-        // Match React Native: width = currentX + 1 for slight overlap
-        this.maskElement.style.width = `${Math.max(0, this.currentX + 1)}px`;
-        this.maskElement.style.transform = `translateX(0)`;
+        // At start (cursor at center), mask should cover up to center to hide beginning of text
+        // As cursor moves right, mask extends to cover everything left of cursor
+        if (this.isAtStart && this.layoutReady) {
+            // At start, mask covers from left edge to center (hiding text before center)
+            // The mask starts at left: 0, so width should be centerX
+            this.maskElement.style.width = `${this.centerX}px`;
+            this.maskElement.style.transform = `translateX(0)`;
+        } else if (!this.isAtStart) {
+            // During animation, mask extends from left to current cursor position
+            this.maskElement.style.width = `${Math.max(0, this.currentX + 1)}px`;
+            this.maskElement.style.transform = `translateX(0)`;
+        } else {
+            // Initial state before layout is ready
+            this.maskElement.style.width = `0px`;
+            this.maskElement.style.transform = `translateX(0)`;
+        }
     }
     
     updateTextPosition() {
