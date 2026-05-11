@@ -70,8 +70,134 @@
         <div class="hero-media fade-up delay-1">
           <div class="hero-phone-wrap">
             <div class="hero-phone-glow"></div>
-            <div class="hero-phone">
-              <img src="images/screens/hero.png" alt="TrainerX app — your AI training plan">
+            <div class="hero-phone app-ui-phone">
+
+              <!-- iOS status bar -->
+              <div class="aui-status-bar">
+                <span class="aui-time">9:41</span>
+                <div class="aui-status-icons">
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="3" width="3" height="9" rx="0.5" fill="white" opacity="0.4"/><rect x="4.5" y="2" width="3" height="10" rx="0.5" fill="white" opacity="0.6"/><rect x="9" y="0.5" width="3" height="11.5" rx="0.5" fill="white" opacity="0.8"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5" fill="white"/></svg>
+                  <svg width="16" height="12" viewBox="0 0 24 12" fill="white"><path d="M1 4C4.31371 4 6 5.68629 6 9C6 5.68629 7.68629 4 11 4C7.68629 4 6 2.31371 6 -1C6 2.31371 4.31371 4 1 4Z" opacity="0"/><path fill-rule="evenodd" clip-rule="evenodd" d="M23.5 4.5H22.5C22.5 2.01472 20.4853 0 18 0H3C1.34315 0 0 1.34315 0 3V9C0 10.6569 1.34315 12 3 12H18C20.4853 12 22.5 9.98528 22.5 7.5H23.5C23.7761 7.5 24 7.27614 24 7V5C24 4.72386 23.7761 4.5 23.5 4.5ZM21 7.5C21 9.15685 19.6569 10.5 18 10.5H3C2.17157 10.5 1.5 9.82843 1.5 9V3C1.5 2.17157 2.17157 1.5 3 1.5H18C19.6569 1.5 21 2.85858 21 4.5V7.5Z" fill="white" opacity="0.35"/><rect x="2" y="2" width="18" height="8" rx="1" fill="white"/></svg>
+                </div>
+              </div>
+
+              <!-- Dynamic island -->
+              <div class="aui-dynamic-island"></div>
+
+              <!-- Navigation bar -->
+              <div class="aui-nav-bar">
+                <span class="aui-nav-back">
+                  <svg width="8" height="13" viewBox="0 0 8 13" fill="none"><path d="M7 1L1.5 6.5L7 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Plans
+                </span>
+                <svg class="aui-nav-action" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+
+              <!-- Plan header -->
+              <div class="aui-plan-header">
+                <div class="aui-plan-title">Lean & Strong</div>
+                <div class="aui-plan-subtitle">Phase 1 · 4 weeks</div>
+                <div class="aui-plan-stats">
+                  <div class="aui-stat">
+                    <span class="aui-stat-val">4</span>
+                    <span class="aui-stat-lbl">Workouts</span>
+                  </div>
+                  <div class="aui-stat-divider"></div>
+                  <div class="aui-stat">
+                    <div class="aui-progress-ring">
+                      <svg width="28" height="28" viewBox="0 0 28 28">
+                        <circle cx="14" cy="14" r="10" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2.5"/>
+                        <circle cx="14" cy="14" r="10" fill="none" stroke="white" stroke-width="2.5" stroke-dasharray="62.8" stroke-dashoffset="31.4" stroke-linecap="round" transform="rotate(-90 14 14)"/>
+                      </svg>
+                    </div>
+                    <span class="aui-stat-lbl">50%</span>
+                  </div>
+                  <div class="aui-stat-divider"></div>
+                  <div class="aui-stat">
+                    <span class="aui-stat-val">33m</span>
+                    <span class="aui-stat-lbl">This week</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Week label -->
+              <div class="aui-week-label">Week 2</div>
+
+              <!-- Plan day rows -->
+              <div class="aui-day-list">
+
+                <div class="aui-day-row aui-next-up">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 8 · <strong>Next Up →</strong></span>
+                    <span class="aui-day-title">Lean Power Circuit</span>
+                  </div>
+                  <div class="aui-day-icon aui-icon-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="white"/><path d="M10 8l4 4-4 4" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+
+                <div class="aui-day-row">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 9</span>
+                    <span class="aui-day-title">Metabolic Strength A</span>
+                  </div>
+                  <div class="aui-day-icon aui-icon-empty"></div>
+                </div>
+
+                <div class="aui-day-row aui-rest-day">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 10</span>
+                    <span class="aui-day-title">Rest Day</span>
+                  </div>
+                </div>
+
+                <div class="aui-day-row">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 11</span>
+                    <span class="aui-day-title">Full-Body Burn</span>
+                  </div>
+                  <div class="aui-day-icon aui-icon-empty"></div>
+                </div>
+
+                <div class="aui-day-row aui-completed">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 7 · Completed</span>
+                    <span class="aui-day-title">Athletic Tone-Up</span>
+                  </div>
+                  <div class="aui-day-icon aui-icon-done">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="white"/><path d="M5 9l3 3 5-5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+
+                <div class="aui-day-row aui-rest-day">
+                  <div class="aui-day-info">
+                    <span class="aui-day-meta">Day 12</span>
+                    <span class="aui-day-title">Rest Day</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Bottom tab bar -->
+              <div class="aui-tab-bar">
+                <div class="aui-tab">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/></svg>
+                  <span>Home</span>
+                </div>
+                <div class="aui-tab aui-tab-active">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.5"/><path d="M8 12h8M8 8h5M8 16h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span>Plans</span>
+                </div>
+                <div class="aui-tab">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z" stroke="none"/><path d="M12 4v16M4 12h16" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span>Workouts</span>
+                </div>
+                <div class="aui-tab">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span>Profile</span>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
