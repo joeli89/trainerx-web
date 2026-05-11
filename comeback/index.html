@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The trainerX Comeback Assessment — find out where you're at and get your personalised first month back. Free. Takes 3 minutes.">
+  <title>The Comeback Assessment — trainerX</title>
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="../styles.css">
+  <!-- Quiz-specific styles -->
+  <link rel="stylesheet" href="quiz.css">
+
+  <link rel="icon" type="image/png" href="../images/logo.png">
+</head>
+<body class="quiz-page dark-mode">
+
+  <!-- ─── MINIMAL HEADER ──────────────────────────────────────── -->
+  <header class="quiz-header">
+    <a href="/" class="logo-link">
+      <img src="../images/logo.svg" alt="TrainerX" class="logo-icon">
+      <span class="logo-text">trainer<span class="logo-x">X</span></span>
+    </a>
+    <!-- No nav — single-purpose page -->
+  </header>
+
+  <!-- ─── PHASE 0: LANDING ─────────────────────────────────────── -->
+  <section id="phase-landing" class="quiz-phase active">
+    <div class="quiz-container">
+      <div class="landing-eyebrow">Free · 3 minutes · No account needed</div>
+      <h1 class="landing-headline">
+        Still waiting to feel like<br>yourself again in the gym?
+      </h1>
+      <p class="landing-sub">
+        Answer 15 questions. Get your Comeback Score and a personalised first month of training — built around your injuries, your schedule, and your goals.
+      </p>
+
+      <div class="landing-value-props">
+        <div class="value-prop">
+          <span class="value-prop-icon">📊</span>
+          <span>Your Comeback Score (0–10)</span>
+        </div>
+        <div class="value-prop">
+          <span class="value-prop-icon">🎯</span>
+          <span>3 insights personalised to you</span>
+        </div>
+        <div class="value-prop">
+          <span class="value-prop-icon">💪</span>
+          <span>Week 1 training plan, ready instantly</span>
+        </div>
+      </div>
+
+      <button class="btn-primary btn-large" id="btn-start">
+        Start the assessment →
+      </button>
+
+      <p class="landing-note">
+        Built by <a href="/">trainerX</a> — AI personal training for people who've trained before.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 1: EMAIL CAPTURE ───────────────────────────────── -->
+  <section id="phase-email" class="quiz-phase">
+    <div class="quiz-container">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <div class="quiz-step-label">Before we start</div>
+      <h2 class="quiz-question">Where should we send your plan?</h2>
+      <p class="quiz-sub">Enter your details to unlock your results. We'll email your full plan too.</p>
+
+      <div class="quiz-form-group">
+        <input type="text" id="input-name" class="quiz-input" placeholder="First name" autocomplete="given-name">
+        <input type="email" id="input-email" class="quiz-input" placeholder="Email address" autocomplete="email">
+        <p class="quiz-legal">No spam. Unsubscribe any time. By continuing you agree to our
+          <a href="/legal/privacy.html" target="_blank">Privacy Policy</a>.</p>
+      </div>
+
+      <button class="btn-primary" id="btn-email-next">Start the quiz →</button>
+      <div class="quiz-error" id="email-error"></div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 2: QUESTIONS ───────────────────────────────────── -->
+  <section id="phase-questions" class="quiz-phase">
+    <div class="quiz-container">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar" id="progress-bar-q"></div>
+      </div>
+      <div class="quiz-step-label" id="q-step-label">Question 1 of 15</div>
+      <h2 class="quiz-question" id="q-text"></h2>
+      <p class="quiz-sub" id="q-sub"></p>
+      <div class="quiz-choices" id="q-choices"></div>
+      <div class="quiz-nav">
+        <button class="btn-ghost" id="btn-back">← Back</button>
+        <button class="btn-primary" id="btn-next" disabled>Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 3: LOADING ─────────────────────────────────────── -->
+  <section id="phase-loading" class="quiz-phase">
+    <div class="quiz-container quiz-container--center">
+      <div class="loading-spinner"></div>
+      <h2 class="loading-headline">Building your comeback plan...</h2>
+      <p class="loading-sub" id="loading-message">Analysing your answers</p>
+    </div>
+  </section>
+
+  <!-- ─── PHASE 4: RESULTS ─────────────────────────────────────── -->
+  <section id="phase-results" class="quiz-phase">
+    <div class="quiz-container">
+
+      <!-- Score block -->
+      <div class="results-score-block">
+        <div class="results-eyebrow">Your Comeback Score</div>
+        <div class="results-score-dial">
+          <span class="results-score-number" id="results-score">0</span>
+          <span class="results-score-out">/10</span>
+        </div>
+        <div class="results-tier-label" id="results-tier"></div>
+        <p class="results-tier-desc" id="results-tier-desc"></p>
+      </div>
+
+      <!-- Insights -->
+      <div class="results-insights">
+        <h3 class="results-section-title">3 things we noticed</h3>
+        <ul class="results-insight-list" id="results-insights"></ul>
+      </div>
+
+      <!-- Plan preview -->
+      <div class="results-plan">
+        <h3 class="results-section-title">Your Week 1 training plan</h3>
+        <p class="results-plan-sub">Built around your goal, your equipment, and your schedule.</p>
+        <div class="plan-days" id="plan-days"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="results-cta-block">
+        <p class="results-cta-message" id="results-cta-message"></p>
+        <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111"
+           class="btn-primary btn-large" target="_blank" rel="noopener" id="results-app-cta">
+          Get the full plan on the App Store →
+        </a>
+        <p class="results-cta-note">7-day free trial · No credit card required · iOS</p>
+      </div>
+
+      <!-- Footer -->
+      <div class="results-footer">
+        <a href="/">trainerx.ai</a> ·
+        <a href="/legal/privacy.html">Privacy</a> ·
+        <a href="mailto:hello@trainerx.ai">Contact</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

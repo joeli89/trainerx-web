@@ -1,54 +1,623 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TrainerX - Your Personal Training Companion">
-    <title>TrainerX</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TrainerX — AI-powered personal training plans that adapt to how you actually train. Start your free 7-day trial. No personal trainer needed.">
+  <meta property="og:title" content="TrainerX — Your AI Personal Trainer">
+  <meta property="og:description" content="Science-backed training plans that evolve with every workout. Start free today.">
+  <meta property="og:image" content="images/screens/hero.png">
+  <title>TrainerX — AI Personal Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt="TrainerX Logo"></a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-    </header>
 
-    <main>
-        <div class="welcome-card-container">
-            <div class="welcome-card">
-                <div class="bottom-section">
-                    <h2>The world's most advanced personal trainer.</h2>
+  <!-- ─── HEADER ─────────────────────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+    <nav class="nav-bar container">
+      <a href="#home" class="logo-link">
+        <img src="images/logo.svg" alt="TrainerX" class="logo-icon">
+        <span class="logo-text">trainer<span class="logo-x">X</span></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How it works</a>
+        <a href="#testimonials" class="nav-link">Reviews</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <a class="nav-cta" href="/comeback/">Start the assessment →</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ─── HERO ───────────────────────────────────────────────────── -->
+    <section id="home" class="hero-section">
+      <div class="hero-bg-gradient"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy fade-up">
+          <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            AI Personal Training
+          </div>
+          <h1 class="hero-headline">
+            Your personalised comeback plan.<br>
+            <span class="headline-accent">Built for your life now.</span>
+          </h1>
+          <p class="hero-lede">
+            Answer 15 questions about where you're at. Get a real, personalised training plan built around your schedule, your injuries, and your goals — in under 3 minutes. Free.
+          </p>
+          <div class="hero-actions">
+            <a href="/comeback/" class="btn-primary">
+              Take the free Comeback Assessment →
+            </a>
+            <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111"
+               target="_blank" rel="noopener" class="download-badge-link">
+              <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-store-badge">
+            </a>
+          </div>
+          <p class="hero-disclaimer">Takes 3 minutes · Free · No account needed</p>
+        </div>
+
+        <div class="hero-media fade-up delay-1">
+          <div class="hero-phone-wrap">
+            <div class="hero-phone-glow"></div>
+            <div class="hero-phone">
+              <img src="images/screens/hero.png" alt="TrainerX app — your AI training plan">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social proof bar -->
+      <div class="container">
+        <div class="social-proof-bar fade-up delay-2">
+          <div class="proof-item">
+            <span class="proof-stars">★★★★★</span>
+            <span class="proof-label">4.9 on the App Store</span>
+          </div>
+          <div class="proof-divider"></div>
+          <div class="proof-item">
+            <span class="proof-value">7-day</span>
+            <span class="proof-label">free trial, no card needed</span>
+          </div>
+          <div class="proof-divider"></div>
+          <div class="proof-item">
+            <span class="proof-value">£20/mo</span>
+            <span class="proof-label">vs £60+/hr for a real PT</span>
+          </div>
+          <div class="proof-divider"></div>
+          <div class="proof-item">
+            <span class="proof-value">3 min</span>
+            <span class="proof-label">quiz, plan ready instantly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HOW THE ASSESSMENT WORKS ─────────────────────────────── -->
+    <section class="assessment-how-section">
+      <div class="container">
+        <div class="section-label fade-up">Free · Takes 3 minutes</div>
+        <h2 class="section-heading fade-up">How the Comeback Assessment works</h2>
+
+        <div class="assessment-steps">
+
+          <div class="assessment-step fade-up">
+            <div class="assessment-step-number">01</div>
+            <h3>Answer 15 questions</h3>
+            <p>Your training history, your schedule, your injuries, your goal. Honest answers get you a better plan.</p>
+          </div>
+
+          <div class="assessment-step-arrow fade-up delay-1">→</div>
+
+          <div class="assessment-step fade-up delay-1">
+            <div class="assessment-step-number">02</div>
+            <h3>Get your Comeback Score</h3>
+            <p>See exactly where you're at — your training readiness rated 0–10, with three insights specific to your answers.</p>
+          </div>
+
+          <div class="assessment-step-arrow fade-up delay-2">→</div>
+
+          <div class="assessment-step fade-up delay-2">
+            <div class="assessment-step-number">03</div>
+            <h3>Unlock your first month back</h3>
+            <p>A real, personalised training plan — built around your injuries, your equipment, and the days you actually have. Week 1 delivered instantly.</p>
+          </div>
+
+        </div>
+
+        <div class="assessment-cta fade-up delay-3">
+          <a href="/comeback/" class="btn-primary">Start the assessment →</a>
+          <p class="assessment-cta-note">Free. No account required. Your plan is ready before you leave the page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROBLEM ────────────────────────────────────────────────── -->
+    <section class="problem-section">
+      <div class="container">
+        <div class="section-label fade-up">The problem</div>
+        <h2 class="section-heading fade-up">Most people train without a real plan.<br>That's why they stop seeing results.</h2>
+        <p class="section-sub fade-up">Generic fitness apps give everyone the same workouts. Real PTs cost a fortune. YouTube videos don't know your goals. There's a better way.</p>
+
+        <div class="problem-grid">
+          <div class="problem-card fade-up">
+            <div class="problem-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Personal trainers</h3>
+            <p>£60–100 per session. Two sessions a week is over £400/month. Most people can't sustain it.</p>
+            <div class="problem-tag problem-tag--bad">Unaffordable</div>
+          </div>
+          <div class="problem-card fade-up delay-1">
+            <div class="problem-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Generic fitness apps</h3>
+            <p>The same 8-week programme for every user. No idea if you're progressing. No adaptation, ever.</p>
+            <div class="problem-tag problem-tag--bad">One-size-fits-none</div>
+          </div>
+          <div class="problem-card fade-up delay-2">
+            <div class="problem-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+            <h3>YouTube workouts</h3>
+            <p>No structure, no progressive overload, no feedback loop. Random variation masquerading as a plan.</p>
+            <div class="problem-tag problem-tag--bad">No progression</div>
+          </div>
+          <div class="problem-card problem-card--solution fade-up delay-3">
+            <div class="problem-icon problem-icon--solution">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>TrainerX</h3>
+            <p>A personalised plan built for your goals, equipment, and schedule — that gets smarter every time you train.</p>
+            <div class="problem-tag problem-tag--good">£20/month</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FEATURES ───────────────────────────────────────────────── -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-label fade-up">What makes TrainerX different</div>
+        <h2 class="section-heading fade-up">Built like a real trainer.<br>Priced like an app.</h2>
+
+        <div class="features-grid">
+
+          <div class="feature-card feature-card--wide fade-up">
+            <div class="feature-card-content">
+              <div class="feature-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+              </div>
+              <h3>Truly personalised plans</h3>
+              <p>Tell TrainerX your goals, equipment, schedule, and experience. It generates a training plan built specifically for you — not a template, not a generic programme. Your plan is unique to you on day one.</p>
+            </div>
+            <div class="feature-card-visual feature-card-visual--ai">
+              <div class="ai-plan-preview">
+                <div class="plan-week">
+                  <div class="plan-day plan-day--active">
+                    <span class="plan-day-label">Mon</span>
+                    <span class="plan-day-name">Upper A</span>
+                    <span class="plan-day-sets">6 exercises</span>
+                  </div>
+                  <div class="plan-day">
+                    <span class="plan-day-label">Tue</span>
+                    <span class="plan-day-name">Rest</span>
+                    <span class="plan-day-sets">Recovery</span>
+                  </div>
+                  <div class="plan-day plan-day--active">
+                    <span class="plan-day-label">Wed</span>
+                    <span class="plan-day-name">Lower A</span>
+                    <span class="plan-day-sets">5 exercises</span>
+                  </div>
+                  <div class="plan-day plan-day--active">
+                    <span class="plan-day-label">Thu</span>
+                    <span class="plan-day-name">Upper B</span>
+                    <span class="plan-day-sets">7 exercises</span>
+                  </div>
+                  <div class="plan-day">
+                    <span class="plan-day-label">Fri</span>
+                    <span class="plan-day-name">Rest</span>
+                    <span class="plan-day-sets">Recovery</span>
+                  </div>
                 </div>
+                <div class="plan-badge">Your plan · Week 1 of 12</div>
+              </div>
             </div>
-        </div>
-    </main>
+          </div>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 TrainerX. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="legal/privacy.html">Privacy Policy</a>
-                <span class="footer-separator">|</span>
-                <a href="legal/terms.html">Terms of Service</a>
+          <div class="feature-card fade-up delay-1">
+            <div class="feature-card-content">
+              <div class="feature-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h3>Adapts after every session</h3>
+              <p>Log your sets, weights, and how hard it felt. TrainerX reads all of it and automatically adjusts your next session — harder when you're flying, lighter when you need recovery.</p>
             </div>
-        </div>
-    </footer>
+            <div class="feature-card-visual">
+              <div class="adapt-visual">
+                <div class="adapt-bar-label">Last week</div>
+                <div class="adapt-bars">
+                  <div class="adapt-bar" style="height: 40%"><span>60kg</span></div>
+                  <div class="adapt-bar" style="height: 55%"><span>65kg</span></div>
+                  <div class="adapt-bar adapt-bar--accent" style="height: 72%"><span>70kg</span></div>
+                  <div class="adapt-bar adapt-bar--projected" style="height: 85%"><span>75kg ↑</span></div>
+                </div>
+                <div class="adapt-bar-label adapt-bar-label--projected">AI projected · Next session</div>
+              </div>
+            </div>
+          </div>
 
-    <script src="script.js"></script>
+          <div class="feature-card fade-up delay-2">
+            <div class="feature-card-content">
+              <div class="feature-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <h3>AI coach in your pocket</h3>
+              <p>Real-time guidance through every set — form cues, pacing, encouragement, and answers to your questions. Like having a PT whispering in your ear, without the awkward small talk.</p>
+            </div>
+            <div class="feature-card-visual">
+              <div class="chat-preview">
+                <div class="chat-msg chat-msg--ai">
+                  <span>Your bench is looking strong today. Ready for set 3? Push for 8 reps.</span>
+                </div>
+                <div class="chat-msg chat-msg--user">
+                  <span>Done — felt easier than last week</span>
+                </div>
+                <div class="chat-msg chat-msg--ai">
+                  <span>Nice. I'll add 2.5kg next session. Recovery looking good too 🔥</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card fade-up delay-1">
+            <div class="feature-card-content">
+              <div class="feature-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <h3>Built on training science</h3>
+              <p>Not random variation — structured progressive overload, proper volume management, and intelligent deloading. The same principles elite athletes use, made accessible for everyone.</p>
+            </div>
+            <div class="feature-card-visual">
+              <div class="science-tags">
+                <span class="sci-tag">Progressive overload</span>
+                <span class="sci-tag sci-tag--accent">Volume periodisation</span>
+                <span class="sci-tag">RPE tracking</span>
+                <span class="sci-tag sci-tag--accent">Auto-deload</span>
+                <span class="sci-tag">Compound-first</span>
+                <span class="sci-tag">Recovery aware</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HOW IT WORKS ───────────────────────────────────────────── -->
+    <section id="how-it-works" class="how-section">
+      <div class="container">
+        <div class="section-label fade-up">Simple by design</div>
+        <h2 class="section-heading fade-up">From download to first workout<br>in under 5 minutes.</h2>
+
+        <div class="steps-grid">
+          <div class="step fade-up">
+            <div class="step-number">01</div>
+            <h3>Tell TrainerX about yourself</h3>
+            <p>Answer a few quick questions — your goals, fitness level, available equipment, and how many days you can train. Takes about 2 minutes.</p>
+          </div>
+          <div class="step-arrow fade-up delay-1">→</div>
+          <div class="step fade-up delay-1">
+            <div class="step-number">02</div>
+            <h3>Get your personalised plan instantly</h3>
+            <p>Your AI-generated programme is ready immediately. No waiting, no forms to fill, no human in the loop. Just your plan, built for you.</p>
+          </div>
+          <div class="step-arrow fade-up delay-2">→</div>
+          <div class="step fade-up delay-2">
+            <div class="step-number">03</div>
+            <h3>Train, log, and watch it adapt</h3>
+            <p>Complete your workouts, log how they felt. TrainerX learns from every session and continuously evolves your plan as you get stronger.</p>
+          </div>
+        </div>
+
+        <div class="how-cta fade-up delay-3">
+          <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" class="btn-primary" target="_blank" rel="noopener">Get my free plan</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ───────────────────────────────────────────── -->
+    <section id="testimonials" class="testimonials-section">
+      <div class="container">
+        <div class="section-label fade-up">Real results</div>
+        <h2 class="section-heading fade-up">Trusted by athletes who<br>got tired of guessing.</h2>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card fade-up">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">"I've tried every fitness app going. TrainerX is the first one that actually adapts to me — I had a rough week and it lightened the load automatically without me touching anything. That's never happened before."</p>
+            <div class="t-author">
+              <div class="t-avatar t-avatar">M</div>
+              <div>
+                <div class="t-name">Marcus T.</div>
+                <div class="t-detail">Training for 3 years · Gym</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card fade-up delay-1">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">"I cancelled my PT subscription after the first month with TrainerX. I'm actually getting better programming, I can train whenever I want, and I'm paying about 95% less. No brainer."</p>
+            <div class="t-author">
+              <div class="t-avatar t-avatar">P</div>
+              <div>
+                <div class="t-name">Priya K.</div>
+                <div class="t-detail">Intermediate lifter · 4 days/week</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card fade-up delay-2">
+            <div class="t-stars">★★★★★</div>
+            <p class="t-quote">"As a complete beginner, I was intimidated by the gym. TrainerX gave me a plan I could actually follow — and having the AI walk me through every set gave me the confidence I needed. Three months in and I'm hooked."</p>
+            <div class="t-author">
+              <div class="t-avatar t-avatar">T</div>
+              <div>
+                <div class="t-name">Tom A.</div>
+                <div class="t-detail">Started from scratch · Home gym</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="t-rating-summary fade-up delay-3">
+          <span class="t-stars">★★★★★</span>
+          <span>4.9 out of 5 · App Store</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PRICING ────────────────────────────────────────────────── -->
+    <section id="pricing" class="pricing-section">
+      <div class="container">
+        <div class="section-label fade-up">Pricing</div>
+        <h2 class="section-heading fade-up">Smart training.<br>Sensible pricing.</h2>
+        <p class="section-sub fade-up">Start free. Cancel any time. No commitment.</p>
+
+        <div class="pricing-grid">
+          <div class="pricing-card fade-up">
+            <div class="pricing-tier">Free</div>
+            <div class="pricing-price">£0</div>
+            <div class="pricing-desc">Try it before you commit</div>
+            <ul class="pricing-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                1 full AI-generated workout
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                AI coaching during your session
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Set logging &amp; RPE tracking
+              </li>
+            </ul>
+            <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" class="btn-secondary" target="_blank" rel="noopener">Download free</a>
+          </div>
+
+          <div class="pricing-card pricing-card--pro fade-up delay-1">
+            <div class="pricing-badge">Most popular</div>
+            <div class="pricing-tier">Pro</div>
+            <div class="pricing-price">£19.99<span>/mo</span></div>
+            <div class="pricing-desc">After your free 7-day trial</div>
+            <ul class="pricing-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Unlimited personalised training plans
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Adaptive progression — every session
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Unlimited AI coaching &amp; chat
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Progress analytics &amp; body tracking
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Weekly summaries &amp; milestones
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Cancel any time — no lock-in
+              </li>
+            </ul>
+            <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" class="btn-primary btn-primary--dark" target="_blank" rel="noopener">Start 7-day free trial</a>
+            <p class="pricing-note">No credit card required to start</p>
+          </div>
+
+          <div class="pricing-card pricing-card--compare fade-up delay-2">
+            <div class="pricing-tier">Personal trainer</div>
+            <div class="pricing-price pricing-price--expensive">£400+<span>/mo</span></div>
+            <div class="pricing-desc">Average 2 sessions/week in the UK</div>
+            <ul class="pricing-features pricing-features--crossed">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Fixed session times only
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                No in-session guidance between sessions
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                No automatic plan adaptation
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                £60–100 per individual session
+              </li>
+            </ul>
+            <div class="compare-verdict">TrainerX gives you 97% of the value at under 5% of the cost.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <section id="faq" class="faq-section">
+      <div class="container faq-inner">
+        <div class="faq-header">
+          <div class="section-label fade-up">Common questions</div>
+          <h2 class="section-heading fade-up">Everything you want<br>to know.</h2>
+        </div>
+        <div class="faq-list">
+
+          <div class="faq-item fade-up">
+            <button class="faq-q" aria-expanded="false">
+              How is TrainerX different from other fitness apps?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Most fitness apps give you a static programme — the same plan for every user that never changes. TrainerX generates a training plan built around your specific goals, equipment, and schedule from day one, and then adapts it after every single workout based on your actual performance. It's closer to having a personal trainer than using an app.</p>
+            </div>
+          </div>
+
+          <div class="faq-item fade-up delay-1">
+            <button class="faq-q" aria-expanded="false">
+              Do I need a gym membership or equipment?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>No. During setup, you tell TrainerX exactly what equipment you have access to — whether that's a fully equipped gym, a set of dumbbells at home, or bodyweight only. Your plan is built around what you actually have. It works equally well for gym-goers and home trainers.</p>
+            </div>
+          </div>
+
+          <div class="faq-item fade-up delay-2">
+            <button class="faq-q" aria-expanded="false">
+              I'm a complete beginner. Is this right for me?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Absolutely. TrainerX is designed for all fitness levels. If you're a beginner, it starts conservatively, builds your foundation, and increases the challenge gradually as you get stronger. The in-session coaching is especially useful if you're new to the gym — it walks you through every exercise so you always know what you're doing.</p>
+            </div>
+          </div>
+
+          <div class="faq-item fade-up">
+            <button class="faq-q" aria-expanded="false">
+              How does the AI adapt my plan exactly?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>After each workout, you log your sets, weights, and how hard it felt (RPE — rate of perceived exertion). TrainerX analyses this data to understand how your body is responding. If you're handling the load easily, it increases intensity. If you had a hard week, it dials things back. It also tracks patterns over time to adjust volume, exercise selection, and progression strategy.</p>
+            </div>
+          </div>
+
+          <div class="faq-item fade-up delay-1">
+            <button class="faq-q" aria-expanded="false">
+              What happens after my 7-day free trial?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>After 7 days, your subscription starts at £19.99/month. You'll be reminded before the trial ends so there are no surprises. If you decide TrainerX isn't for you, you can cancel any time before the trial ends and you won't be charged anything. No awkward cancellation process — it takes 30 seconds in the app or via your App Store settings.</p>
+            </div>
+          </div>
+
+          <div class="faq-item fade-up delay-2">
+            <button class="faq-q" aria-expanded="false">
+              Can I cancel any time?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a">
+              <p>Yes. There's no minimum commitment, no cancellation fees, and no hoops to jump through. Cancel directly from your iOS subscription settings whenever you want. Your access continues until the end of your current billing period.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FINAL CTA ──────────────────────────────────────────────── -->
+    <section class="final-cta-section">
+      <div class="final-cta-bg"></div>
+      <div class="container final-cta-inner fade-up">
+        <h2 class="final-cta-headline">
+          Your comeback plan is<br>
+          <span class="shimmer-text--dark">three minutes away.</span>
+        </h2>
+        <p class="final-cta-sub">
+          Answer 15 questions about where you're at. Get your personalised first month back — free. No account needed.
+        </p>
+        <div class="final-cta-actions">
+          <a href="/comeback/" class="btn-primary btn-primary--dark btn-primary--large">
+            Take the free assessment →
+          </a>
+          <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111"
+             target="_blank" rel="noopener" class="download-badge-link">
+            <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-store-badge">
+          </a>
+        </div>
+        <p class="final-cta-note">Or download the app directly · 7-day free trial · iOS</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/logo.svg" alt="TrainerX" class="logo-icon logo-icon--white">
+          <span>trainer<span class="logo-x">X</span></span>
+        </div>
+        <p class="footer-tagline">AI-powered personal training. Built on science, not guesswork.</p>
+        <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" target="_blank" rel="noopener">
+          <img src="images/app-store-badge.png" alt="Download on the App Store" class="footer-badge">
+        </a>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Product</div>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <a href="contact.html">Contact</a>
+          <a href="legal/privacy.html">Privacy Policy</a>
+          <a href="legal/terms.html">Terms of Service</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Get in touch</div>
+          <a href="mailto:hello@trainerx.ai">hello@trainerx.ai</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 Kaizen Technologies Ltd · Company No. 09108099</p>
+      <p>Made in the UK 🇬🇧</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
