@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Sign in — trainerX</title>
+  <!-- Fallback for the magic-link universal link (2026-08-14 rewrite).
+       If iOS routed here, the app either isn't installed or the universal
+       link fell back to the browser (long-press open-in-Safari, first-open
+       quirk, macOS). The honest recovery is the 6-digit code, which is in
+       the SAME email as the link that brought the user here — the code path
+       has never failed once. Deliberately NO "verify here in the browser":
+       a session in Safari's storage does not help the app. -->
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0; padding: 40px 24px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f7; color: #000; line-height: 1.6;
+      display: flex; justify-content: center;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #101012; color: #f5f5f7; }
+      .card { background: #1b1b1e !important; box-shadow: 0 2px 8px rgba(0,0,0,.4) !important; }
+      .muted { color: #98989d !important; }
+    }
+    .card {
+      max-width: 420px; width: 100%; background: #fff; border-radius: 12px;
+      padding: 40px 32px; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      text-align: center; height: fit-content; margin-top: 40px;
+    }
+    h1 { font-size: 24px; font-weight: 600; margin: 0 0 12px; letter-spacing: -0.5px; }
+    p { margin: 0 0 16px; font-size: 16px; }
+    .muted { color: #86868b; font-size: 14px; margin-top: 24px; }
+    .steps { text-align: left; margin: 24px 0; padding: 0 0 0 20px; font-size: 16px; }
+    .steps li { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Almost there</h1>
+    <p>Finish signing in inside the trainerX&nbsp;app:</p>
+    <ol class="steps">
+      <li>Open <strong>trainerX</strong> on your phone</li>
+      <li>Enter the <strong>6-digit code</strong> from the same email as this link</li>
+    </ol>
+    <p class="muted">The code works for an hour. If it has expired, request a fresh link from the app and use the new code.</p>
+  </div>
+</body>
+</html>

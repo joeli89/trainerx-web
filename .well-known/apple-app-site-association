@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["Z9F537W27X.ai.trainerx.app"],
+        "appID": "Z9F537W27X.ai.trainerx.app",
+        "paths": ["/auth/confirm"],
+        "components": [
+          {
+            "/": "/auth/confirm",
+            "comment": "Magic-link sign-in (token_hash). Opens the trainerX app directly from the mail client."
+          }
+        ]
+      }
+    ]
+  }
+}
