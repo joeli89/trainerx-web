@@ -13,9 +13,27 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── Header scroll state ──────────────────────────────────────────
+// Two things ride the scroll: the "scrolled" thickening, and whether the
+// glass is currently sitting over a dark section (it inverts if so, or
+// the nav links would be near-invisible against near-black).
 const header = document.getElementById('site-header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 16);
+const pill   = header.querySelector('.nav-pill');
+const darkSections = [...document.querySelectorAll('.section--dark')];
+
+const onScroll = () => {
+  header.classList.toggle('scrolled', scrollY > 16);
+
+  const r = pill.getBoundingClientRect();
+  const midY = r.top + r.height / 2;
+  const overDark = darkSections.some(sec => {
+    const s = sec.getBoundingClientRect();
+    return midY >= s.top && midY <= s.bottom;
+  });
+  header.classList.toggle('over-dark', overDark);
+};
+
 window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
 onScroll();
 
 // ── Mobile nav ───────────────────────────────────────────────────

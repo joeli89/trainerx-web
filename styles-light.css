@@ -174,23 +174,175 @@ ul { list-style: none; }
   padding: 0 16px;
   pointer-events: none;
 }
+/* ── Liquid glass ───────────────────────────────────────────────
+   Four stacked layers:
+     nav-pill  frost      backdrop blur + saturate (universal)
+     .lg-warp  refraction SVG displacement of the backdrop (Chromium)
+     .lg-sheen specular   top-lit gradient over the glass body
+     .lg-rim   edge       1px gradient ring — light wrapping the edge
+   Each layer degrades independently, so an unsupported one costs
+   nothing but its own effect.                                      */
+.lg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
 .nav-pill {
   pointer-events: auto;
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 7px 7px 7px 18px;
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border: 1px solid rgba(9,9,11,0.07);
+  border: none;
   border-radius: var(--r-full);
-  box-shadow: var(--shadow-md);
-  transition: box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+  background: rgba(255,255,255,0.62);
+  box-shadow:
+    0 8px 28px rgba(9,9,11,0.10),
+    0 2px 8px  rgba(9,9,11,0.05),
+    inset 0 1px 1px rgba(255,255,255,0.7);
+  transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease);
 }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-pill {
+    background: rgba(255,255,255,0.13);
+    -webkit-backdrop-filter: blur(11px) saturate(215%) brightness(1.10);
+            backdrop-filter: blur(11px) saturate(215%) brightness(1.10);
+  }
+}
+
+/* Layer 1 — refraction. Bends the backdrop like real glass. */
+.lg-warp {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  -webkit-backdrop-filter: url(#lg-warp);
+          backdrop-filter: url(#lg-warp);
+}
+
+/* Layer 2 — specular sheen. Lit from above, brightest along the top edge. */
+.lg-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,0.34) 0%,
+      rgba(255,255,255,0.07) 38%,
+      rgba(255,255,255,0.00) 64%,
+      rgba(255,255,255,0.13) 100%),
+    radial-gradient(130% 190% at 20% -55%,
+      rgba(255,255,255,0.40) 0%,
+      transparent 60%);
+}
+
+/* Layer 3 — edge. A 1px ring whose brightness travels around the rim. */
+.lg-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.30) 26%,
+    rgba(255,255,255,0.10) 48%,
+    rgba(255,255,255,0.45) 72%,
+    rgba(255,255,255,0.95) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* Scrolled — the glass thickens slightly over content. */
 .site-header.scrolled .nav-pill {
-  background: rgba(255,255,255,0.86);
-  box-shadow: var(--shadow-lg);
+  background: rgba(255,255,255,0.46);
+  box-shadow:
+    0 14px 40px rgba(9,9,11,0.13),
+    0 3px 10px  rgba(9,9,11,0.06),
+    inset 0 1px 1px rgba(255,255,255,0.8);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header.scrolled .nav-pill {
+    background: rgba(255,255,255,0.20);
+    -webkit-backdrop-filter: blur(16px) saturate(215%) brightness(1.12);
+            backdrop-filter: blur(16px) saturate(215%) brightness(1.12);
+  }
+}
+
+/* Over a dark section the glass inverts: smoked rather than milky, with
+   the rim dimmed so it reads as an edge catching light, not a white line. */
+.site-header.over-dark .nav-pill {
+  background: rgba(22,22,26,0.42);
+  box-shadow:
+    0 10px 34px rgba(0,0,0,0.42),
+    0 2px 8px rgba(0,0,0,0.28),
+    inset 0 1px 1px rgba(255,255,255,0.16);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header.over-dark .nav-pill {
+    background: rgba(22,22,26,0.26);
+    -webkit-backdrop-filter: blur(14px) saturate(190%) brightness(1.5);
+            backdrop-filter: blur(14px) saturate(190%) brightness(1.5);
+  }
+}
+.site-header.over-dark .lg-sheen {
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,0.16) 0%,
+      rgba(255,255,255,0.03) 40%,
+      rgba(255,255,255,0.00) 66%,
+      rgba(255,255,255,0.06) 100%),
+    radial-gradient(130% 190% at 20% -55%,
+      rgba(255,255,255,0.20) 0%,
+      transparent 60%);
+}
+.site-header.over-dark .lg-rim {
+  background: linear-gradient(145deg,
+    rgba(255,255,255,0.55) 0%,
+    rgba(255,255,255,0.14) 26%,
+    rgba(255,255,255,0.05) 48%,
+    rgba(255,255,255,0.22) 72%,
+    rgba(255,255,255,0.55) 100%);
+}
+.site-header.over-dark .nav-brand { color: #fff; }
+.site-header.over-dark .nav-link  { color: rgba(255,255,255,0.68); }
+.site-header.over-dark .nav-link:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.10);
+}
+.site-header.over-dark .nav-cta { background: #fff; color: var(--fg); }
+.site-header.over-dark .nav-cta:hover { background: rgba(255,255,255,0.86); }
+.site-header.over-dark .menu-toggle span { background: #fff; }
+
+/* Colour swaps ride the same 300ms as the glass so the whole pill
+   changes state as one object. */
+.nav-brand, .nav-link, .nav-cta, .lg-sheen, .lg-rim {
+  transition: color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+/* Nav content sits above every glass layer. */
+.nav-brand, .nav-links, .nav-cta, .menu-toggle { position: relative; z-index: 1; }
+
+/* Reduce Transparency — drop to an opaque pill, keep the rim as the edge.
+   (standing_principles.md: honour Reduce Transparency.) */
+@media (prefers-reduced-transparency: reduce) {
+  .nav-pill {
+    background: rgba(255,255,255,0.97);
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+  }
+  .site-header.scrolled .nav-pill,
+  .site-header.over-dark .nav-pill {
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+  }
+  .site-header.scrolled .nav-pill { background: rgba(255,255,255,0.99); }
+  .site-header.over-dark .nav-pill { background: rgba(18,18,21,0.97); }
+  .lg-warp, .lg-sheen { display: none; }
 }
 .nav-brand {
   display: flex;
