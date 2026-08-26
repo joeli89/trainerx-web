@@ -17,14 +17,18 @@
 </head>
 <body>
 
-<!-- Liquid-glass refraction filter (Chromium; degrades to plain frost elsewhere) -->
+<!-- Liquid-glass refraction filter (Chromium; degrades to plain frost elsewhere).
+     Tuned for a ~300x52px pill, not a full page — baseFrequency has to be high
+     enough that several noise cycles fit across the element, or you get a
+     handful of giant smeared blobs instead of a fine ripple. Filter region is
+     tight to the element so the warp doesn't bleed past the pill's edges. -->
 <svg class="lg-defs" aria-hidden="true" focusable="false">
-  <filter id="lg-warp" x="-20%" y="-20%" width="140%" height="140%"
+  <filter id="lg-warp" x="-4%" y="-8%" width="108%" height="116%"
           color-interpolation-filters="sRGB">
-    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.009"
+    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.09"
                   numOctaves="2" seed="9" result="noise"/>
-    <feGaussianBlur in="noise" stdDeviation="4" result="soft"/>
-    <feDisplacementMap in="SourceGraphic" in2="soft" scale="34"
+    <feGaussianBlur in="noise" stdDeviation="1.1" result="soft"/>
+    <feDisplacementMap in="SourceGraphic" in2="soft" scale="7"
                        xChannelSelector="R" yChannelSelector="G"/>
   </filter>
 </svg>
