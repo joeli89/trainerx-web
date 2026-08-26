@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TrainerX — your AI personal trainer for iPhone. Answer 15 questions, get a real personalised training plan built around your schedule, your injuries, and your goals.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="TrainerX — AI Personal Trainer for iPhone">
+  <meta property="og:description" content="Assess. Plan. Train. A personalised comeback plan that adapts after every session.">
+  <meta property="og:image" content="images/screens/hero.png">
+  <title>TrainerX — AI Personal Trainer for iPhone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="stylesheet" href="styles-light.css">
+</head>
+<body>
+
+<!-- ══ HEADER ═══════════════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <nav class="nav-pill">
+    <a href="#top" class="nav-brand">
+      <img src="images/logo.svg" alt="">
+      trainerX
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#assess" class="nav-link">Assess</a>
+      <a href="#train" class="nav-link">Train</a>
+      <a href="#app" class="nav-link">The app</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+    <a href="/comeback/" class="nav-cta">Start free</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══ HERO ═════════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="aurora">
+    <span class="a1"></span><span class="a2"></span><span class="a3"></span>
+    <span class="a4"></span><span class="a5"></span>
+  </div>
+
+  <div class="container">
+    <img src="images/logo.svg" alt="TrainerX" class="app-icon reveal">
+    <h1 class="display reveal d1">Assess. Plan. Train.</h1>
+    <p class="lede reveal d2">
+      TrainerX is the AI personal trainer for iPhone. Answer 15 questions and get a real
+      training plan — built around your schedule, your injuries, and the body you have now.
+    </p>
+    <div class="hero-actions reveal d3">
+      <a href="/comeback/" class="btn btn--primary btn--lg">Take the free assessment</a>
+      <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111"
+         target="_blank" rel="noopener">
+        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+      </a>
+    </div>
+    <p class="hero-note reveal d3">3 minutes · Free · No account needed</p>
+  </div>
+
+  <div class="hero-device reveal d4">
+    <!-- Plan screen -->
+    <div class="device">
+      <div class="device-screen">
+        <div class="aui-status">
+          <span class="aui-time">9:41</span>
+          <div class="aui-status-icons">
+            <svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg>
+            <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x=".5" y=".5" width="18" height="10" rx="3" stroke="#fff" stroke-opacity=".4"/><rect x="2" y="2" width="14" height="7" rx="1.6" fill="#fff"/><path d="M20 4v3a2 2 0 000-3z" fill="#fff" fill-opacity=".4"/></svg>
+          </div>
+        </div>
+        <div class="aui-island"></div>
+        <div class="aui-nav">
+          <span class="aui-nav-back">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M6 1L1.5 6 6 11" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Chat
+          </span>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="aui-head">
+          <div class="aui-title">Lean &amp; Strong</div>
+          <div class="aui-sub">Phase 1 · 4 weeks</div>
+          <div class="aui-stats">
+            <div class="aui-stat"><span class="aui-stat-v">4</span><span class="aui-stat-l">Workouts</span></div>
+            <div class="aui-stat-div"></div>
+            <div class="aui-stat">
+              <svg width="26" height="26" viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="2.6"/><circle cx="14" cy="14" r="10" fill="none" stroke="#fff" stroke-width="2.6" stroke-dasharray="62.8" stroke-dashoffset="31.4" stroke-linecap="round" transform="rotate(-90 14 14)"/></svg>
+              <span class="aui-stat-l">50%</span>
+            </div>
+            <div class="aui-stat-div"></div>
+            <div class="aui-stat"><span class="aui-stat-v">33m</span><span class="aui-stat-l">This week</span></div>
+          </div>
+        </div>
+        <div class="aui-week">Week 2</div>
+        <div class="aui-list">
+          <div class="aui-row aui-row--next">
+            <div class="aui-row-info"><span class="aui-meta">Day 8 · <b>Next Up →</b></span><span class="aui-name">Lean Power Circuit</span></div>
+            <div class="aui-dot"><svg width="21" height="21" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#000"/><path d="M10 8l4 4-4 4" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="aui-row">
+            <div class="aui-row-info"><span class="aui-meta">Day 9</span><span class="aui-name">Metabolic Strength A</span></div>
+            <div class="aui-dot aui-dot--empty"></div>
+          </div>
+          <div class="aui-row aui-row--rest">
+            <div class="aui-row-info"><span class="aui-meta">Day 10</span><span class="aui-name">Rest Day</span></div>
+          </div>
+          <div class="aui-row">
+            <div class="aui-row-info"><span class="aui-meta">Day 11</span><span class="aui-name">Full-Body Burn</span></div>
+            <div class="aui-dot aui-dot--empty"></div>
+          </div>
+          <div class="aui-row aui-row--done">
+            <div class="aui-row-info"><span class="aui-meta">Day 7 · Completed</span><span class="aui-name">Athletic Tone-Up</span></div>
+            <div class="aui-dot"><svg width="19" height="19" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#fff"/><path d="M5 9l3 3 5-5" stroke="#000" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+        <div class="aui-tabs">
+          <div class="aui-tab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" stroke="rgba(255,255,255,.34)" stroke-width="1.6"/></svg><span>Home</span></div>
+          <div class="aui-tab aui-tab--on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#fff" stroke-width="1.6"/><path d="M8 8h5M8 12h8M8 16h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg><span>Plans</span></div>
+          <div class="aui-tab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6.5 9v6M17.5 9v6M3 10.5v3M21 10.5v3M6.5 12h11" stroke="rgba(255,255,255,.34)" stroke-width="1.6" stroke-linecap="round"/></svg><span>Workouts</span></div>
+          <div class="aui-tab"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="rgba(255,255,255,.34)" stroke-width="1.6"/><path d="M4.5 20c0-3.8 3.4-6.6 7.5-6.6s7.5 2.8 7.5 6.6" stroke="rgba(255,255,255,.34)" stroke-width="1.6" stroke-linecap="round"/></svg><span>Profile</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OVERVIEW STATEMENT ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <h2 class="h2 statement reveal">
+      One plan for the body you have now.
+      <em>Not the one you had at 25.</em>
+    </h2>
+  </div>
+</section>
+
+<!-- ══ ASSESS (dark) ════════════════════════════════════════════ -->
+<section class="section section--dark" id="assess">
+  <div class="container">
+    <div class="section-head section-head--wide">
+      <span class="eyebrow eyebrow--on-dark reveal">Assess</span>
+      <h2 class="h2 reveal d1">Three minutes to know exactly where you stand.</h2>
+      <p class="lede reveal d2">
+        The Comeback Assessment asks about your training history, your schedule, your
+        injuries and your goal. Honest answers get you a better plan.
+      </p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal d1">
+        <div class="step-num">01</div>
+        <h3>Answer 15 questions</h3>
+        <p>Where you're at, what you've got, what's holding you back. No sign-up, no card, no waiting.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">02</div>
+        <h3>Get your Comeback Score</h3>
+        <p>Training readiness rated 0–10, with three insights written specifically against your answers.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">03</div>
+        <h3>Unlock your first month</h3>
+        <p>A real plan built around your injuries, your equipment and the days you actually train. Week 1 lands instantly.</p>
+      </div>
+    </div>
+
+    <div class="hero-actions reveal d4" style="margin-top:52px">
+      <a href="/comeback/" class="btn btn--on-dark btn--lg">Start the assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRAIN — adapts ═══════════════════════════════════════════ -->
+<section class="section" id="train">
+  <div class="container">
+    <div class="feature-split">
+      <div>
+        <span class="eyebrow reveal">Train</span>
+        <h2 class="h2 reveal d1" style="margin-top:20px">Log a set.<br>The plan updates.</h2>
+        <p class="lede reveal d2">
+          Enter your weights, reps and how hard it felt. TrainerX reads all of it and adjusts
+          the next session — heavier when you're flying, lighter when you need the recovery.
+          You never have to think about programming again.
+        </p>
+        <div class="pill-list reveal d3">
+          <span class="pill">Progressive overload</span>
+          <span class="pill pill--accent">Volume periodisation</span>
+          <span class="pill">RPE tracking</span>
+          <span class="pill pill--accent">Auto-deload</span>
+          <span class="pill">Compound-first</span>
+          <span class="pill">Injury-aware substitutions</span>
+        </div>
+      </div>
+
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <!-- Workout logging screen -->
+        <div class="device">
+          <div class="device-screen">
+            <div class="aui-status">
+              <span class="aui-time">18:22</span>
+              <div class="aui-status-icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x=".5" y=".5" width="18" height="10" rx="3" stroke="#fff" stroke-opacity=".4"/><rect x="2" y="2" width="11" height="7" rx="1.6" fill="#fff"/></svg>
+              </div>
+            </div>
+            <div class="aui-island"></div>
+            <div class="aui-nav">
+              <span class="aui-nav-back">
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M6 1L1.5 6 6 11" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Plan
+              </span>
+              <span style="font-family:var(--font-mono);font-size:13px;font-weight:600">24:07</span>
+            </div>
+            <div class="aui-head" style="padding-bottom:8px">
+              <div class="aui-title" style="font-size:21px">Barbell Bench</div>
+              <div class="aui-sub">Exercise 2 of 6 · Target RPE 8</div>
+            </div>
+            <div class="aui-set-head"><span>Set</span><span>KG</span><span>Reps</span><span>RPE</span></div>
+            <div class="aui-set aui-set--done"><span>Warm-up</span><span>40</span><span>10</span><span>4</span></div>
+            <div class="aui-set aui-set--done"><span>Set 1</span><span>70</span><span>8</span><span>7</span></div>
+            <div class="aui-set aui-set--done"><span>Set 2</span><span>72.5</span><span>8</span><span>8</span></div>
+            <div class="aui-set aui-set--active"><span>Set 3</span><span>75</span><span>—</span><span>—</span></div>
+            <div class="aui-keypad">
+              <div class="aui-key">7</div><div class="aui-key">8</div><div class="aui-key">9</div>
+              <div class="aui-key">4</div><div class="aui-key">5</div><div class="aui-key">6</div>
+              <div class="aui-key">1</div><div class="aui-key">2</div><div class="aui-key">3</div>
+              <div class="aui-key">.</div><div class="aui-key">0</div><div class="aui-key aui-key--go">LOG</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ A CLOSER LOOK — rail ═════════════════════════════════════ -->
+<section class="section section--gray" id="app">
+  <div class="container">
+    <div class="section-head section-head--wide">
+      <span class="eyebrow reveal">A closer look</span>
+      <h2 class="h2 reveal d1">Every part of the app.</h2>
+      <p class="lede reveal d2">
+        Your plan, your sessions, your coach, your numbers. Swipe through what TrainerX
+        actually does, screen by screen.
+      </p>
+    </div>
+  </div>
+
+  <div class="rail-wrap reveal d2">
+    <div class="rail" id="rail">
+
+      <!-- Coach chat -->
+      <div class="rail-item">
+        <div class="device device--sm">
+          <div class="device-screen">
+            <div class="aui-status"><span class="aui-time">7:12</span>
+              <div class="aui-status-icons"><svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg></div>
+            </div>
+            <div class="aui-island"></div>
+            <div class="aui-head" style="padding-bottom:10px"><div class="aui-title" style="font-size:20px">Coach</div><div class="aui-sub">Always on</div></div>
+            <div class="aui-chat">
+              <div class="aui-bubble aui-bubble--ai">Shoulder still sore from Tuesday?</div>
+              <div class="aui-bubble aui-bubble--me">A bit. Right side.</div>
+              <div class="aui-bubble aui-bubble--ai">Swapping overhead press for landmine press today — same stimulus, kinder angle. Everything else stands.</div>
+              <div class="aui-typing"><i></i><i></i><i></i></div>
+            </div>
+            <div class="aui-composer">Ask your coach anything…</div>
+          </div>
+        </div>
+        <div class="rail-caption">
+          <h3>Just ask.</h3>
+          <p>Tell it what hurts, what you skipped, what you'd rather do. The plan changes, not your excuses.</p>
+        </div>
+      </div>
+
+      <!-- Plan -->
+      <div class="rail-item">
+        <div class="device device--sm">
+          <div class="device-screen">
+            <div class="aui-status"><span class="aui-time">9:41</span>
+              <div class="aui-status-icons"><svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg></div>
+            </div>
+            <div class="aui-island"></div>
+            <div class="aui-head" style="padding-bottom:10px">
+              <div class="aui-title" style="font-size:20px">Lean &amp; Strong</div>
+              <div class="aui-sub">Phase 1 · Week 2</div>
+              <div class="aui-stats">
+                <div class="aui-stat"><span class="aui-stat-v">4</span><span class="aui-stat-l">Done</span></div>
+                <div class="aui-stat-div"></div>
+                <div class="aui-stat"><span class="aui-stat-v">50%</span><span class="aui-stat-l">Phase</span></div>
+                <div class="aui-stat-div"></div>
+                <div class="aui-stat"><span class="aui-stat-v">33m</span><span class="aui-stat-l">Week</span></div>
+              </div>
+            </div>
+            <div class="aui-list">
+              <div class="aui-row aui-row--next">
+                <div class="aui-row-info"><span class="aui-meta">Day 8 · <b>Next Up →</b></span><span class="aui-name">Lean Power Circuit</span></div>
+                <div class="aui-dot"><svg width="19" height="19" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#000"/><path d="M10 8l4 4-4 4" stroke="#fff" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+              <div class="aui-row"><div class="aui-row-info"><span class="aui-meta">Day 9</span><span class="aui-name">Metabolic Strength A</span></div><div class="aui-dot aui-dot--empty"></div></div>
+              <div class="aui-row aui-row--rest"><div class="aui-row-info"><span class="aui-meta">Day 10</span><span class="aui-name">Rest Day</span></div></div>
+              <div class="aui-row"><div class="aui-row-info"><span class="aui-meta">Day 11</span><span class="aui-name">Full-Body Burn</span></div><div class="aui-dot aui-dot--empty"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rail-caption">
+          <h3>At a glance.</h3>
+          <p>Where you are in the phase, what's next, and what you've already banked this week.</p>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="rail-item">
+        <div class="device device--sm">
+          <div class="device-screen">
+            <div class="aui-status"><span class="aui-time">21:04</span>
+              <div class="aui-status-icons"><svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg></div>
+            </div>
+            <div class="aui-island"></div>
+            <div class="aui-head" style="padding-bottom:10px"><div class="aui-title" style="font-size:20px">Bench Press</div><div class="aui-sub">Est. 1RM · 12 weeks</div></div>
+            <div class="aui-chart">
+              <div class="aui-bars">
+                <div class="aui-bar" style="height:34%"></div>
+                <div class="aui-bar" style="height:42%"></div>
+                <div class="aui-bar" style="height:39%"></div>
+                <div class="aui-bar" style="height:52%"></div>
+                <div class="aui-bar" style="height:61%"></div>
+                <div class="aui-bar" style="height:57%"></div>
+                <div class="aui-bar" style="height:73%"></div>
+                <div class="aui-bar aui-bar--hi" style="height:88%"></div>
+              </div>
+              <div class="aui-bar-axis"><span>W1</span><span>W3</span><span>W5</span><span>W7</span><span>W9</span><span>W10</span><span>W11</span><span>W12</span></div>
+            </div>
+            <div class="aui-metric-row">
+              <div class="aui-metric"><div class="aui-metric-v">92.5<span style="font-size:11px">kg</span></div><div class="aui-metric-l">Est. 1RM</div></div>
+              <div class="aui-metric"><div class="aui-metric-v">+18%</div><div class="aui-metric-l">12 weeks</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rail-caption">
+          <h3>Your story.</h3>
+          <p>Every lift tracked over time — estimated 1RM, weekly volume and where the trend is actually heading.</p>
+        </div>
+      </div>
+
+      <!-- Session -->
+      <div class="rail-item">
+        <div class="device device--sm">
+          <div class="device-screen">
+            <div class="aui-status"><span class="aui-time">18:22</span>
+              <div class="aui-status-icons"><svg width="15" height="10" viewBox="0 0 15 10" fill="#fff"><rect x="0" y="6.5" width="2.5" height="3.5" rx=".6" opacity=".45"/><rect x="4" y="4.5" width="2.5" height="5.5" rx=".6" opacity=".7"/><rect x="8" y="2.5" width="2.5" height="7.5" rx=".6"/><rect x="12" y="0" width="2.5" height="10" rx=".6"/></svg></div>
+            </div>
+            <div class="aui-island"></div>
+            <div class="aui-nav"><span class="aui-nav-back">Plan</span><span style="font-family:var(--font-mono);font-size:12px;font-weight:600">24:07</span></div>
+            <div class="aui-head" style="padding-bottom:8px"><div class="aui-title" style="font-size:19px">Barbell Bench</div><div class="aui-sub">2 of 6 · Target RPE 8</div></div>
+            <div class="aui-set-head"><span>Set</span><span>KG</span><span>Reps</span><span>RPE</span></div>
+            <div class="aui-set aui-set--done"><span>Set 1</span><span>70</span><span>8</span><span>7</span></div>
+            <div class="aui-set aui-set--done"><span>Set 2</span><span>72.5</span><span>8</span><span>8</span></div>
+            <div class="aui-set aui-set--active"><span>Set 3</span><span>75</span><span>—</span><span>—</span></div>
+            <div class="aui-keypad">
+              <div class="aui-key">7</div><div class="aui-key">8</div><div class="aui-key">9</div>
+              <div class="aui-key">4</div><div class="aui-key">5</div><div class="aui-key">6</div>
+              <div class="aui-key">1</div><div class="aui-key">2</div><div class="aui-key">3</div>
+              <div class="aui-key">.</div><div class="aui-key">0</div><div class="aui-key aui-key--go">LOG</div>
+            </div>
+          </div>
+        </div>
+        <div class="rail-caption">
+          <h3>Every set.</h3>
+          <p>A keypad built for chalky hands mid-session. Weight, reps, RPE — three taps and you're back under the bar.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="rail-hint">← Swipe →</div>
+  </div>
+</section>
+
+<!-- ══ WHY (3-up) ═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal">Why it works</span>
+      <h2 class="h2 reveal d1">Built like a real trainer.</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal d1">
+        <span class="eyebrow">Personalised</span>
+        <h3>Yours from day one.</h3>
+        <p>Not a template with your name on it. Your goals, your equipment, your schedule, your history — the plan is generated against all of it before you train once.</p>
+      </div>
+      <div class="card reveal d2">
+        <span class="eyebrow">Adaptive</span>
+        <h3>Changes as you do.</h3>
+        <p>Every logged set feeds back. Load, volume and exercise selection move with your actual performance instead of a fixed 8-week block.</p>
+      </div>
+      <div class="card reveal d3">
+        <span class="eyebrow">Evidence-led</span>
+        <h3>Real training science.</h3>
+        <p>Progressive overload, managed volume, planned deloads. The principles serious lifters use, applied without you having to run the spreadsheet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══════════════════════════════════════════════════ -->
+<section class="section section--gray" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal">Pricing</span>
+      <h2 class="h2 reveal d1">Smart training.<br>Sensible price.</h2>
+      <p class="lede reveal d2">Start free. Cancel any time. No lock-in.</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-card reveal d1">
+        <div class="price-tier">Free</div>
+        <div class="price-amount">£0</div>
+        <div class="price-desc">Try it before you commit</div>
+        <ul class="price-list">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>The full Comeback Assessment</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>One complete AI-built workout</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>In-session coaching &amp; set logging</li>
+        </ul>
+        <a href="/comeback/" class="btn btn--ghost">Start free</a>
+      </div>
+
+      <div class="price-card price-card--pro reveal d2">
+        <div class="price-badge">Most popular</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">£19.99<span>/mo</span></div>
+        <div class="price-desc">After your 7-day free trial</div>
+        <ul class="price-list">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited personalised plans</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Adaptive progression every session</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Unlimited AI coaching &amp; chat</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Progress analytics &amp; body tracking</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Weekly summaries &amp; milestones</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Cancel any time</li>
+        </ul>
+        <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" class="btn btn--primary" target="_blank" rel="noopener">Start 7-day free trial</a>
+        <p class="price-note">No card needed to start</p>
+      </div>
+
+      <div class="price-card reveal d3">
+        <div class="price-tier">A personal trainer</div>
+        <div class="price-amount">£400+<span>/mo</span></div>
+        <div class="price-desc">Two sessions a week, UK average</div>
+        <ul class="price-list price-list--muted">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Fixed session times only</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No guidance between sessions</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>No automatic plan adaptation</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>£60–100 per session</li>
+        </ul>
+        <div class="price-verdict">TrainerX gives you most of that value for <strong>under 5% of the cost</strong>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROOF ════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal">Proof</span>
+      <h2 class="h2 reveal d1">People who got tired of guessing.</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="quote reveal d1">
+        <div class="quote-stars">★★★★★</div>
+        <p>"I've tried every fitness app going. TrainerX is the first one that actually adapts to me — I had a rough week and it lightened the load on its own. That's never happened before."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">M</div>
+          <div><div class="quote-name">Marcus T.</div><div class="quote-detail">Training 3 years · Gym</div></div>
+        </div>
+      </div>
+      <div class="quote reveal d2">
+        <div class="quote-stars">★★★★★</div>
+        <p>"I cancelled my PT after the first month. I'm getting better programming, I train when I want, and I'm paying about 95% less. No brainer."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">P</div>
+          <div><div class="quote-name">Priya K.</div><div class="quote-detail">Intermediate · 4 days/week</div></div>
+        </div>
+      </div>
+      <div class="quote reveal d3">
+        <div class="quote-stars">★★★★★</div>
+        <p>"Forty-six, two dodgy knees, hadn't trained properly in eight years. It built around the knees instead of pretending they weren't there. Three months in and I'm hooked."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">T</div>
+          <div><div class="quote-name">Tom A.</div><div class="quote-detail">Back after 8 years · Home gym</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══════════════════════════════════════════════════════ -->
+<section class="section section--gray" id="faq">
+  <div class="container container--narrow">
+    <div class="section-head">
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="h2 reveal d1">Questions, answered.</h2>
+    </div>
+
+    <div class="faq-list reveal d2">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How is this different from other fitness apps?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Most apps hand you a static programme — the same plan for every user, unchanged for eight weeks. TrainerX generates a plan around your specific goals, equipment and schedule from day one, then adapts it after every single session based on what you actually lifted. It behaves far more like a trainer than an app.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do I need a gym or equipment?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>No. During the assessment you say exactly what you have access to — a full gym, a pair of dumbbells in the spare room, or nothing but bodyweight. The plan is built around what you've actually got.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">I've got an old injury. Will it account for that?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Yes — it's one of the things the assessment asks about directly. TrainerX substitutes exercises that load the same pattern through a friendlier range, and you can flag a flare-up mid-plan at any time. The programme reshapes around it rather than telling you to push through.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does the plan actually adapt?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>After each session you log sets, weights and RPE. TrainerX reads how you're responding: handling the load easily means intensity goes up; a hard week means it backs off. Over time it also adjusts total volume, exercise selection and when to schedule a deload.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What happens after the free trial?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>After 7 days your subscription starts at £19.99/month. You're reminded before the trial ends, so there are no surprises. Cancel before then and you're not charged anything — it takes about thirty seconds in your App Store settings.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I cancel any time?<span class="faq-icon"></span></button>
+        <div class="faq-a"><p>Yes. No minimum term, no cancellation fee, no retention maze. Cancel from your iOS subscription settings whenever you like and keep access until the end of the billing period.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ════════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="aurora aurora--soft" style="inset:auto -10% -30% -10%;height:640px">
+    <span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span><span class="a5"></span>
+  </div>
+  <div class="container">
+    <h2 class="display reveal">Your comeback starts in three minutes.</h2>
+    <p class="lede reveal d1">
+      Answer 15 questions. Get your Comeback Score and your first month back — free,
+      no account, no card.
+    </p>
+    <div class="hero-actions reveal d2">
+      <a href="/comeback/" class="btn btn--primary btn--lg">Take the free assessment</a>
+      <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111"
+         target="_blank" rel="noopener">
+        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+      </a>
+    </div>
+    <p class="hero-note reveal d2">7-day free trial · iOS</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-row">
+          <img src="images/logo.svg" alt="">
+          trainerX
+        </div>
+        <p class="footer-tagline">AI personal training for iPhone. Built on training science, not guesswork.</p>
+        <a href="https://apps.apple.com/gb/app/trainerx-ai-personal-trainer/id6755206111" target="_blank" rel="noopener">
+          <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#assess">Assessment</a>
+        <a href="#train">How it adapts</a>
+        <a href="#app">The app</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="contact.html">Contact</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/terms.html">Terms</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Get in touch</div>
+        <a href="mailto:hello@trainerx.ai">hello@trainerx.ai</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Kaizen Technologies Ltd · Company No. 09108099</p>
+      <p>Made in the UK 🇬🇧</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script-light.js"></script>
+</body>
+</html>
