@@ -2,6 +2,7 @@
 
 const SUPABASE_URL = 'https://psvtvitzzwesiohdmppj.supabase.co';
 const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/generate_lead_magnet_plan`;
+const EVENT_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/lead_magnet_event`;
 
 // ─── QUIZ DEFINITION ────────────────────────────────────────────
 
@@ -149,7 +150,28 @@ const state = {
   answers: {},         // { q1: 'yes', q2: 'no', ..., q11: 'inconsistent', ... }
   result: null,        // API response
   utm: {},
+  sessionId: getSessionId(),
+  contactId: null,
+  contactCapturePromise: null,
 };
+
+function uuid() {
+  if (crypto.randomUUID) return crypto.randomUUID();
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = [...bytes].map(value => value.toString(16).padStart(2, '0')).join('');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
+function getSessionId() {
+  const key = 'trainerx_comeback_session_id';
+  const existing = sessionStorage.getItem(key);
+  if (existing) return existing;
+  const created = uuid();
+  sessionStorage.setItem(key, created);
+  return created;
+}
 
 // ─── UTM CAPTURE ────────────────────────────────────────────────
 
@@ -159,6 +181,46 @@ const state = {
     if (params.has(k)) state.utm[k] = params.get(k);
   });
 })();
+
+function referrerDomain() {
+  if (!document.referrer) return null;
+  try {
+    return new URL(document.referrer).hostname;
+  } catch {
+    return null;
+  }
+}
+
+async function trackEvent(eventName, options = {}) {
+  try {
+    const response = await fetch(EVENT_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+      body: JSON.stringify({
+        event_name: eventName,
+        client_event_id: uuid(),
+        session_id: state.sessionId,
+        contact_id: state.contactId,
+        lead_submission_id: options.leadId || null,
+        path: window.location.pathname,
+        referrer_domain: referrerDomain(),
+        properties: options.properties || {},
+        contact: options.contact,
+        ...state.utm,
+      }),
+    });
+    if (!response.ok) return null;
+    const result = await response.json();
+    if (result.contact_id) state.contactId = result.contact_id;
+    return result;
+  } catch (error) {
+    console.warn('Comeback analytics unavailable:', error);
+    return null;
+  }
+}
+
+void trackEvent('landing_viewed');
 
 // ─── PHASE TRANSITIONS ──────────────────────────────────────────
 
@@ -171,7 +233,10 @@ function showPhase(name) {
 
 // ─── EMAIL PHASE ────────────────────────────────────────────────
 
-document.getElementById('btn-start').addEventListener('click', () => showPhase('email'));
+document.getElementById('btn-start').addEventListener('click', () => {
+  void trackEvent('assessment_started');
+  showPhase('email');
+});
 
 document.getElementById('btn-email-next').addEventListener('click', () => {
   const name = document.getElementById('input-name').value.trim();
@@ -190,6 +255,9 @@ document.getElementById('btn-email-next').addEventListener('click', () => {
   errorEl.textContent = '';
   state.name = name;
   state.email = email;
+  state.contactCapturePromise = trackEvent('contact_captured', {
+    contact: { name, email },
+  });
   state.currentQuestion = 0;
   renderQuestion();
   showPhase('questions');
@@ -335,6 +403,8 @@ async function submitQuiz() {
   // Infer days per week from obstacle
   const days_per_week = obstacle === 'time' ? 3 : 4;
 
+  if (state.contactCapturePromise) await state.contactCapturePromise;
+
   const payload = {
     name: state.name,
     email: state.email,
@@ -347,6 +417,8 @@ async function submitQuiz() {
     days_per_week,
     situation,
     obstacle,
+    session_id: state.sessionId,
+    contact_id: state.contactId,
     ...state.utm,
   };
 
@@ -360,6 +432,10 @@ async function submitQuiz() {
     if (!res.ok) throw new Error(`API error: ${res.status}`);
 
     state.result = await res.json();
+    void trackEvent('assessment_completed', {
+      leadId: state.result.lead_id,
+      properties: { score, tier: state.result.tier },
+    });
     renderResults(state.result);
     showPhase('results');
   } catch (err) {
@@ -518,3 +594,13 @@ function scoreToTier(score) {
   if (score <= 9) return 'almost_there';
   return 'full_comeback';
 }
+
+document.addEventListener('click', event => {
+  const target = event.target instanceof Element ? event.target : event.target.parentElement;
+  const link = target?.closest('a[href*="apps.apple.com"]');
+  if (!link) return;
+  void trackEvent('app_store_clicked', {
+    leadId: state.result?.lead_id || null,
+    properties: { placement: 'results' },
+  });
+});
