@@ -13,12 +13,14 @@
 
 const CDN = 'https://esm.sh/@paper-design/shaders@0.0.80';
 
-// colorBack is sampled from the Figma board (node 3729-570) rather than
-// Paper's #AAAAAC — the mark is drawn *against* it, so this is what sets
-// the overall value of the icon. Anything near-black kills the effect:
-// there is no tonal room left and it reads as a plain dark square.
+// colorBack is fully transparent so the shader paints the mark and
+// nothing else. The board's #E4E4E4 is applied as the host's CSS
+// background instead — that way the two drop shadows can follow the
+// mark's own outline rather than the square edge of the canvas.
+// Note: the string 'transparent' does NOT work here, the parser returns
+// mid-grey for it; an explicit zero-alpha colour is required.
 const PARAMS = {
-  colorBack:  '#E4E4E4',
+  colorBack:  'rgba(0,0,0,0)',
   colorTint:  '#FFFFFF',
   repetition: 2,
   softness:   0.1,

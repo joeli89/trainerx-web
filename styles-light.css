@@ -425,6 +425,18 @@ ul { list-style: none; }
   height: 100% !important;
   border-radius: inherit;
   z-index: 1 !important;
+
+  /* The mark's own two drop shadows, from the Figma board:
+        0 · 25 · 32  #FFFFFF 100%   (white lift under the mark)
+        0 · 67 · 80  #000000  25%   (soft cast below it)
+     Those are in the board's 1024px frame, so they are scaled by
+     --fig-scale (112 / 1024). filter: drop-shadow follows the canvas's
+     alpha, which is why colorBack is transparent — a box-shadow here
+     would just outline the square. */
+  --fig-scale: 0.109;
+  filter:
+    drop-shadow(0 calc(25px * var(--fig-scale)) calc(32px * var(--fig-scale)) #FFFFFF)
+    drop-shadow(0 calc(67px * var(--fig-scale)) calc(80px * var(--fig-scale)) rgba(0,0,0,0.25));
 }
 /* The inset the host used to provide with padding now lives here, so the
    static mark still sits correctly inside the squircle. */
