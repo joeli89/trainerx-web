@@ -67,7 +67,9 @@
   </div>
 
   <div class="container">
-    <img src="images/logo.svg" alt="TrainerX" class="app-icon reveal">
+    <div class="app-icon reveal" id="app-icon" data-logo="images/logo.svg">
+      <img src="images/logo.svg" alt="TrainerX" class="app-icon-fallback">
+    </div>
     <h1 class="display reveal d1">Assess. Plan. Train.</h1>
     <p class="lede reveal d2">
       TrainerX is the AI personal trainer for iPhone. Answer 15 questions and get a real
@@ -621,5 +623,6 @@
 </footer>
 
 <script src="script-light.js"></script>
+<script type="module" src="liquid-logo.js"></script>
 </body>
 </html>
