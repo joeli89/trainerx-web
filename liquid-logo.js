@@ -13,12 +13,12 @@
 
 const CDN = 'https://esm.sh/@paper-design/shaders@0.0.80';
 
-// Paper's own values. colorBack was black here at first to match the app
-// icon, but the metal is drawn *against* colorBack — on black there is
-// nothing left to see but a faint rim, so the shader reads as a plain
-// dark square. The mid-grey is what makes it look like metal.
+// colorBack is sampled from the Figma board (node 3729-570) rather than
+// Paper's #AAAAAC — the mark is drawn *against* it, so this is what sets
+// the overall value of the icon. Anything near-black kills the effect:
+// there is no tonal room left and it reads as a plain dark square.
 const PARAMS = {
-  colorBack:  '#AAAAAC',
+  colorBack:  '#E4E4E4',
   colorTint:  '#FFFFFF',
   repetition: 2,
   softness:   0.1,

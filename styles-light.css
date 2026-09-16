@@ -397,8 +397,15 @@ ul { list-style: none; }
   width: 112px; height: 112px;
   border-radius: 26px;
   margin: 0 auto 30px;
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(9,9,11,0.05);
-  background: var(--fg);
+  /* Measured off the Figma board (node 3729-570): the shadow peaks about
+     70px below a 602px mark and spreads ~160px at roughly 20% darkening.
+     Scaled to this icon that is a ~9px drop at a ~20px blur, over a
+     tighter contact shadow to keep it seated. */
+  box-shadow:
+    0 9px 20px rgba(9,9,11,0.20),
+    0 2px 6px  rgba(9,9,11,0.10),
+    0 0 0 1px  rgba(9,9,11,0.04);
+  background: #E4E4E4;
   /* No padding here. ShaderMount sizes its canvas from the host's
      *content* box, so padding shrank the render target and the mark got
      drawn small then upscaled. The shader's own `scale` insets it. */
