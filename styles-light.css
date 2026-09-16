@@ -392,28 +392,40 @@ ul { list-style: none; }
 }
 .hero .container { position: relative; z-index: 1; }
 .app-icon {
-  width: 88px; height: 88px;
-  border-radius: 21px;
+  /* Bigger than the old 88px: the liquid-metal shader needs room, and
+     below ~110px the banding collapses into grey mush. */
+  width: 112px; height: 112px;
+  border-radius: 26px;
   margin: 0 auto 30px;
   box-shadow: var(--shadow-lg), 0 0 0 1px rgba(9,9,11,0.05);
   background: var(--fg);
-  padding: 16px;
+  /* No padding here. ShaderMount sizes its canvas from the host's
+     *content* box, so padding shrank the render target and the mark got
+     drawn small then upscaled. The shader's own `scale` insets it. */
   position: relative;
   overflow: hidden;          /* clip the shader canvas to the squircle */
   isolation: isolate;
 }
 /* The shader canvas is injected by ShaderMount and fills the host edge
    to edge — the 16px padding only ever applies to the fallback mark. */
+/* ShaderMount hard-codes z-index:-1 on its canvas (it assumes it is a
+   background layer), which puts it *behind* the fallback mark. Override
+   it so the shader is what you actually see. */
 .app-icon > canvas {
   position: absolute;
   inset: 0;
   width: 100% !important;
   height: 100% !important;
   border-radius: inherit;
+  z-index: 1 !important;
 }
+/* The inset the host used to provide with padding now lives here, so the
+   static mark still sits correctly inside the squircle. */
 .app-icon-fallback {
   width: 100%; height: 100%;
   display: block;
+  padding: 20px;
+  box-sizing: border-box;
   transition: opacity 0.4s var(--ease);
 }
 /* Swapped only once the shader has actually mounted. */

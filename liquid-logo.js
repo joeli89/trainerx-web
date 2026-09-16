@@ -13,11 +13,12 @@
 
 const CDN = 'https://esm.sh/@paper-design/shaders@0.0.80';
 
-// Matches the app icon's own black so the squircle reads as one object.
-// Swap colorBack to '#aaaaac' for the silver-on-grey look from the
-// Paper preset instead.
+// Paper's own values. colorBack was black here at first to match the app
+// icon, but the metal is drawn *against* colorBack — on black there is
+// nothing left to see but a faint rim, so the shader reads as a plain
+// dark square. The mid-grey is what makes it look like metal.
 const PARAMS = {
-  colorBack:  '#0A0A0A',
+  colorBack:  '#AAAAAC',
   colorTint:  '#FFFFFF',
   repetition: 2,
   softness:   0.1,
