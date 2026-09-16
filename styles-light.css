@@ -353,7 +353,11 @@ ul { list-style: none; }
   letter-spacing: -0.02em;
   margin-right: 8px;
 }
-.nav-brand img { width: 22px; height: 22px; border-radius: 6px; }
+/* No border-radius here. The mark fills its viewBox edge to edge, so a
+   radius clips the four corner squares into petals and the X stops
+   reading. Sized up a little too — below ~24px the notches between the
+   blocks close up and it turns into a blob. */
+.nav-brand img { width: 25px; height: 25px; }
 .nav-links { display: flex; align-items: center; gap: 2px; }
 .nav-link {
   padding: 8px 13px;
@@ -716,7 +720,7 @@ ul { list-style: none; }
 .site-footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 72px 0 40px; }
 .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; }
 .footer-brand-row { display: flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
-.footer-brand-row img { width: 24px; height: 24px; border-radius: 7px; }
+.footer-brand-row img { width: 26px; height: 26px; }
 .footer-tagline { font-size: 14px; color: var(--fg-secondary); margin: 14px 0 22px; max-width: 34ch; line-height: 1.6; }
 .footer-col-title { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 16px; }
 .footer-col a { display: block; font-size: 14.5px; color: var(--fg-secondary); padding: 5px 0; transition: color 0.15s; }
