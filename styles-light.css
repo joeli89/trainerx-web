@@ -347,11 +347,7 @@ ul { list-style: none; }
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-right: 8px;
+  margin-right: 6px;
 }
 /* No border-radius here. The mark fills its viewBox edge to edge, so a
    radius clips the four corner squares into petals and the X stops
