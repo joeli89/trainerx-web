@@ -936,13 +936,15 @@ ul { list-style: none; }
 .guide-table thead th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); background: var(--bg-secondary); }
 .guide-table tbody th { font-family: var(--font-mono); font-weight: 600; color: var(--accent-ink); width: 56px; }
 .guide-table td:nth-child(3), .guide-table td:nth-child(4) { font-family: var(--font-mono); width: 64px; }
+.guide-table td:nth-child(5) { font-family: var(--font-mono); width: 80px; white-space: nowrap; }
 .guide-table tbody tr:last-child th, .guide-table tbody tr:last-child td { border-bottom: 0; }
 /* Text tables (price guides): row headers are prose, not codes, and no column is a fixed-width numeric cell */
 .guide-table--text tbody th { font-family: var(--font-sans); font-weight: 500; color: var(--fg); width: auto; }
 .guide-table--text td:nth-child(3), .guide-table--text td:nth-child(4) { font-family: var(--font-sans); width: auto; }
 .guide-table--text td:last-child { white-space: nowrap; font-family: var(--font-mono); font-size: 14.5px; color: var(--fg); }
-.guide-sources { font-size: 14px; color: var(--fg-muted); margin-top: -10px !important; }
+.guide-sources, .guide-table-note { font-size: 14px; color: var(--fg-muted); margin-top: -10px !important; }
 .guide-sources a { color: var(--fg-secondary); }
+.guide-table-note { margin-top: -12px !important; margin-bottom: 26px !important; }
 
 .guide-figure { margin: 26px 0 30px; text-align: center; }
 .guide-figure img { max-width: 320px; width: 100%; height: auto; border-radius: 28px; box-shadow: var(--shadow-lg); }
@@ -963,6 +965,9 @@ ul { list-style: none; }
 
 @media (max-width: 640px) {
   .guide { padding-top: 108px; }
+  /* Five-column session table: let it keep its natural width and swipe inside
+     .guide-table-wrap, rather than crushing the Exercise column into five lines. */
+  .guide-table:not(.guide-table--text) { min-width: 540px; }
   .guide-article { padding: 0 18px; }
   .guide-body { font-size: 16.5px; }
   .guide-app { padding: 18px 18px 18px 20px; }
