@@ -889,3 +889,80 @@ ul { list-style: none; }
   .device { width: 270px; height: 560px; }
   .footer-top { grid-template-columns: 1fr; gap: 34px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   GUIDES — long-form article pages, light design
+   Content must render without JS: no .reveal classes on article text.
+   ═══════════════════════════════════════════════════════════════ */
+.guide { padding: 132px 0 96px; background: var(--bg); }
+.guide-article { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+.guide-breadcrumb { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 28px; }
+.guide-breadcrumb a { color: var(--fg-secondary); text-decoration: none; }
+.guide-breadcrumb a:hover { color: var(--fg); }
+.guide-breadcrumb span[aria-hidden] { margin: 0 8px; }
+
+.guide-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.guide-title { font-size: clamp(36px, 5.4vw, 56px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.06; color: var(--fg); margin: 0 0 20px; }
+.guide-byline { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14.5px; color: var(--fg-secondary); padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 36px; }
+
+.guide-body { font-size: 18px; line-height: 1.7; color: #26262b; letter-spacing: -0.005em; }
+.guide-body > p, .guide-body > ul, .guide-faq p { margin: 0 0 20px; }
+.guide-body strong { color: var(--fg); font-weight: 600; }
+.guide-body a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(109,74,255,0.35); }
+.guide-body a:hover { text-decoration-color: var(--accent-ink); }
+
+.guide-body h2 { font-size: clamp(26px, 3.2vw, 34px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: var(--fg); margin: 56px 0 18px; padding-top: 32px; border-top: 1px solid var(--border); }
+.guide-body h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; color: var(--fg); margin: 36px 0 12px; }
+.guide-body ul { padding-left: 22px; }
+.guide-body li { margin-bottom: 8px; }
+.guide-body li::marker { color: var(--fg-muted); }
+
+.guide-note { margin: 28px 0; padding: 16px 20px; border-radius: var(--r-md); background: var(--bg-secondary); border: 1px solid var(--border); font-size: 15.5px; color: var(--fg-secondary); }
+.guide-note p { margin: 0; }
+.guide-note strong { color: var(--fg); }
+
+/* "How trainerX does this bit" — tinted panel, accent left border */
+.guide-app { margin: 30px 0 38px; padding: 22px 24px 22px 26px; border-radius: var(--r-md); background: var(--accent-soft); border: 1px solid rgba(109,74,255,0.16); border-left: 3px solid var(--accent); font-size: 16px; line-height: 1.65; color: #2b2540; }
+.guide-app p { margin: 0 0 14px; }
+.guide-app p:last-child { margin-bottom: 0; }
+.guide-app-label { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 10px !important; }
+.guide-app-cta { display: inline-block; font-weight: 600; text-decoration: none !important; padding: 11px 18px; border-radius: var(--r-full); background: var(--fg); color: #fff !important; font-size: 15px; box-shadow: var(--shadow-md); transition: background 0.18s var(--ease), transform 0.18s var(--ease); }
+.guide-app-cta:hover { background: #262629; }
+.guide-app-cta:active { transform: scale(0.975); }
+.guide-app-alt { font-size: 14.5px; color: var(--fg-secondary); margin-top: 14px !important; }
+
+/* Session table */
+.guide-table-wrap { overflow-x: auto; margin: 22px 0 26px; -webkit-overflow-scrolling: touch; }
+.guide-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15.5px; background: #fff; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+.guide-table th, .guide-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+.guide-table thead th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); background: var(--bg-secondary); }
+.guide-table tbody th { font-family: var(--font-mono); font-weight: 600; color: var(--accent-ink); width: 56px; }
+.guide-table td:nth-child(3), .guide-table td:nth-child(4) { font-family: var(--font-mono); width: 64px; }
+.guide-table tbody tr:last-child th, .guide-table tbody tr:last-child td { border-bottom: 0; }
+
+.guide-figure { margin: 26px 0 30px; text-align: center; }
+.guide-figure img { max-width: 320px; width: 100%; height: auto; border-radius: 28px; box-shadow: var(--shadow-lg); }
+.guide-figure figcaption { font-size: 14px; color: var(--fg-secondary); margin-top: 12px; }
+
+/* Final CTA */
+.guide-final-cta { margin: 36px 0 12px; padding: 34px 28px; border-radius: var(--r-lg); background: var(--bg-secondary); border: 1px solid var(--border); text-align: center; }
+.guide-final-cta .btn-primary { display: inline-flex; align-items: center; justify-content: center; height: 54px; padding: 0 28px; border-radius: var(--r-full); background: var(--fg); color: #fff; font-weight: 600; font-size: 15.5px; text-decoration: none; box-shadow: var(--shadow-md); }
+.guide-final-cta .btn-primary:hover { background: #262629; }
+.guide-final-note { font-size: 14px; color: var(--fg-secondary); margin: 14px 0 0; }
+.guide-final-alt { font-size: 15px; color: var(--fg-secondary); margin: 18px 0 0; }
+
+/* FAQ — plain visible text; never an accordion */
+.guide-faq { margin-top: 24px; }
+.guide-faq h3 { margin-top: 28px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (max-width: 640px) {
+  .guide { padding-top: 108px; }
+  .guide-article { padding: 0 18px; }
+  .guide-body { font-size: 16.5px; }
+  .guide-app { padding: 18px 18px 18px 20px; }
+  .guide-byline { flex-direction: column; gap: 4px; }
+  .guide-byline span[aria-hidden] { display: none; }
+}
