@@ -147,10 +147,11 @@ ul { list-style: none; }
 /* ── Aurora ─────────────────────────────────────────────────────── */
 .aurora {
   position: absolute;
-  inset: -20% -10% auto -10%;
+  inset: -20% 0 auto 0;
   height: 780px;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;          /* blobs used to bleed 10% past the viewport; clip them here */
   filter: blur(70px);
   opacity: 0.85;
 }
@@ -390,7 +391,8 @@ ul { list-style: none; }
   position: relative;
   padding: 148px 0 0;
   text-align: center;
-  overflow: hidden;
+  /* No overflow:hidden here — it was clipping the device's drop shadow flat
+     at the section edge. The aurora clips itself instead (see .aurora). */
 }
 .hero .container { position: relative; z-index: 1; }
 .app-icon {
