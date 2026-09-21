@@ -44,21 +44,12 @@ if (toggle && links) {
   const close = () => {
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.querySelectorAll('span').forEach(s => s.removeAttribute('style'));
   };
 
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
     const open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(open));
-    const s = toggle.querySelectorAll('span');
-    if (open) {
-      s[0].style.transform = 'translateY(5.5px) rotate(45deg)';
-      s[1].style.opacity   = '0';
-      s[2].style.transform = 'translateY(-5.5px) rotate(-45deg)';
-    } else {
-      s.forEach(x => x.removeAttribute('style'));
-    }
+    toggle.setAttribute('aria-expanded', String(open));   // CSS draws the X from this
   });
 
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
