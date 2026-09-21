@@ -1,19 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TrainerX — your AI personal trainer for iPhone. Answer 15 questions, get a real personalised training plan built around your schedule, your injuries, and your goals.">
+  <meta name="description" content="trainerX is the AI personal trainer for iPhone. It writes every session around your goal, your gym and your week, sets the weights from what you actually lift, and adapts when life gets in the way. 7 days free.">
   <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="TrainerX — AI Personal Trainer for iPhone">
-  <meta property="og:description" content="Assess. Plan. Train. A personalised comeback plan that adapts after every session.">
-  <meta property="og:image" content="images/screens/hero.png">
+  <meta property="og:description" content="Plan. Train. Adapt. An AI personal trainer that writes your sessions and adjusts them from what you actually lift. 7 days free.">
+  <meta property="og:image" content="https://trainerx.ai/images/screens/hero.png">
+  <meta property="og:url" content="https://trainerx.ai/">
+  <link rel="canonical" href="https://trainerx.ai/">
   <title>TrainerX — AI Personal Trainer for iPhone</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://trainerx.ai/#organization",
+        "name": "trainerX",
+        "url": "https://trainerx.ai/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://trainerx.ai/images/logo.png"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://trainerx.ai/#website",
+        "url": "https://trainerx.ai/",
+        "name": "trainerX",
+        "publisher": {
+          "@id": "https://trainerx.ai/#organization"
+        },
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://trainerx.ai/#app",
+        "name": "trainerX — AI Personal Trainer",
+        "operatingSystem": "iOS",
+        "applicationCategory": "HealthApplication",
+        "description": "An AI personal trainer that writes every session around your goal, equipment and schedule, suggests a weight for every set, and adapts the plan from what you actually lifted.",
+        "installUrl": "https://apps.apple.com/app/apple-store/id6755206111",
+        "author": {
+          "@id": "https://trainerx.ai/#organization"
+        },
+        "offers": [
+          {
+            "@type": "Offer",
+            "price": "19.99",
+            "priceCurrency": "GBP",
+            "category": "subscription",
+            "description": "Monthly, after a 7-day free trial"
+          },
+          {
+            "@type": "Offer",
+            "price": "119.99",
+            "priceCurrency": "GBP",
+            "category": "subscription",
+            "description": "Yearly, after a 7-day free trial"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/logo.png">
-  <link rel="stylesheet" href="styles-light.css?v=5">
+  <link rel="stylesheet" href="styles-light.css?v=6">
 </head>
 <body>
 
@@ -43,13 +100,13 @@
       <img src="images/logo.svg" alt="trainerX">
     </a>
     <div class="nav-links" id="nav-links">
-      <a href="#assess" class="nav-link">Assess</a>
+      <a href="#how" class="nav-link">How it works</a>
       <a href="#train" class="nav-link">Train</a>
       <a href="#app" class="nav-link">The app</a>
       <a href="#pricing" class="nav-link">Pricing</a>
       <a href="#faq" class="nav-link">FAQ</a>
     </div>
-    <a href="/comeback/" class="nav-cta">Start free</a>
+    <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-nav&amp;mt=8" class="nav-cta" target="_blank" rel="noopener">Download free</a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -69,19 +126,20 @@
     <div class="app-icon reveal" id="app-icon" data-logo="images/logo.svg">
       <img src="images/logo.svg" alt="TrainerX" class="app-icon-fallback">
     </div>
-    <h1 class="display reveal d1">Assess. Plan. Train.</h1>
+    <h1 class="display reveal d1">Plan. Train. Adapt.</h1>
     <p class="lede reveal d2">
-      TrainerX is the AI personal trainer for iPhone. Answer 15 questions and get a real
-      training plan — built around your schedule, your injuries, and the body you have now.
+      trainerX is the AI personal trainer for iPhone. It writes every session around your
+      goal, your gym and your week, sets the weights from what you actually lifted last time,
+      and rewrites the plan when life gets in the way.
     </p>
     <div class="hero-actions reveal d3">
-      <a href="/comeback/" class="btn btn--primary btn--lg">Take the free assessment</a>
       <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-home-hero-badge&amp;mt=8"
          target="_blank" rel="noopener">
-        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge app-badge--lg">
       </a>
+      <a href="#how" class="btn btn--ghost btn--lg">How it works</a>
     </div>
-    <p class="hero-note reveal d3">3 minutes · Free · No account needed</p>
+    <p class="hero-note reveal d3">7 days free · No card needed · iPhone</p>
   </div>
 
   <div class="hero-device reveal d4">
@@ -160,38 +218,38 @@
   </div>
 </section>
 
-<!-- ══ ASSESS (dark) ════════════════════════════════════════════ -->
-<section class="section section--dark" id="assess">
+<!-- ══ HOW IT WORKS (dark) ══════════════════════════════════════ -->
+<section class="section section--dark" id="how">
   <div class="container">
     <div class="section-head section-head--wide">
-      <span class="eyebrow eyebrow--on-dark reveal">Assess</span>
-      <h2 class="h2 reveal d1">Three minutes to know exactly where you stand.</h2>
+      <span class="eyebrow eyebrow--on-dark reveal">How it works</span>
+      <h2 class="h2 reveal d1">Your first session is written before you get there.</h2>
       <p class="lede reveal d2">
-        The Comeback Assessment asks about your training history, your schedule, your
-        injuries and your goal. Honest answers get you a better plan.
+        Download it, answer a few questions about your goal, your days and what you're
+        working around, and the plan is ready. From then on, it changes as you do.
       </p>
     </div>
 
     <div class="steps">
       <div class="step reveal d1">
         <div class="step-num">01</div>
-        <h3>Answer 15 questions</h3>
-        <p>Where you're at, what you've got, what's holding you back. No sign-up, no card, no waiting.</p>
+        <h3>Tell it about you</h3>
+        <p>Your goal, the days you can train, how long you've got, your equipment, and anything you're working around. About two minutes, in the app.</p>
       </div>
       <div class="step reveal d2">
         <div class="step-num">02</div>
-        <h3>Get your Comeback Score</h3>
-        <p>Training readiness rated 0–10, with three insights written specifically against your answers.</p>
+        <h3>Get your plan</h3>
+        <p>Every session written for you: the exercises, the pairings, the sets and reps, and a suggested weight for every set. Nothing to design.</p>
       </div>
       <div class="step reveal d3">
         <div class="step-num">03</div>
-        <h3>Unlock your first month</h3>
-        <p>A real plan built around your injuries, your equipment and the days you actually train. Week 1 lands instantly.</p>
+        <h3>Log a set. The plan updates.</h3>
+        <p>Enter what you lifted and how hard it felt. The next session moves up when you're flying and backs off when you need the recovery.</p>
       </div>
     </div>
 
     <div class="hero-actions reveal d4" style="margin-top:52px">
-      <a href="/comeback/" class="btn btn--on-dark btn--lg">Start the assessment</a>
+      <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-home-how&amp;mt=8" class="btn btn--on-dark btn--lg" target="_blank" rel="noopener">Download free</a>
     </div>
   </div>
 </section>
@@ -444,11 +502,11 @@
         <div class="price-amount">£0</div>
         <div class="price-desc">Try it before you commit</div>
         <ul class="price-list">
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>The full Comeback Assessment</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Full setup: goal, days, equipment, injuries</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>One complete AI-built workout</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>In-session coaching &amp; set logging</li>
         </ul>
-        <a href="/comeback/" class="btn btn--ghost">Start free</a>
+        <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-home-download&amp;mt=8" class="btn btn--ghost" target="_blank" rel="noopener">Download free</a>
       </div>
 
       <div class="price-card price-card--pro reveal d2">
@@ -535,11 +593,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Do I need a gym or equipment?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>No. During the assessment you say exactly what you have access to — a full gym, a pair of dumbbells in the spare room, or nothing but bodyweight. The plan is built around what you've actually got.</p></div>
+        <div class="faq-a"><p>No. When you set up the app you say exactly what you have access to — a full gym, a pair of dumbbells in the spare room, or nothing but bodyweight. The plan is built around what you've actually got.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">I've got an old injury. Will it account for that?<span class="faq-icon"></span></button>
-        <div class="faq-a"><p>Yes — it's one of the things the assessment asks about directly. TrainerX substitutes exercises that load the same pattern through a friendlier range, and you can flag a flare-up mid-plan at any time. The programme reshapes around it rather than telling you to push through.</p></div>
+        <div class="faq-a"><p>Yes — it's one of the things the app asks about when you set it up. TrainerX substitutes exercises that load the same pattern through a friendlier range, and you can flag a flare-up mid-plan at any time. The programme reshapes around it rather than telling you to push through.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How does the plan actually adapt?<span class="faq-icon"></span></button>
@@ -563,19 +621,19 @@
     <span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span><span class="a5"></span>
   </div>
   <div class="container">
-    <h2 class="display reveal">Your comeback starts in three minutes.</h2>
+    <h2 class="display reveal">Your first session is already written.</h2>
     <p class="lede reveal d1">
-      Answer 15 questions. Get your Comeback Score and your first month back — free,
-      no account, no card.
+      Download trainerX, answer a few questions, and walk into the gym with a plan built
+      for your body, your gym and your week. 7 days free, no card needed.
     </p>
     <div class="hero-actions reveal d2">
-      <a href="/comeback/" class="btn btn--primary btn--lg">Take the free assessment</a>
       <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-home-badge-2&amp;mt=8"
          target="_blank" rel="noopener">
-        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+        <img src="images/app-store-badge.png" alt="Download on the App Store" class="app-badge app-badge--lg">
       </a>
+      <a href="/getting-back-into-the-gym/" class="btn btn--ghost btn--lg">Read the 4-week comeback plan</a>
     </div>
-    <p class="hero-note reveal d2">7-day free trial · iOS</p>
+    <p class="hero-note reveal d2">7 days free · iPhone</p>
   </div>
 </section>
 
@@ -597,7 +655,7 @@
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Product</div>
-        <a href="#assess">Assessment</a>
+        <a href="#how">How it works</a>
         <a href="#train">How it adapts</a>
         <a href="#app">The app</a>
         <a href="#pricing">Pricing</a>

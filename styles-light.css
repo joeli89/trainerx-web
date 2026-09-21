@@ -141,6 +141,8 @@ ul { list-style: none; }
 
 .app-badge { height: 52px; width: auto; border-radius: 9px; transition: transform 0.18s var(--ease); }
 .app-badge:hover { transform: scale(1.03); }
+.app-badge--lg { height: 58px; }
+@media (max-width: 520px) { .app-badge--lg { height: 54px; } }
 
 /* ── Aurora ─────────────────────────────────────────────────────── */
 .aurora {
