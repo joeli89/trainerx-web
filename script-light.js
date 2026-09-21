@@ -137,3 +137,19 @@ if (rail) {
   rail.addEventListener('pointerup', up);
   rail.addEventListener('pointercancel', up);
 }
+
+// ── Hero video ───────────────────────────────────────────────────
+// Reduced Motion gets the poster frame instead of a loop; off-screen the
+// loop pauses so it isn't decoding behind the fold.
+const heroVideo = document.querySelector('.hero video.device-shot');
+if (heroVideo) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  } else {
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) heroVideo.play().catch(() => {});
+      else heroVideo.pause();
+    }, { threshold: 0.15 }).observe(heroVideo);
+  }
+}
