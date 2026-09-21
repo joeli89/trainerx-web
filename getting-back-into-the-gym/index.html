@@ -27,7 +27,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/styles-light.css">
 
@@ -38,7 +41,10 @@
       {
         "@type": "Article",
         "@id": "https://trainerx.ai/getting-back-into-the-gym/#article",
-        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://trainerx.ai/getting-back-into-the-gym/" },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://trainerx.ai/getting-back-into-the-gym/"
+        },
         "headline": "Getting back into the gym after a long break",
         "description": "A realistic plan for getting back into the gym after months or years off. What to do in week one, how much weight to start with, and how to not wreck yourself.",
         "image": "https://trainerx.ai/images/screens/hero.png",
@@ -49,12 +55,22 @@
           "@type": "Person",
           "name": "Joe Li",
           "jobTitle": "Founder",
-          "worksFor": { "@id": "https://trainerx.ai/#organization" }
+          "worksFor": {
+            "@id": "https://trainerx.ai/#organization"
+          }
         },
-        "publisher": { "@id": "https://trainerx.ai/#organization" },
+        "publisher": {
+          "@id": "https://trainerx.ai/#organization"
+        },
         "about": [
-          { "@type": "Thing", "name": "Returning to strength training after a break" },
-          { "@type": "Thing", "name": "Beginner full-body training programme" }
+          {
+            "@type": "Thing",
+            "name": "Returning to strength training after a break"
+          },
+          {
+            "@type": "Thing",
+            "name": "Beginner full-body training programme"
+          }
         ]
       },
       {
@@ -62,83 +78,99 @@
         "@id": "https://trainerx.ai/#organization",
         "name": "trainerX",
         "url": "https://trainerx.ai/",
-        "logo": { "@type": "ImageObject", "url": "https://trainerx.ai/images/logo.png" }
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://trainerx.ai/images/logo.png"
+        },
+        "sameAs": [
+          "https://apps.apple.com/app/apple-store/id6755206111"
+        ]
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "trainerX", "item": "https://trainerx.ai/" },
-          { "@type": "ListItem", "position": 2, "name": "Getting back into the gym after a long break", "item": "https://trainerx.ai/getting-back-into-the-gym/" }
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "trainerX",
+            "item": "https://trainerx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Getting back into the gym after a long break",
+            "item": "https://trainerx.ai/getting-back-into-the-gym/"
+          }
         ]
       },
       {
         "@type": "FAQPage",
         "@id": "https://trainerx.ai/getting-back-into-the-gym/#faq",
         "mainEntity": [
-                  {
-                            "@type": "Question",
-                            "name": "How long does it take to get back in shape after a long break?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "Most people notice they're moving better within 2–3 weeks and see real strength returning by weeks 6–8. If you trained seriously before, it comes back faster than it came the first time. Strength returns before size does."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "How do I ease back into working out after years off?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "Start with three full-body sessions a week, pairing a lower-body exercise with an upper-body one, and weights you could do five more reps with. Keep that for two weeks before adding anything. The aim of the first month is to still be training in month two."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "Is it too late to start at 40, or 50?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "No. Resistance training builds strength and maintains muscle and bone density at any age, and people starting in their 40s and 50s make quick early progress. The approach is the same. You just have less room for injuries that cost you six weeks."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "How long should I rest between sets?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "90 seconds to 2 minutes after the bigger lifts, around 60 seconds after the smaller ones. Short rests mean fewer reps and worse technique on the next set, which is what actually drives progress. Time it rather than guessing — trainerX runs the timer for you between sets."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "How many days a week should I go?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "Three is the sweet spot when you're coming back. Two works if that's what your week allows. More than four rarely helps in the first month, because recovery, not effort, is the limit."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "How do I know how much weight to lift?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "Pick a weight you could manage five more reps with, then add small amounts week by week. If you'd rather not judge it yourself, trainerX suggests the weight for every set and adjusts it based on what you actually lifted last time. Download it here."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "Do I need a personal trainer to get started?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "It helps, but it's $50–$90 a session with most trainers, $40–$60 at big-box gyms, and $100+ in New York or LA. What most people need is the thing a trainer provides rather than the trainer: a plan for today, someone adjusting it as you go, and a reason to show up. A good app does that for less than the cost of two sessions a year."
-                            }
-                  },
-                  {
-                            "@type": "Question",
-                            "name": "What if I miss a week?",
-                            "acceptedAnswer": {
-                                      "@type": "Answer",
-                                      "text": "Nothing bad happens. Go back to the weights from your last session rather than where you meant to be, and carry on. A missed week is a missed week, not a reset. trainerX does this for you automatically — it reworks the plan around the gap rather than starting you over."
-                            }
-                  }
+          {
+            "@type": "Question",
+            "name": "How long does it take to get back in shape after a long break?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most people notice they're moving better within 2–3 weeks and see real strength returning by weeks 6–8. If you trained seriously before, it comes back faster than it came the first time. Strength returns before size does."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I ease back into working out after years off?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Start with three full-body sessions a week, pairing a lower-body exercise with an upper-body one, and weights you could do five more reps with. Keep that for two weeks before adding anything. The aim of the first month is to still be training in month two."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it too late to start at 40, or 50?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Resistance training builds strength and maintains muscle and bone density at any age, and people starting in their 40s and 50s make quick early progress. The approach is the same. You just have less room for injuries that cost you six weeks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long should I rest between sets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "90 seconds to 2 minutes after the bigger lifts, around 60 seconds after the smaller ones. Short rests mean fewer reps and worse technique on the next set, which is what actually drives progress. Time it rather than guessing — trainerX runs the timer for you between sets."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many days a week should I go?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Three is the sweet spot when you're coming back. Two works if that's what your week allows. More than four rarely helps in the first month, because recovery, not effort, is the limit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know how much weight to lift?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pick a weight you could manage five more reps with, then add small amounts week by week. If you'd rather not judge it yourself, trainerX suggests the weight for every set and adjusts it based on what you actually lifted last time. Download it here."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a personal trainer to get started?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It helps, but it's $50–$90 a session with most trainers, $40–$60 at big-box gyms, and $100+ in New York or LA. What most people need is the thing a trainer provides rather than the trainer: a plan for today, someone adjusting it as you go, and a reason to show up. A good app does that for less than the cost of two sessions a year."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if I miss a week?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nothing bad happens. Go back to the weights from your last session rather than where you meant to be, and carry on. A missed week is a missed week, not a reset. trainerX does this for you automatically — it reworks the plan around the gap rather than starting you over."
+            }
+          }
         ]
       }
     ]
