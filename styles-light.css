@@ -906,6 +906,10 @@ ul { list-style: none; }
 }
 @media (max-width: 520px) {
   .container { padding: 0 18px; }
+  /* Hero headline is two deliberate lines ("You show up." / "We'll do the
+     thinking."); at 40px the second line needs ~440px and only ~354px is
+     available, which orphaned "thinking." on a third line. */
+  .hero .display { font-size: clamp(30px, 8.5vw, 40px); }
   .rail { padding-left: 18px; padding-right: 18px; gap: 20px; }
   .app-icon { width: 74px; height: 74px; border-radius: 18px; }
   .btn { width: 100%; }
