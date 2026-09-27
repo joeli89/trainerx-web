@@ -976,6 +976,12 @@ ul { list-style: none; }
 .guide-table--text tbody th { font-family: var(--font-sans); font-weight: 500; color: var(--fg); width: auto; }
 .guide-table--text td:nth-child(3), .guide-table--text td:nth-child(4) { font-family: var(--font-sans); width: auto; }
 .guide-table--text td:last-child { white-space: nowrap; font-family: var(--font-mono); font-size: 14.5px; color: var(--fg); }
+/* Comparison table: long prose in the middle column and long price strings on the
+   right. The text-table's nowrap price column would crush "Best for" to a word a line,
+   so here the price wraps and the middle column keeps a real width. */
+.guide-table--compare th:nth-child(2), .guide-table--compare td:nth-child(2) { min-width: 250px; }
+.guide-table--compare td:last-child { white-space: normal; min-width: 170px; font-size: 14px; line-height: 1.45; }
+.guide-table--compare tbody th { white-space: nowrap; }
 .guide-sources, .guide-table-note { font-size: 14px; color: var(--fg-muted); margin-top: -10px !important; }
 .guide-sources a { color: var(--fg-secondary); }
 .guide-table-note { margin-top: -12px !important; margin-bottom: 26px !important; }

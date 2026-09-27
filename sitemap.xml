@@ -2,7 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://trainerx.ai/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://trainerx.ai/getting-back-into-the-gym/</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://trainerx.ai/personal-trainer-cost/</loc>
+    <lastmod>2026-09-27</lastmod>
+  </url>
+  <url>
+    <loc>https://trainerx.ai/ai-personal-trainer-apps/</loc>
+    <lastmod>2026-09-27</lastmod>
   </url>
   <url>
     <loc>https://trainerx.ai/contact.html</loc>
@@ -15,13 +27,5 @@
   <url>
     <loc>https://trainerx.ai/legal/terms.html</loc>
     <lastmod>2025-12-12</lastmod>
-  </url>
-  <url>
-    <loc>https://trainerx.ai/getting-back-into-the-gym/</loc>
-    <lastmod>2026-09-20</lastmod>
-  </url>
-  <url>
-    <loc>https://trainerx.ai/personal-trainer-cost-uk/</loc>
-    <lastmod>2026-09-20</lastmod>
   </url>
 </urlset>
