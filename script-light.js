@@ -96,14 +96,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Rail: centre the second card on load, drag to scroll ─────────
+// ── Rail: drag to scroll (mouse); touch uses native scrolling ─────────
 const rail = document.getElementById('rail');
 if (rail) {
-  const second = rail.children[1];
-  if (second) {
-    rail.scrollLeft = second.offsetLeft - (rail.clientWidth - second.clientWidth) / 2;
-  }
-
   let down = false, startX = 0, startLeft = 0, moved = false;
   rail.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'touch') return;   // let native touch scrolling handle it

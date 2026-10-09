@@ -580,31 +580,29 @@ ul { list-style: none; }
 
 /* ═══ SCREEN CAROUSEL ═══════════════════════════════════════════ */
 .rail-wrap { margin-top: 64px; }
+/* The rail lives inside .container so its left edge lines up with the
+   heading above it. It still scrolls horizontally when the screens
+   outgrow the column (phones), and centres when they don't (desktop). */
 .rail {
   display: flex;
-  gap: 28px;
+  justify-content: center;
+  gap: 40px;
   overflow-x: auto;
-  padding: 8px 24px 32px;
+  padding: 8px 0 32px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 .rail::-webkit-scrollbar { display: none; }
-.rail-item { scroll-snap-align: center; flex: 0 0 auto; text-align: left; }
+.rail-item { scroll-snap-align: center; flex: 0 0 auto; text-align: left; width: 250px; }
+.rail-caption { max-width: 250px; }
+@media (max-width: 640px) {
+  .rail { justify-content: flex-start; gap: 24px; }
+  .rail::after { content: ''; flex: 0 0 1px; }   /* lets the last card scroll fully into view */
+}
 .rail-caption { margin-top: 22px; max-width: 250px; }
 .rail-caption h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
 .rail-caption p { font-size: 14.5px; color: var(--fg-secondary); margin-top: 6px; line-height: 1.55; }
-.rail-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
 
 /* ═══ CARDS (3-up) ══════════════════════════════════════════════ */
 .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }
