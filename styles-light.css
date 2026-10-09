@@ -1026,3 +1026,68 @@ ul { list-style: none; }
 .guide-refs li { font-size: 14.5px; line-height: 1.55; color: var(--fg-secondary); margin-bottom: 10px; }
 .guide-refs a { color: var(--fg-secondary); word-break: break-word; }
 .guide-related { font-size: 15px; color: var(--fg-secondary); }
+
+/* ═══ TOOLS — macro calculator ═══════════════════════════════════════ */
+.tool { padding: 132px 0 96px; background: var(--bg); }
+.tool-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+.tool-head { margin-bottom: 36px; }
+.tool-lede { font-size: 18px; line-height: 1.6; color: var(--fg-secondary); max-width: 560px; margin: 0; }
+
+.calc { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+.calc-form { padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 22px; }
+.calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.calc-row--3 { grid-template-columns: 1fr 1fr 1.4fr; }
+.calc-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.calc-label { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-muted); }
+.calc-hint { font-size: 13.5px; color: var(--fg-muted); margin: 0; }
+
+/* Segmented control — the one piece of UI here that is unmistakably the design language */
+.seg { display: inline-flex; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--r-full); padding: 3px; gap: 2px; }
+.seg--wrap { flex-wrap: wrap; border-radius: 22px; }
+.seg-opt { position: relative; }
+.seg-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.seg-opt span { display: block; padding: 8px 14px; border-radius: var(--r-full); font-size: 14px; font-weight: 500; color: var(--fg-secondary); white-space: nowrap; transition: background 0.18s var(--ease), color 0.18s var(--ease), box-shadow 0.18s var(--ease); }
+.seg-opt input:checked + span { background: #fff; color: var(--fg); font-weight: 600; box-shadow: var(--shadow-sm), 0 0 0 1px var(--border); }
+.seg-opt input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Number inputs with an inline unit */
+.calc-input { display: flex; align-items: center; gap: 6px; height: 46px; padding: 0 14px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.15s, background 0.15s; }
+.calc-input[hidden] { display: none; }
+.calc-input:focus-within { border-color: var(--fg); background: #fff; }
+.calc-input input { flex: 1; min-width: 0; width: 100%; border: 0; background: none; font: 600 17px var(--font-sans); color: var(--fg); letter-spacing: -0.01em; outline: none; -moz-appearance: textfield; }
+.calc-input input::-webkit-outer-spin-button, .calc-input input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-unit { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); }
+.calc-input--pair input { flex: 0 1 44px; }
+.calc-input--pair .calc-unit { margin-right: 6px; }
+
+/* Results */
+.calc-results { background: var(--fg); color: #fff; padding: 30px 28px 26px; }
+.calc-kcal { text-align: center; margin-bottom: 26px; }
+.calc-kcal-num { display: block; font-size: clamp(52px, 9vw, 72px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.calc-kcal-lbl { display: block; font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 8px; }
+.calc-kcal-sub { display: block; font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.calc-macros { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.calc-macro { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px 14px; text-align: center; }
+.calc-macro-num { display: block; font-size: 26px; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.calc-macro-num b { font-weight: 700; }
+.calc-macro-lbl { display: block; font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+.calc-macro-pct { display: block; font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+.calc-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin: 18px 0 14px; background: rgba(255,255,255,0.08); }
+.calc-bar span { display: block; height: 100%; transition: width 0.35s var(--ease); }
+#b-protein { background: #fff; } #b-carbs { background: rgba(255,255,255,0.55); } #b-fat { background: rgba(255,255,255,0.28); }
+.calc-note { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.6); margin: 0; }
+
+.tool-app { margin-top: 36px; }
+.tool-body { margin-top: 48px; }
+.tool-body h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+@media (max-width: 640px) {
+  .tool { padding-top: 108px; }
+  .tool-wrap { padding: 0 18px; }
+  .calc-form { padding: 22px 18px 20px; }
+  .calc-row, .calc-row--3 { grid-template-columns: 1fr; }
+  .calc-results { padding: 26px 18px 22px; }
+  .calc-macros { gap: 8px; }
+  .calc-macro { padding: 14px 8px; }
+  .calc-macro-num { font-size: 22px; }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:transparent;display:flex;align-items:flex-start;justify-content:flex-start;min-height:100vh;font-family:'Inter',sans-serif}
+
+  .frame{width:390px;height:900px;border-radius:55px;padding:14px;
+    background:linear-gradient(160deg,#3a3a40,#17171a 45%,#2c2c32);
+    box-shadow:0 40px 90px rgba(0,0,0,.35),0 12px 28px rgba(0,0,0,.2);}
+  .screen{width:100%;height:100%;border-radius:42px;background:#fff;overflow:hidden;
+    position:relative;display:flex;flex-direction:column;color:#0a0a0a}
+
+  .status{display:flex;align-items:center;justify-content:space-between;padding:16px 26px 4px;flex-shrink:0}
+  .status-l{display:flex;align-items:center;gap:5px;font-size:15px;font-weight:600;letter-spacing:-.02em}
+  .status-r{display:flex;align-items:center;gap:5px}
+  .island{width:120px;height:34px;background:#000;border-radius:20px;margin:2px auto 0;flex-shrink:0}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px 14px;flex-shrink:0}
+
+  .content{flex:1;overflow:hidden;padding:0 20px;display:flex;flex-direction:column}
+
+  .plan-card{border:1px solid #ececef;border-radius:26px;overflow:hidden;flex-shrink:0}
+  .plan-hero{height:230px;background:
+    radial-gradient(90% 110% at 10% 100%, #a8b8ff 0%, transparent 60%),
+    radial-gradient(100% 120% at 75% 15%, #6bf0c2 0%, transparent 62%),
+    radial-gradient(90% 100% at 100% 55%, #6fe0ff 0%, transparent 60%),
+    linear-gradient(160deg,#e4e9ff 0%,#8fe8d8 55%,#5be8c0 100%);}
+  .plan-body{padding:20px 22px 22px}
+  .plan-title{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  .plan-sub{font-size:15px;color:#8a8a94;margin-top:6px;letter-spacing:-.01em}
+  .plan-btn{margin-top:18px;height:52px;border-radius:26px;background:#0a0a0a;color:#fff;
+    display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:700}
+
+  .reply{padding:22px 2px 0;font-size:17px;line-height:1.55;letter-spacing:-.01em}
+  .reply b{font-weight:800}
+
+  .collapse{width:34px;height:34px;border-radius:50%;background:#dcdce1;
+    display:flex;align-items:center;justify-content:center;margin:16px auto 0;flex-shrink:0}
+
+  .composer-wrap{padding:14px 20px 22px;margin-top:auto;flex-shrink:0}
+  .composer{height:52px;border-radius:26px;background:#e3e3ec;display:flex;align-items:center;
+    padding:0 8px 0 22px;justify-content:space-between}
+  .composer span{color:#a4a4ae;font-size:16px}
+  .send{width:38px;height:38px;border-radius:50%;background:#54545c;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+</style></head>
+<body>
+
+<div class="frame"><div class="screen">
+
+  <div class="status">
+    <div class="status-l">20:24
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+    </div>
+    <div class="status-r">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><rect x="0" y="7" width="3" height="4" rx=".7" fill="#0a0a0a" opacity=".3"/><rect x="4.5" y="5" width="3" height="6" rx=".7" fill="#0a0a0a" opacity=".3"/><rect x="9" y="3" width="3" height="8" rx=".7" fill="#0a0a0a" opacity=".3"/><rect x="13.5" y="0" width="3" height="11" rx=".7" fill="#0a0a0a"/></svg>
+      <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><circle cx="7.5" cy="9.3" r="1.1" fill="#0a0a0a"/><path d="M4.6 7.1a4.2 4.2 0 015.8 0" stroke="#0a0a0a" stroke-width="1.3" stroke-linecap="round"/><path d="M2 4.6a7.8 7.8 0 0111 0" stroke="#0a0a0a" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="#0a0a0a" stroke-opacity=".35"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="#34c759"/><path d="M23 4v4a1.5 1.5 0 000-4z" fill="#0a0a0a" fill-opacity=".35"/><path d="M12.6 2.6L8.6 6.4h2.4l-1.6 3 4-3.8h-2.4z" fill="#0a0a0a"/></svg>
+    </div>
+  </div>
+  <div class="island"></div>
+
+  <div class="topbar">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="#0a0a0a" stroke-width="1.4"/><circle cx="12" cy="10" r="3.4" stroke="#0a0a0a" stroke-width="1.4"/><path d="M5.5 19c1.2-3 3.7-4.4 6.5-4.4s5.3 1.4 6.5 4.4" stroke="#0a0a0a" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M4 4h6v6H4zM14 4h6v6h-6zM9 14a5 5 0 100 10 5 5 0 000-10zM14 14h6v6h-6z"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="3" stroke="#0a0a0a" stroke-width="1.4"/><path d="M3 9h18M8 2v4M16 2v4" stroke="#0a0a0a" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </div>
+
+  <div class="content">
+    <div class="plan-card">
+      <div class="plan-hero"></div>
+      <div class="plan-body">
+        <div class="plan-title">Strength Evolution Cycle</div>
+        <div class="plan-sub">4 weeks &middot; 3 days/week &middot; 30min sessions</div>
+        <div class="plan-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2.5" stroke="#fff" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          View Training Plan
+        </div>
+      </div>
+    </div>
+
+    <div class="reply">
+      Perfect &#128074; &mdash; here&rsquo;s your next phase: <b>Strength Evolution Cycle</b>
+      <br><br>
+      <span style="color:#4a4a52">The Strength Evolution Cycle is designed to help you build muscle and maximize your strength in just four weeks, with three focused sessions per week lasting around 30 minutes each.</span>
+    </div>
+
+    <div class="collapse">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#54545c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="composer-wrap">
+    <div class="composer">
+      <span>Type a message&hellip;</span>
+      <div class="send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M6 11l6-6 6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+
+</div></div>
+</body></html>

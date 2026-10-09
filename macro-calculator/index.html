@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macro Calculator: Daily Protein, Carbs and Fat for Your Goal</title>
+  <meta name="description" content="Free macro calculator. Enter your stats and goal and get your daily calories, protein, carbs and fat — using the Mifflin-St Jeor equation and evidence-based protein targets. No sign-up.">
+  <link rel="canonical" href="https://trainerx.ai/macro-calculator/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="trainerX">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://trainerx.ai/macro-calculator/">
+  <meta property="og:title" content="Macro Calculator: Daily Protein, Carbs and Fat for Your Goal">
+  <meta property="og:description" content="Enter your stats and goal, get your daily calories and macros. Evidence-based, no sign-up.">
+  <meta property="og:image" content="https://trainerx.ai/images/screens/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Macro Calculator: Daily Protein, Carbs and Fat for Your Goal">
+  <meta name="twitter:description" content="Enter your stats and goal, get your daily calories and macros. Evidence-based, no sign-up.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles-light.css?v=15">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://trainerx.ai/macro-calculator/#tool",
+        "name": "trainerX Macro Calculator",
+        "url": "https://trainerx.ai/macro-calculator/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "description": "Calculates daily calories, protein, carbohydrate and fat targets from height, weight, age, sex, activity level and goal, using the Mifflin-St Jeor equation.",
+        "author": {"@id": "https://trainerx.ai/#organization"}
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://trainerx.ai/#organization",
+        "name": "trainerX",
+        "url": "https://trainerx.ai/",
+        "logo": {"@type": "ImageObject", "url": "https://trainerx.ai/images/logo.png"},
+        "sameAs": ["https://apps.apple.com/app/apple-store/id6755206111"]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "trainerX", "item": "https://trainerx.ai/"},
+          {"@type": "ListItem", "position": 2, "name": "Macro calculator", "item": "https://trainerx.ai/macro-calculator/"}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://trainerx.ai/macro-calculator/#faq",
+        "mainEntity": [
+          {"@type": "Question", "name": "How does this macro calculator work?", "acceptedAnswer": {"@type": "Answer", "text": "It estimates your resting energy use with the Mifflin-St Jeor equation, multiplies by an activity factor to get your daily maintenance calories, then adjusts for your goal: about 15% below maintenance to lose fat, 10% above to build muscle. Protein is set per kilogram of bodyweight, fat at around 25–30% of calories, and carbohydrate fills the rest."}},
+          {"@type": "Question", "name": "How much protein do I need to build muscle?", "acceptedAnswer": {"@type": "Answer", "text": "Research supports at least 1.6 grams per kilogram of bodyweight a day for adults doing resistance training, with little extra benefit above about 2.2 g/kg. This calculator uses 1.8 g/kg for building muscle and 2.0 g/kg when losing fat, where a higher intake helps protect muscle."}},
+          {"@type": "Question", "name": "Are macro calculators accurate?", "acceptedAnswer": {"@type": "Answer", "text": "They are a starting point, not a measurement. Mifflin-St Jeor is accurate to within about 10% for most people, but individual metabolism varies. Use the numbers for two to three weeks, watch your bodyweight trend and how training feels, then adjust calories by 100–200 a day in whichever direction you need."}},
+          {"@type": "Question", "name": "Should I count calories or macros?", "acceptedAnswer": {"@type": "Answer", "text": "Calories decide whether you gain or lose weight. Macros decide what that weight is made of. If you only track one thing, make it protein: hitting your protein target and staying roughly on calories gets most people most of the result. Precise carb and fat splits matter much less."}},
+          {"@type": "Question", "name": "What activity level should I pick?", "acceptedAnswer": {"@type": "Answer", "text": "Most people overestimate. A desk job with three gym sessions a week is 'lightly active', not 'moderately active'. If you are unsure, pick the lower option — it is easier to add food when you are losing weight too fast than to work out why you are not losing at all."}}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<svg class="lg-defs" aria-hidden="true" focusable="false">
+  <filter id="lg-warp" x="-4%" y="-8%" width="108%" height="116%"
+          color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.09"
+                  numOctaves="2" seed="9" result="noise"/>
+    <feGaussianBlur in="noise" stdDeviation="1.1" result="soft"/>
+    <feDisplacementMap in="SourceGraphic" in2="soft" scale="7"
+                       xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="site-header" id="site-header">
+  <nav class="nav-pill">
+    <span class="lg-warp" aria-hidden="true"></span>
+    <span class="lg-sheen" aria-hidden="true"></span>
+    <span class="lg-rim" aria-hidden="true"></span>
+    <a href="/" class="nav-brand" aria-label="trainerX — home">
+      <img src="/images/logo.svg" alt="trainerX">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/#how" class="nav-link">How it works</a>
+      <a href="/#train" class="nav-link">Train</a>
+      <a href="/#app" class="nav-link">The app</a>
+      <a href="/#pricing" class="nav-link">Pricing</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+    </div>
+    <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-nav&amp;mt=8" class="nav-cta" target="_blank" rel="noopener">Download free</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main class="tool">
+  <div class="container tool-wrap">
+
+    <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">trainerX</a> <span aria-hidden="true">/</span> <span>Macro calculator</span>
+    </nav>
+
+    <header class="tool-head">
+      <p class="guide-eyebrow">Free tool</p>
+      <h1 class="guide-title">Macro calculator</h1>
+      <p class="tool-lede">Your daily calories, protein, carbs and fat — for your body and your goal. No sign-up, nothing stored.</p>
+    </header>
+
+    <div class="calc" id="calc">
+
+      <form class="calc-form" id="calc-form" novalidate>
+
+        <div class="calc-row">
+          <div class="calc-field">
+            <span class="calc-label">Units</span>
+            <div class="seg" role="radiogroup" aria-label="Units">
+              <label class="seg-opt"><input type="radio" name="units" value="imperial" checked><span>lb · ft</span></label>
+              <label class="seg-opt"><input type="radio" name="units" value="metric"><span>kg · cm</span></label>
+            </div>
+          </div>
+          <div class="calc-field">
+            <span class="calc-label">Sex</span>
+            <div class="seg" role="radiogroup" aria-label="Sex">
+              <label class="seg-opt"><input type="radio" name="sex" value="male" checked><span>Male</span></label>
+              <label class="seg-opt"><input type="radio" name="sex" value="female"><span>Female</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-row calc-row--3">
+          <label class="calc-field">
+            <span class="calc-label">Age</span>
+            <span class="calc-input"><input type="number" name="age" inputmode="numeric" min="14" max="100" value="40" required><span class="calc-unit">yrs</span></span>
+          </label>
+          <label class="calc-field">
+            <span class="calc-label">Weight</span>
+            <span class="calc-input"><input type="number" name="weight" inputmode="decimal" min="30" max="700" step="0.1" value="180" required><span class="calc-unit" data-unit="weight">lb</span></span>
+          </label>
+          <div class="calc-field" id="height-field">
+            <span class="calc-label">Height</span>
+            <span class="calc-input calc-input--pair" data-units="imperial">
+              <input type="number" name="ft" inputmode="numeric" min="3" max="8" value="5" aria-label="feet"><span class="calc-unit">ft</span>
+              <input type="number" name="in" inputmode="numeric" min="0" max="11" value="10" aria-label="inches"><span class="calc-unit">in</span>
+            </span>
+            <span class="calc-input" data-units="metric" hidden>
+              <input type="number" name="cm" inputmode="numeric" min="100" max="250" value="178" aria-label="centimetres"><span class="calc-unit">cm</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <span class="calc-label">Activity</span>
+          <div class="seg seg--wrap" role="radiogroup" aria-label="Activity level">
+            <label class="seg-opt"><input type="radio" name="activity" value="1.2"><span>Sedentary</span></label>
+            <label class="seg-opt"><input type="radio" name="activity" value="1.375" checked><span>Lightly active</span></label>
+            <label class="seg-opt"><input type="radio" name="activity" value="1.55"><span>Moderately active</span></label>
+            <label class="seg-opt"><input type="radio" name="activity" value="1.725"><span>Very active</span></label>
+          </div>
+          <p class="calc-hint" id="activity-hint">Desk job plus three gym sessions a week.</p>
+        </div>
+
+        <div class="calc-field">
+          <span class="calc-label">Goal</span>
+          <div class="seg" role="radiogroup" aria-label="Goal">
+            <label class="seg-opt"><input type="radio" name="goal" value="cut"><span>Lose fat</span></label>
+            <label class="seg-opt"><input type="radio" name="goal" value="maintain" checked><span>Maintain</span></label>
+            <label class="seg-opt"><input type="radio" name="goal" value="bulk"><span>Build muscle</span></label>
+          </div>
+        </div>
+
+        <noscript><p class="guide-note">This calculator needs JavaScript. The method and the numbers it uses are explained below, so you can work it out by hand.</p></noscript>
+      </form>
+
+      <section class="calc-results" id="results" aria-live="polite" aria-label="Your results">
+        <div class="calc-kcal">
+          <span class="calc-kcal-num" id="r-kcal">—</span>
+          <span class="calc-kcal-lbl">calories a day</span>
+          <span class="calc-kcal-sub" id="r-sub">to maintain your weight</span>
+        </div>
+        <div class="calc-macros">
+          <div class="calc-macro">
+            <span class="calc-macro-num"><b id="r-protein">—</b>g</span>
+            <span class="calc-macro-lbl">Protein</span>
+            <span class="calc-macro-pct" id="p-protein"></span>
+          </div>
+          <div class="calc-macro">
+            <span class="calc-macro-num"><b id="r-carbs">—</b>g</span>
+            <span class="calc-macro-lbl">Carbs</span>
+            <span class="calc-macro-pct" id="p-carbs"></span>
+          </div>
+          <div class="calc-macro">
+            <span class="calc-macro-num"><b id="r-fat">—</b>g</span>
+            <span class="calc-macro-lbl">Fat</span>
+            <span class="calc-macro-pct" id="p-fat"></span>
+          </div>
+        </div>
+        <div class="calc-bar" aria-hidden="true">
+          <span id="b-protein"></span><span id="b-carbs"></span><span id="b-fat"></span>
+        </div>
+        <p class="calc-note" id="r-note"></p>
+      </section>
+
+    </div>
+
+    <aside class="guide-app tool-app">
+      <p class="guide-app-label">Then hit them without weighing everything</p>
+      <p>trainerX logs your food from a photo — snap the plate, it estimates the calories and macros and tells you what it assumed. The same app writes your training and sets the weights.</p>
+      <a class="guide-app-cta" href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-macro-tool&amp;mt=8" target="_blank" rel="noopener">Download trainerX →</a>
+    </aside>
+
+    <article class="guide-body tool-body">
+      <h2 id="how-it-works">How the numbers are worked out</h2>
+      <p>Nothing here is a secret formula. It's the same arithmetic a dietitian would do, with the assumptions shown so you can disagree with them.</p>
+      <p><strong>Resting energy.</strong> The <em>Mifflin-St Jeor</em> equation, which in validation studies comes closest to measured values for most adults: 10 × weight (kg) + 6.25 × height (cm) − 5 × age, plus 5 for men or minus 161 for women.</p>
+      <p><strong>Daily maintenance.</strong> Resting energy multiplied by an activity factor: 1.2 sedentary, 1.375 lightly active, 1.55 moderately active, 1.725 very active. These are the standard multipliers, and most people pick one too high — see the FAQ.</p>
+      <p><strong>Your goal.</strong> Losing fat takes 15% off maintenance, roughly 0.5 kg (1 lb) a week for most people. Building muscle adds 10%, enough to support growth without most of the surplus going to fat. Maintain is maintenance.</p>
+      <p><strong>Protein.</strong> Set per kilogram of bodyweight, because that's how the research reports it: 1.6 g/kg to maintain, 1.8 g/kg to build, and 2.0 g/kg when cutting, where a higher intake helps hold on to muscle while you lose weight.</p>
+      <p><strong>Fat and carbs.</strong> Fat at 25% of calories when cutting and 30% otherwise, which keeps it above the floor hormones need. Carbohydrate takes whatever calories are left — it's the flexible one, and the one that fuels training.</p>
+      <p>Use the numbers for two or three weeks, watch the trend on the scale and how sessions feel, then adjust by 100–200 calories a day. The calculator gets you to the right neighbourhood; your own data gets you to the house.</p>
+
+      <section class="guide-faq" id="faqs" aria-labelledby="faqs-heading">
+        <h2 id="faqs-heading">FAQs</h2>
+        <h3>How does this macro calculator work?</h3>
+        <p>It estimates your resting energy use with the Mifflin-St Jeor equation, multiplies by an activity factor to get your daily maintenance calories, then adjusts for your goal: about 15% below maintenance to lose fat, 10% above to build muscle. Protein is set per kilogram of bodyweight, fat at around 25–30% of calories, and carbohydrate fills the rest.</p>
+        <h3>How much protein do I need to build muscle?</h3>
+        <p>Research supports at least 1.6 grams per kilogram of bodyweight a day for adults doing resistance training, with little extra benefit above about 2.2 g/kg. This calculator uses 1.8 g/kg for building muscle and 2.0 g/kg when losing fat, where a higher intake helps protect muscle.</p>
+        <h3>Are macro calculators accurate?</h3>
+        <p>They are a starting point, not a measurement. Mifflin-St Jeor is accurate to within about 10% for most people, but individual metabolism varies. Use the numbers for two to three weeks, watch your bodyweight trend and how training feels, then adjust calories by 100–200 a day in whichever direction you need.</p>
+        <h3>Should I count calories or macros?</h3>
+        <p>Calories decide whether you gain or lose weight. Macros decide what that weight is made of. If you only track one thing, make it protein: hitting your protein target and staying roughly on calories gets most people most of the result. Precise carb and fat splits matter much less.</p>
+        <h3>What activity level should I pick?</h3>
+        <p>Most people overestimate. A desk job with three gym sessions a week is 'lightly active', not 'moderately active'. If you are unsure, pick the lower option — it is easier to add food when you are losing weight too fast than to work out why you are not losing at all.</p>
+      </section>
+
+      <p class="guide-related"><strong>Related:</strong> <a href="/getting-back-into-the-gym/">Getting back into the gym after a long break</a> · <a href="/strength-training-perimenopause/">Strength training in perimenopause</a> · <a href="/blog/">All posts</a></p>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-row">
+          <img src="/images/logo.svg" alt="">
+          trainerX
+        </div>
+        <p class="footer-tagline">AI personal training for iPhone. Built on training science, not guesswork.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-footer&amp;mt=8" target="_blank" rel="noopener">
+          <img src="/images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="/#how">How it works</a>
+        <a href="/#train">How it adapts</a>
+        <a href="/#app">The app</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Blog</div>
+        <a href="/deload-week/">Deload weeks</a>
+        <a href="/strength-training-perimenopause/">Strength training in perimenopause</a>
+        <a href="/strength-training-bone-density/">Strength training for bone density</a>
+        <a href="/ai-personal-trainer-apps/">AI personal trainer apps</a>
+        <a href="/personal-trainer-cost/">Personal trainer cost</a>
+        <a href="/getting-back-into-the-gym/">Getting back into the gym</a>
+        <a href="/blog/">All posts →</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Tools</div>
+        <a href="/macro-calculator/">Macro calculator</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Tools</div>
+        <a href="/macro-calculator/" aria-current="page">Macro calculator</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="/contact.html">Contact</a>
+        <a href="/legal/privacy.html">Privacy</a>
+        <a href="/legal/terms.html">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Kaizen Technologies Ltd · Company No. 09108099</p>
+      <p>Made in the UK 🇬🇧</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/script-light.js?v=6" defer></script>
+<script src="/macro-calculator/calc.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3359922d54aa40cb83c5ddd72208eb2a"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
