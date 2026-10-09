@@ -585,7 +585,10 @@ ul { list-style: none; }
    outgrow the column (phones), and centres when they don't (desktop). */
 .rail {
   display: flex;
-  justify-content: center;
+  /* safe center: centres when the screens fit the column, but falls back
+     to start when they overflow — plain `center` clips the first phone's
+     left edge off the scrollable area once there are enough of them. */
+  justify-content: safe center;
   gap: 40px;
   overflow-x: auto;
   padding: 8px 0 32px;
@@ -597,7 +600,7 @@ ul { list-style: none; }
 .rail-item { scroll-snap-align: center; flex: 0 0 auto; text-align: left; width: 250px; }
 .rail-caption { max-width: 250px; }
 @media (max-width: 640px) {
-  .rail { justify-content: flex-start; gap: 24px; }
+  .rail { gap: 24px; }
   .rail::after { content: ''; flex: 0 0 1px; }   /* lets the last card scroll fully into view */
 }
 .rail-caption { margin-top: 22px; max-width: 250px; }
