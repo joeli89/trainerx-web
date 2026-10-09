@@ -580,32 +580,20 @@ ul { list-style: none; }
 
 /* ═══ SCREEN CAROUSEL ═══════════════════════════════════════════ */
 .rail-wrap { margin-top: 64px; }
-/* The rail lives inside .container so its left edge lines up with the
-   heading above it. It still scrolls horizontally when the screens
-   outgrow the column (phones), and centres when they don't (desktop). */
+/* A grid, not a scroll rail: six screens never fit a column, and a rail
+   clipped at the column edges reads as broken rather than scrollable. */
 .rail {
-  display: flex;
-  /* safe center: centres when the screens fit the column, but falls back
-     to start when they overflow — plain `center` clips the first phone's
-     left edge off the scrollable area once there are enough of them. */
-  justify-content: safe center;
-  gap: 40px;
-  overflow-x: auto;
-  padding: 8px 0 32px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px 40px;
+  justify-items: center;
 }
-.rail::-webkit-scrollbar { display: none; }
-.rail-item { scroll-snap-align: center; flex: 0 0 auto; text-align: left; width: 250px; }
-.rail-caption { max-width: 250px; }
-@media (max-width: 640px) {
-  .rail { gap: 24px; }
-  .rail::after { content: ''; flex: 0 0 1px; }   /* lets the last card scroll fully into view */
-}
+.rail-item { text-align: left; width: 250px; max-width: 100%; }
 .rail-caption { margin-top: 22px; max-width: 250px; }
 .rail-caption h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
 .rail-caption p { font-size: 14.5px; color: var(--fg-secondary); margin-top: 6px; line-height: 1.55; }
+@media (max-width: 900px) { .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .rail { grid-template-columns: 1fr; gap: 40px; } }
 
 /* ═══ CARDS (3-up) ══════════════════════════════════════════════ */
 .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }

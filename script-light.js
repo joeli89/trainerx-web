@@ -96,33 +96,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Rail: drag to scroll (mouse); touch uses native scrolling ─────────
-const rail = document.getElementById('rail');
-if (rail) {
-  let down = false, startX = 0, startLeft = 0, moved = false;
-  rail.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'touch') return;   // let native touch scrolling handle it
-    down = true; moved = false;
-    startX = e.clientX;
-    startLeft = rail.scrollLeft;
-    rail.setPointerCapture(e.pointerId);
-    rail.style.cursor = 'grabbing';
-  });
-  rail.addEventListener('pointermove', (e) => {
-    if (!down) return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 3) moved = true;
-    rail.scrollLeft = startLeft - dx;
-  });
-  const up = (e) => {
-    if (!down) return;
-    down = false;
-    rail.style.cursor = '';
-    if (moved) rail.addEventListener('click', ev => ev.preventDefault(), { capture: true, once: true });
-  };
-  rail.addEventListener('pointerup', up);
-  rail.addEventListener('pointercancel', up);
-}
 
 // ── Hero video ───────────────────────────────────────────────────
 // Reduced Motion gets the poster frame instead of a loop; off-screen the
