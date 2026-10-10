@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Macro Calculator: Daily Protein, Carbs and Fat for Your Goal</title>
-  <meta name="description" content="Free macro calculator. Enter your stats and goal and get your daily calories, protein, carbs and fat — using the Mifflin-St Jeor equation and evidence-based protein targets. No sign-up.">
+  <title>Free Macro Calculator: Daily Protein, Carbs &amp; Fat</title>
+  <meta name="description" content="Free macro calculator, no sign-up. Enter your stats and goal and get your daily calories, protein, carbs and fat instantly — using the Mifflin-St Jeor equation and evidence-based protein targets.">
   <link rel="canonical" href="https://trainerx.ai/macro-calculator/">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="trainerX">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://trainerx.ai/macro-calculator/">
-  <meta property="og:title" content="Macro Calculator: Daily Protein, Carbs and Fat for Your Goal">
-  <meta property="og:description" content="Enter your stats and goal, get your daily calories and macros. Evidence-based, no sign-up.">
+  <meta property="og:title" content="Free Macro Calculator: Daily Protein, Carbs &amp; Fat">
+  <meta property="og:description" content="Free macro calculator. Enter your stats and goal, get your daily calories and macros instantly. Evidence-based, no sign-up.">
   <meta property="og:image" content="https://trainerx.ai/images/screens/hero.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Macro Calculator: Daily Protein, Carbs and Fat for Your Goal">
-  <meta name="twitter:description" content="Enter your stats and goal, get your daily calories and macros. Evidence-based, no sign-up.">
+  <meta name="twitter:title" content="Free Macro Calculator: Daily Protein, Carbs &amp; Fat">
+  <meta name="twitter:description" content="Free macro calculator. Enter your stats and goal, get your daily calories and macros instantly. Evidence-based, no sign-up.">
   <meta name="theme-color" content="#ffffff">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,13 +33,13 @@
       {
         "@type": "WebApplication",
         "@id": "https://trainerx.ai/macro-calculator/#tool",
-        "name": "trainerX Macro Calculator",
+        "name": "Free Macro Calculator by trainerX",
         "url": "https://trainerx.ai/macro-calculator/",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript",
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "description": "Calculates daily calories, protein, carbohydrate and fat targets from height, weight, age, sex, activity level and goal, using the Mifflin-St Jeor equation.",
+        "description": "Free, no sign-up macro calculator. Calculates daily calories, protein, carbohydrate and fat targets from height, weight, age, sex, activity level and goal, using the Mifflin-St Jeor equation.",
         "author": {"@id": "https://trainerx.ai/#organization"}
       },
       {
@@ -54,13 +54,14 @@
         "@type": "BreadcrumbList",
         "itemListElement": [
           {"@type": "ListItem", "position": 1, "name": "trainerX", "item": "https://trainerx.ai/"},
-          {"@type": "ListItem", "position": 2, "name": "Macro calculator", "item": "https://trainerx.ai/macro-calculator/"}
+          {"@type": "ListItem", "position": 2, "name": "Free macro calculator", "item": "https://trainerx.ai/macro-calculator/"}
         ]
       },
       {
         "@type": "FAQPage",
         "@id": "https://trainerx.ai/macro-calculator/#faq",
         "mainEntity": [
+          {"@type": "Question", "name": "Is this macro calculator really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. There is no account, no email capture and no paywall — the calculator runs in your browser and nothing you enter is stored or sent anywhere. trainerX makes the iPhone app that logs your food from a photo; this tool is free whether or not you ever use the app."}},
           {"@type": "Question", "name": "How does this macro calculator work?", "acceptedAnswer": {"@type": "Answer", "text": "It estimates your resting energy use with the Mifflin-St Jeor equation, multiplies by an activity factor to get your daily maintenance calories, then adjusts for your goal: about 15% below maintenance to lose fat, 10% above to build muscle. Protein is set per kilogram of bodyweight, fat at around 25–30% of calories, and carbohydrate fills the rest."}},
           {"@type": "Question", "name": "How much protein do I need to build muscle?", "acceptedAnswer": {"@type": "Answer", "text": "Research supports at least 1.6 grams per kilogram of bodyweight a day for adults doing resistance training, with little extra benefit above about 2.2 g/kg. This calculator uses 1.8 g/kg for building muscle and 2.0 g/kg when losing fat, where a higher intake helps protect muscle."}},
           {"@type": "Question", "name": "Are macro calculators accurate?", "acceptedAnswer": {"@type": "Answer", "text": "They are a starting point, not a measurement. Mifflin-St Jeor is accurate to within about 10% for most people, but individual metabolism varies. Use the numbers for two to three weeks, watch your bodyweight trend and how training feels, then adjust calories by 100–200 a day in whichever direction you need."}},
@@ -112,13 +113,13 @@
   <div class="container tool-wrap">
 
     <nav class="guide-breadcrumb" aria-label="Breadcrumb">
-      <a href="/">trainerX</a> <span aria-hidden="true">/</span> <span>Macro calculator</span>
+      <a href="/">trainerX</a> <span aria-hidden="true">/</span> <span>Free macro calculator</span>
     </nav>
 
     <header class="tool-head">
-      <p class="guide-eyebrow">Free tool</p>
-      <h1 class="guide-title">Macro calculator</h1>
-      <p class="tool-lede">Your daily calories, protein, carbs and fat — for your body and your goal. No sign-up, nothing stored.</p>
+      <p class="guide-eyebrow">Free tool · no sign-up</p>
+      <h1 class="guide-title">Free macro calculator</h1>
+      <p class="tool-lede">Your daily calories, protein, carbs and fat — for your body and your goal. Free, no sign-up, nothing stored.</p>
     </header>
 
     <div class="calc" id="calc">
@@ -235,6 +236,8 @@
 
       <section class="guide-faq" id="faqs" aria-labelledby="faqs-heading">
         <h2 id="faqs-heading">FAQs</h2>
+        <h3>Is this macro calculator really free?</h3>
+        <p>Yes. There is no account, no email capture and no paywall — the calculator runs in your browser and nothing you enter is stored or sent anywhere. trainerX makes the iPhone app that logs your food from a photo; this tool is free whether or not you ever use the app.</p>
         <h3>How does this macro calculator work?</h3>
         <p>It estimates your resting energy use with the Mifflin-St Jeor equation, multiplies by an activity factor to get your daily maintenance calories, then adjusts for your goal: about 15% below maintenance to lose fat, 10% above to build muscle. Protein is set per kilogram of bodyweight, fat at around 25–30% of calories, and carbohydrate fills the rest.</p>
         <h3>How much protein do I need to build muscle?</h3>
@@ -286,11 +289,11 @@
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Tools</div>
-        <a href="/macro-calculator/">Macro calculator</a>
+        <a href="/macro-calculator/">Free macro calculator</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Tools</div>
-        <a href="/macro-calculator/" aria-current="page">Macro calculator</a>
+        <a href="/macro-calculator/" aria-current="page">Free macro calculator</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Company</div>
