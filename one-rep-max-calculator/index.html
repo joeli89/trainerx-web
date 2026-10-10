@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free One Rep Max Calculator: Estimate Your 1RM</title>
+  <meta name="description" content="Free one rep max calculator, no sign-up. Enter a weight and the reps you lifted it for and get your estimated 1RM (Epley and Brzycki) plus the training loads for every rep range.">
+  <link rel="canonical" href="https://trainerx.ai/one-rep-max-calculator/">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="trainerX">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://trainerx.ai/one-rep-max-calculator/">
+  <meta property="og:title" content="Free One Rep Max Calculator: Estimate Your 1RM">
+  <meta property="og:description" content="Free 1RM calculator. Enter a weight and reps, get your estimated one rep max and training loads instantly. No sign-up.">
+  <meta property="og:image" content="https://trainerx.ai/images/screens/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free One Rep Max Calculator: Estimate Your 1RM">
+  <meta name="twitter:description" content="Free 1RM calculator. Enter a weight and reps, get your estimated one rep max and training loads instantly. No sign-up.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/icon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles-light.css?v=17">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://trainerx.ai/one-rep-max-calculator/#tool",
+        "name": "Free One Rep Max Calculator by trainerX",
+        "url": "https://trainerx.ai/one-rep-max-calculator/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Free, no sign-up one rep max calculator. Estimates 1RM from a weight and rep count using the Epley and Brzycki formulas, and shows training loads for each rep range.",
+        "author": {
+          "@id": "https://trainerx.ai/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://trainerx.ai/#organization",
+        "name": "trainerX",
+        "url": "https://trainerx.ai/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://trainerx.ai/images/logo.png"
+        },
+        "sameAs": [
+          "https://apps.apple.com/app/apple-store/id6755206111"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "trainerX",
+            "item": "https://trainerx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Free one rep max calculator",
+            "item": "https://trainerx.ai/one-rep-max-calculator/"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://trainerx.ai/one-rep-max-calculator/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this one rep max calculator free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. No account, no email, no paywall. It runs in your browser and nothing you enter is stored or sent anywhere. trainerX makes the iPhone app that sets your weights for you; the calculator is free whether or not you use the app."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is a one rep max calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Within about 5% when the estimate comes from a set of 1–5 reps, drifting to 10% or more from sets of 10 and above. The formulas were fitted to average lifters, so if you are unusually strong at high reps (or unusually weak) they will be off for you. Use the number to plan, then confirm it with a heavy single, double or triple."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which 1RM formula is best?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "None is best for everyone. Epley tends to run slightly high and Brzycki slightly low at moderate reps, so this calculator averages the two for its headline number and shows each formula underneath. Lombardi and O'Conner are listed for comparison. The spread between them is a useful reminder of how approximate any estimate is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many reps should I use to estimate my max?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fewer is better: 2–5 reps, taken close to failure, gives the most reliable estimate. Above 10 reps the relationship between reps and load depends more on endurance than strength, so the formulas lose accuracy. Avoid using a set you stopped well short of failure — the calculator assumes the set was near maximal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to test my actual one rep max?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not unless you compete. For programming, an estimate from a heavy set of 3–5 is enough and much safer than a true max attempt. If you do want to test, do it after a lighter week, with a spotter or safety bars, working up in small jumps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What percentage of my 1RM should I train at?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on the goal: roughly 80–90% for sets of 3–5 to build strength, 65–80% for sets of 6–12 to build muscle, and 50–65% for higher-rep or technique work. The table above converts your estimate into those loads. A good program moves between ranges rather than living in one."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<svg class="lg-defs" aria-hidden="true" focusable="false">
+  <filter id="lg-warp" x="-4%" y="-8%" width="108%" height="116%"
+          color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.09"
+                  numOctaves="2" seed="9" result="noise"/>
+    <feGaussianBlur in="noise" stdDeviation="1.1" result="soft"/>
+    <feDisplacementMap in="SourceGraphic" in2="soft" scale="7"
+                       xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="site-header" id="site-header">
+  <nav class="nav-pill">
+    <span class="lg-warp" aria-hidden="true"></span>
+    <span class="lg-sheen" aria-hidden="true"></span>
+    <span class="lg-rim" aria-hidden="true"></span>
+    <a href="/" class="nav-brand" aria-label="trainerX — home">
+      <img src="/images/logo.svg" alt="trainerX">
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/#how" class="nav-link">How it works</a>
+      <a href="/#train" class="nav-link">Train</a>
+      <a href="/#app" class="nav-link">The app</a>
+      <a href="/#pricing" class="nav-link">Pricing</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/blog/" class="nav-link">Blog</a>
+    </div>
+    <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-nav&amp;mt=8" class="nav-cta" target="_blank" rel="noopener">Download free</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main class="tool">
+  <div class="container tool-wrap">
+
+    <nav class="guide-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">trainerX</a> <span aria-hidden="true">/</span> <span>Free one rep max calculator</span>
+    </nav>
+
+    <header class="tool-head">
+      <p class="guide-eyebrow">Free tool · no sign-up</p>
+      <h1 class="guide-title">Free one rep max calculator</h1>
+      <p class="tool-lede">Enter a weight and how many reps you lifted it for. Get your estimated 1RM and the load for every rep range. Free, nothing stored. Share it as a link or an image.</p>
+    </header>
+
+    <div class="calc" id="calc">
+
+      <form class="calc-form" id="calc-form" novalidate>
+
+        <div class="calc-row">
+          <div class="calc-field">
+            <span class="calc-label">Units</span>
+            <div class="seg" role="radiogroup" aria-label="Units">
+              <label class="seg-opt"><input type="radio" name="units" value="imperial" checked><span>lb</span></label>
+              <label class="seg-opt"><input type="radio" name="units" value="metric"><span>kg</span></label>
+            </div>
+          </div>
+          <div class="calc-field">
+            <span class="calc-label">Lift</span>
+            <div class="seg seg--wrap" role="radiogroup" aria-label="Lift">
+              <label class="seg-opt"><input type="radio" name="lift" value="squat" checked><span>Squat</span></label>
+              <label class="seg-opt"><input type="radio" name="lift" value="bench"><span>Bench</span></label>
+              <label class="seg-opt"><input type="radio" name="lift" value="deadlift"><span>Deadlift</span></label>
+              <label class="seg-opt"><input type="radio" name="lift" value="ohp"><span>Press</span></label>
+              <label class="seg-opt"><input type="radio" name="lift" value="other"><span>Other</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label class="calc-field">
+            <span class="calc-label">Weight lifted</span>
+            <span class="calc-input"><input type="number" name="weight" inputmode="decimal" min="1" max="2000" step="1" value="225" required><span class="calc-unit" data-unit="weight">lb</span></span>
+          </label>
+          <label class="calc-field">
+            <span class="calc-label">Reps</span>
+            <span class="calc-input"><input type="number" name="reps" inputmode="numeric" min="1" max="15" value="5" required><span class="calc-unit">reps</span></span>
+          </label>
+        </div>
+        <p class="calc-hint" id="reps-hint"></p>
+
+        <noscript><p class="guide-note">This calculator needs JavaScript. The formulas are written out below, so you can work it out by hand.</p></noscript>
+      </form>
+
+      <section class="calc-results" id="results" aria-live="polite" aria-label="Your results">
+        <div class="calc-kcal">
+          <span class="calc-kcal-num"><span id="r-1rm">—</span> <span class="calc-kcal-unit" id="r-unit">lb</span></span>
+          <span class="calc-kcal-lbl">estimated one rep max</span>
+          <span class="calc-kcal-sub" id="r-sub"></span>
+        </div>
+        <dl class="calc-formulas">
+          <div><dt>Epley</dt><dd><span id="f-epley">—</span> <span class="f-unit">lb</span></dd></div>
+          <div><dt>Brzycki</dt><dd><span id="f-brzycki">—</span> <span class="f-unit">lb</span></dd></div>
+          <div><dt>Lombardi</dt><dd><span id="f-lombardi">—</span> <span class="f-unit">lb</span></dd></div>
+          <div><dt>O'Conner</dt><dd><span id="f-oconner">—</span> <span class="f-unit">lb</span></dd></div>
+        </dl>
+        <p class="calc-note" id="r-note"></p>
+        <div class="calc-share" id="calc-share">
+          <button type="button" class="calc-btn calc-btn--primary" id="share-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="m7 8 5-5 5 5"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>
+            Share my 1RM
+          </button>
+          <button type="button" class="calc-btn" id="copy-btn">Copy link</button>
+          <span class="calc-toast" id="calc-toast" role="status" hidden></span>
+        </div>
+      </section>
+
+      <section class="calc-table-wrap" id="table-wrap" aria-label="Training loads by percentage">
+        <h2 class="calc-table-title">Training loads from your 1RM</h2>
+        <table class="calc-table">
+          <thead><tr><th scope="col">% of 1RM</th><th scope="col">Weight</th><th scope="col">Reps you can expect</th></tr></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+        <p class="calc-hint">Weights rounded to what you can load on a bar (2.5 kg / 5 lb).</p>
+      </section>
+
+    </div>
+
+    <aside class="guide-app tool-app">
+      <p class="guide-app-label">Then stop doing the maths every session</p>
+      <p>trainerX works out your working weights from what you actually lifted last time — every set, every exercise — and nudges them up when you're ready. You just show up and lift.</p>
+      <a class="guide-app-cta" href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-1rm-tool&amp;mt=8" target="_blank" rel="noopener">Download trainerX →</a>
+    </aside>
+
+    <article class="guide-body tool-body">
+      <h2 id="how-it-works">How the estimate is worked out</h2>
+      <p>A one rep max calculator doesn't measure anything. It takes a set you've done — a weight and a rep count — and runs it through a formula fitted to how strength usually falls off as reps go up. Four are shown here.</p>
+      <p><strong>Epley:</strong> weight × (1 + reps ÷ 30). The most widely used; tends to run slightly high at moderate reps.</p>
+      <p><strong>Brzycki:</strong> weight × 36 ÷ (37 − reps). Tends to run slightly low, and gets unstable above 10 reps.</p>
+      <p><strong>Lombardi:</strong> weight × reps<sup>0.10</sup>. <strong>O'Conner:</strong> weight × (1 + 0.025 × reps). Both listed so you can see the spread.</p>
+      <p>The headline number is the average of Epley and Brzycki, rounded to the nearest 2.5 kg or 5 lb so it's a weight you can actually load. The training-load table applies standard rep-max percentages to that estimate: 90% for around 4 reps, 80% for around 8, 70% for around 12. Those are population averages — your own rep ability at a given percentage will vary a little by lift and by how you've trained.</p>
+      <p>The estimate is only as good as the set it came from. A set of 3–5 reps taken close to failure is ideal. A set of 12 you could have pushed further will underestimate you, and a grindy set of 15 will overestimate.</p>
+
+      <section class="guide-faq" id="faqs" aria-labelledby="faqs-heading">
+        <h2 id="faqs-heading">FAQs</h2>
+        <h3>Is this one rep max calculator free?</h3>
+        <p>Yes. No account, no email, no paywall. It runs in your browser and nothing you enter is stored or sent anywhere. trainerX makes the iPhone app that sets your weights for you; the calculator is free whether or not you use the app.</p>
+        <h3>How accurate is a one rep max calculator?</h3>
+        <p>Within about 5% when the estimate comes from a set of 1–5 reps, drifting to 10% or more from sets of 10 and above. The formulas were fitted to average lifters, so if you are unusually strong at high reps (or unusually weak) they will be off for you. Use the number to plan, then confirm it with a heavy single, double or triple.</p>
+        <h3>Which 1RM formula is best?</h3>
+        <p>None is best for everyone. Epley tends to run slightly high and Brzycki slightly low at moderate reps, so this calculator averages the two for its headline number and shows each formula underneath. Lombardi and O'Conner are listed for comparison. The spread between them is a useful reminder of how approximate any estimate is.</p>
+        <h3>How many reps should I use to estimate my max?</h3>
+        <p>Fewer is better: 2–5 reps, taken close to failure, gives the most reliable estimate. Above 10 reps the relationship between reps and load depends more on endurance than strength, so the formulas lose accuracy. Avoid using a set you stopped well short of failure — the calculator assumes the set was near maximal.</p>
+        <h3>Do I need to test my actual one rep max?</h3>
+        <p>Not unless you compete. For programming, an estimate from a heavy set of 3–5 is enough and much safer than a true max attempt. If you do want to test, do it after a lighter week, with a spotter or safety bars, working up in small jumps.</p>
+        <h3>What percentage of my 1RM should I train at?</h3>
+        <p>It depends on the goal: roughly 80–90% for sets of 3–5 to build strength, 65–80% for sets of 6–12 to build muscle, and 50–65% for higher-rep or technique work. The table above converts your estimate into those loads. A good program moves between ranges rather than living in one.</p>
+      </section>
+
+      <p class="guide-related"><strong>Related:</strong> <a href="/macro-calculator/">Free macro calculator</a> · <a href="/deload-week/">When to take a deload week</a> · <a href="/getting-back-into-the-gym/">Getting back into the gym</a> · <a href="/blog/">All posts</a></p>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-row">
+          <img src="/images/logo.svg" alt="">
+          trainerX
+        </div>
+        <p class="footer-tagline">AI personal training for iPhone. Built on training science, not guesswork.</p>
+        <a href="https://apps.apple.com/app/apple-store/id6755206111?pt=66819800&amp;ct=web-footer&amp;mt=8" target="_blank" rel="noopener">
+          <img src="/images/app-store-badge.png" alt="Download on the App Store" class="app-badge">
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="/#how">How it works</a>
+        <a href="/#train">How it adapts</a>
+        <a href="/#app">The app</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Blog</div>
+        <a href="/deload-week/">Deload weeks</a>
+        <a href="/strength-training-perimenopause/">Strength training in perimenopause</a>
+        <a href="/strength-training-bone-density/">Strength training for bone density</a>
+        <a href="/ai-personal-trainer-apps/">AI personal trainer apps</a>
+        <a href="/personal-trainer-cost/">Personal trainer cost</a>
+        <a href="/getting-back-into-the-gym/">Getting back into the gym</a>
+        <a href="/blog/">All posts →</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Tools</div>
+        <a href="/macro-calculator/">Free macro calculator</a>
+        <a href="/one-rep-max-calculator/" aria-current="page">Free one rep max calculator</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="/contact.html">Contact</a>
+        <a href="/legal/privacy.html">Privacy</a>
+        <a href="/legal/terms.html">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Kaizen Technologies Ltd · Company No. 09108099</p>
+      <p>Made in the UK 🇬🇧</p>
+    </div>
+  </div>
+</footer>
+<script src="/script-light.js?v=6" defer></script>
+<script src="/tools/share.js" defer></script>
+<script src="/one-rep-max-calculator/calc.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3359922d54aa40cb83c5ddd72208eb2a"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

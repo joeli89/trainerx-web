@@ -99,80 +99,41 @@
     render();
   }
 
-  /* ── share ────────────────────────────────────────────────────── */
-  let toastTimer;
-  function toast(msg) {
-    const t = $('calc-toast'); t.textContent = msg; t.hidden = false;
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2200);
-  }
+  /* ── share (plumbing in /tools/share.js) ──────────────────────── */
+  const S = window.txShare;
   const shareUrl = () => PAGE + location.search;
   const shareText = (r) => `My daily macros: ${r.kcal.toLocaleString()} kcal · ${r.protein}g protein · ${r.carbs}g carbs · ${r.fat}g fat (${GOAL[r.goal].toLowerCase()}). Free calculator:`;
 
-  async function copyLink() {
-    try { await navigator.clipboard.writeText(shareUrl()); toast('Link copied'); }
-    catch { prompt('Copy this link', shareUrl()); }
-  }
-
-  const logo = new Image(); logo.src = '/images/logo.svg';
-  async function renderCard(r) {
-    await Promise.all([document.fonts.load('700 120px Inter'), document.fonts.load('600 48px Inter'), document.fonts.load('400 36px Inter'),
-                       logo.complete ? null : new Promise(res => { logo.onload = res; logo.onerror = res; })]);
-    const W = 1080, H = 1350, c = document.createElement('canvas'); c.width = W; c.height = H;
-    const x = c.getContext('2d');
-    x.fillStyle = '#0a0a0a'; x.fillRect(0, 0, W, H);
-    x.textAlign = 'center'; x.fillStyle = '#fff';
-    // brand
-    if (logo.naturalWidth) x.drawImage(logo, W / 2 - 36, 150, 72, 72);
-    x.font = '500 30px Inter'; x.fillStyle = 'rgba(255,255,255,0.55)'; x.fillText('MY DAILY MACROS', W / 2, 290);
-    // calories
-    x.font = '700 220px Inter'; x.fillStyle = '#fff'; x.letterSpacing = '-10px'; x.fillText(r.kcal.toLocaleString(), W / 2, 540); x.letterSpacing = '0px';
-    x.font = '400 40px Inter'; x.fillStyle = 'rgba(255,255,255,0.6)'; x.fillText('calories a day', W / 2, 610);
-    x.font = '500 40px Inter'; x.fillStyle = 'rgba(255,255,255,0.85)'; x.fillText(SUB[r.goal], W / 2, 665);
-    // macros
+  async function renderCard() {
+    const r = last, W = 1080, H = 1350;
+    const { x, toBlob } = await S.cardContext(W, H);
+    S.cardText(x, 'MY DAILY MACROS', 290, { size: 30, weight: 500, color: 'rgba(255,255,255,0.55)' }, W / 2);
+    S.cardText(x, r.kcal.toLocaleString(), 540, { size: 220, weight: 700, spacing: -10 }, W / 2);
+    S.cardText(x, 'calories a day', 610, { size: 40, color: 'rgba(255,255,255,0.6)' }, W / 2);
+    S.cardText(x, SUB[r.goal], 665, { size: 40, weight: 500, color: 'rgba(255,255,255,0.85)' }, W / 2);
     const cols = [['Protein', r.protein, r.pp], ['Carbs', r.carbs, r.pc], ['Fat', r.fat, r.pf]];
     const bw = 296, gap = 24, x0 = (W - (bw * 3 + gap * 2)) / 2, y0 = 760, bh = 250;
     cols.forEach(([lbl, g, p], i) => {
       const bx = x0 + i * (bw + gap);
       x.fillStyle = 'rgba(255,255,255,0.07)'; x.beginPath(); x.roundRect(bx, y0, bw, bh, 36); x.fill();
       x.strokeStyle = 'rgba(255,255,255,0.12)'; x.lineWidth = 2; x.stroke();
-      x.fillStyle = '#fff'; x.font = '700 84px Inter'; x.letterSpacing = '-3px'; x.fillText(g + 'g', bx + bw / 2, y0 + 118); x.letterSpacing = '0px';
-      x.fillStyle = 'rgba(255,255,255,0.7)'; x.font = '500 34px Inter'; x.fillText(lbl, bx + bw / 2, y0 + 172);
-      x.fillStyle = 'rgba(255,255,255,0.45)'; x.font = '500 28px Inter'; x.fillText(p + '%', bx + bw / 2, y0 + 216);
+      S.cardText(x, g + 'g', y0 + 118, { size: 84, weight: 700, spacing: -3 }, bx + bw / 2);
+      S.cardText(x, lbl, y0 + 172, { size: 34, weight: 500, color: 'rgba(255,255,255,0.7)' }, bx + bw / 2);
+      S.cardText(x, p + '%', y0 + 216, { size: 28, weight: 500, color: 'rgba(255,255,255,0.45)' }, bx + bw / 2);
     });
-    // split bar
     const by = 1070, bwid = bw * 3 + gap * 2, bhgt = 14;
     x.fillStyle = 'rgba(255,255,255,0.1)'; x.beginPath(); x.roundRect(x0, by, bwid, bhgt, 7); x.fill();
     x.save(); x.beginPath(); x.roundRect(x0, by, bwid, bhgt, 7); x.clip();
     let cx = x0; [[r.pp, '#fff'], [r.pc, 'rgba(255,255,255,0.55)'], [r.pf, 'rgba(255,255,255,0.28)']].forEach(([p, col]) => { const w = bwid * p / 100; x.fillStyle = col; x.fillRect(cx, by, w, bhgt); cx += w; });
     x.restore();
-    // footer
-    x.font = '500 32px Inter'; x.fillStyle = 'rgba(255,255,255,0.55)'; x.fillText('Free calculator  ·  trainerx.ai/macro-calculator', W / 2, 1230);
-    return new Promise(res => c.toBlob(res, 'image/png'));
-  }
-
-  async function share() {
-    if (!last) return;
-    const btn = $('share-btn'); btn.disabled = true;
-    try {
-      const blob = await renderCard(last);
-      const file = new File([blob], 'my-macros.png', { type: 'image/png' });
-      const data = { title: 'My daily macros', text: shareText(last), url: shareUrl() };
-      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ ...data, files: [file] }); }
-      else if (navigator.share) { await navigator.share(data); }
-      else {
-        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-macros.png'; a.click();
-        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-        await navigator.clipboard?.writeText(shareUrl()).catch(() => {});
-        toast('Image saved · link copied');
-      }
-    } catch (e) { if (e?.name !== 'AbortError') toast('Could not share'); }
-    finally { btn.disabled = false; }
+    S.cardFooter(x, W, 'Free calculator  ·  trainerx.ai/macro-calculator');
+    return toBlob();
   }
 
   form.addEventListener('input', (e) => { if (e.target.name !== 'units') render(); });
   form.querySelectorAll('input[name="units"]').forEach(el => el.addEventListener('change', () => applyUnits(true)));
   form.addEventListener('submit', (e) => e.preventDefault());
-  $('share-btn').addEventListener('click', share);
-  $('copy-btn').addEventListener('click', copyLink);
+  $('share-btn').addEventListener('click', () => last && S.share({ button: $('share-btn'), renderCard, filename: 'my-macros.png', title: 'My daily macros', text: shareText(last), url: shareUrl() }));
+  $('copy-btn').addEventListener('click', () => S.copyLink(shareUrl()));
   if (!loadUrl()) render();
 })();
