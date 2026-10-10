@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/icon-96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="stylesheet" href="/styles-light.css?v=15">
+  <link rel="stylesheet" href="/styles-light.css?v=16">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -119,7 +119,7 @@
     <header class="tool-head">
       <p class="guide-eyebrow">Free tool · no sign-up</p>
       <h1 class="guide-title">Free macro calculator</h1>
-      <p class="tool-lede">Your daily calories, protein, carbs and fat — for your body and your goal. Free, no sign-up, nothing stored.</p>
+      <p class="tool-lede">Your daily calories, protein, carbs and fat — for your body and your goal. Free, no sign-up, nothing stored. Share the result as a link or an image.</p>
     </header>
 
     <div class="calc" id="calc">
@@ -214,6 +214,14 @@
           <span id="b-protein"></span><span id="b-carbs"></span><span id="b-fat"></span>
         </div>
         <p class="calc-note" id="r-note"></p>
+        <div class="calc-share" id="calc-share">
+          <button type="button" class="calc-btn calc-btn--primary" id="share-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="m7 8 5-5 5 5"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>
+            Share my macros
+          </button>
+          <button type="button" class="calc-btn" id="copy-btn">Copy link</button>
+          <span class="calc-toast" id="calc-toast" role="status" hidden></span>
+        </div>
       </section>
 
     </div>

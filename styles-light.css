@@ -1077,6 +1077,19 @@ ul { list-style: none; }
 #b-protein { background: #fff; } #b-carbs { background: rgba(255,255,255,0.55); } #b-fat { background: rgba(255,255,255,0.28); }
 .calc-note { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.6); margin: 0; }
 
+/* Share row inside the dark results panel */
+.calc-share { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+.calc-share[hidden] { display: none; }
+.calc-btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--r-full); border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.08); color: #fff; font: 600 14px var(--font-sans); letter-spacing: -0.01em; cursor: pointer; transition: background 0.15s var(--ease), transform 0.15s var(--ease); }
+.calc-btn:hover { background: rgba(255,255,255,0.14); }
+.calc-btn:active { transform: scale(0.98); }
+.calc-btn:disabled { opacity: 0.6; cursor: progress; }
+.calc-btn--primary { background: #fff; color: var(--fg); border-color: #fff; }
+.calc-btn--primary:hover { background: #ededed; }
+.calc-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.calc-toast { font-size: 13.5px; color: rgba(255,255,255,0.75); }
+.calc-toast[hidden] { display: none; }
+
 .tool-app { margin-top: 36px; }
 .tool-body { margin-top: 48px; }
 .tool-body h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
