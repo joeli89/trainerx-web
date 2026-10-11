@@ -8,6 +8,8 @@ import {
   loadIntentCore,
   isTestAccount,
   wawc2Series,
+  wawc2Week,
+  completionsSince,
   fetchUserMessages,
   fetchUserTrace,
   fetchUserPlans,
@@ -485,11 +487,12 @@ function viewOverview() {
       store.loadedAt ? `Data loaded ${fmtTime(store.loadedAt.toISOString())}.` : ''
     }</div>
     <div class="tiles">
-      <div class="tile"><div class="label">WAWC₂ this week</div><div class="value">${thisWeek}</div>
-        <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta >= 0 ? '+' : ''}${delta} vs last week</div></div>
+      <a class="tile link" href="#/north-star"><div class="label">WAWC₂ this week <span class="tile-go">→</span></div><div class="value">${thisWeek}</div>
+        <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta >= 0 ? '+' : ''}${delta} vs last week</div></a>
       <div class="tile"><div class="label">Total users</div><div class="value">${users.length}</div>
         <div class="delta">${newUsers7} new in 7d</div></div>
-      <div class="tile"><div class="label">Workouts completed · 7d</div><div class="value">${workouts7}</div></div>
+      <a class="tile link" href="#/workouts"><div class="label">Workouts completed · 7d <span class="tile-go">→</span></div><div class="value">${workouts7}</div>
+        <div class="delta">${new Set(completions.filter((c) => c.at >= new Date(Date.now() - 7 * 86400 * 1000).toISOString()).map((c) => c.user_id)).size} people</div></a>
       <div class="tile"><div class="label">User messages · 7d</div><div class="value">${msgs7}</div></div>
       <div class="tile"><div class="label">Plans generated · 7d</div><div class="value">${plans7}</div></div>
       ${appstoreTiles}
@@ -521,6 +524,9 @@ function viewOverview() {
 }
 
 function bindRowLinks() {
+  document.querySelectorAll('tr.rowlink[data-href]').forEach((tr) => {
+    tr.onclick = () => (location.hash = tr.dataset.href);
+  });
   document.querySelectorAll('tr.rowlink[data-uid]').forEach((tr) => {
     tr.onclick = () => (location.hash = `#/user/${tr.dataset.uid}`);
   });
@@ -528,6 +534,87 @@ function bindRowLinks() {
 
 // ---------------------------------------------------------------------------
 // Users
+
+// ---------------------------------------------------------------------------
+// North Star drill-down: who was behind WAWC₂ in a given week.
+
+const fmtDur = (sec) => (sec == null ? '—' : sec < 60 ? `${sec}s` : `${Math.round(sec / 60)} min`);
+const userHref = (uid, tab = 'workouts') => `#/user/${uid}/${tab}`;
+
+function viewNorthStar(wk) {
+  const series = wawc2Series(8, userVisible);
+  const week = wk && series.some((w) => w.week === wk) ? wk : series[series.length - 1].week;
+  const rows = wawc2Week(week, userVisible);
+  const qualified = rows.filter((r) => r.qualifies);
+  const nearly = rows.filter((r) => !r.qualifies);
+  const weekEnd = new Date(Date.parse(week) + 6 * 86400 * 1000).toISOString().slice(0, 10);
+  const userRow = (r) => {
+    const u = store.byId.get(r.user_id) ?? {};
+    return `<tr class="rowlink" data-href="${userHref(r.user_id)}">
+      <td><strong>${esc(displayName(u))}</strong><br><span style="color:var(--text-muted)">${esc(u.email ?? '')}</span></td>
+      <td class="num">${r.items.length}</td>
+      <td class="workout-list">${r.items.map((c) => `<span class="pill ${c.source === 'scheduled' ? '' : 'good'}" title="${esc(c.source)}">${esc(c.title)} · ${fmtDate(c.at)}${c.rating ? ' ' + '★'.repeat(c.rating) : ''}</span>`).join(' ')}</td>
+      <td>→</td></tr>`;
+  };
+  shell(
+    'home',
+    `<a class="backlink" href="#/home">← Home</a>
+    <div class="page-title">WAWC₂ · week of ${week}</div>
+    <div class="page-sub">Distinct users completing ≥2 workouts between ${week} and ${weekEnd}. Rows open the user's workouts.</div>
+    <div class="week-picker">${series
+      .map((w) => `<a class="chip-link ${w.week === week ? 'active' : ''}" href="#/north-star/${w.week}">${w.week.slice(5)} <b>${w.value}</b></a>`)
+      .join('')}</div>
+    <div class="tiles">
+      <div class="tile"><div class="label">WAWC₂</div><div class="value">${qualified.length}</div></div>
+      <div class="tile"><div class="label">Completed exactly one</div><div class="value">${nearly.length}</div><div class="delta">one more and they'd count</div></div>
+      <div class="tile"><div class="label">Workouts that week</div><div class="value">${rows.reduce((a, r) => a + r.items.length, 0)}</div></div>
+    </div>
+    <div class="card"><h3>Who counted <span class="sub">${qualified.length} users</span></h3>
+      ${qualified.length ? `<div class="table-scroll"><table>
+        <tr><th>User</th><th class="num">Workouts</th><th>What they did</th><th></th></tr>
+        ${qualified.map(userRow).join('')}</table></div>` : '<div class="empty">Nobody hit two workouts this week.</div>'}
+    </div>
+    <div class="card"><h3>One workout only <span class="sub">${nearly.length} users</span></h3>
+      ${nearly.length ? `<div class="table-scroll"><table>
+        <tr><th>User</th><th class="num">Workouts</th><th>What they did</th><th></th></tr>
+        ${nearly.map(userRow).join('')}</table></div>` : '<div class="empty">Everyone who trained did it at least twice.</div>'}
+    </div>`
+  );
+  bindRowLinks();
+}
+
+// ---------------------------------------------------------------------------
+// Completed workouts, newest first.
+
+function viewWorkouts(daysArg) {
+  const days = [7, 14, 30, 90].includes(+daysArg) ? +daysArg : 7;
+  const items = completionsSince(days, userVisible);
+  const people = new Set(items.map((c) => c.user_id)).size;
+  const raw = store.completionsRaw ?? {};
+  shell(
+    'home',
+    `<a class="backlink" href="#/home">← Home</a>
+    <div class="page-title">Workouts completed</div>
+    <div class="page-sub">${items.length} workouts by ${people} people in the last ${days} days. One row per workout; sessions logged in both tables are counted once.</div>
+    <div class="week-picker">${[7, 14, 30, 90].map((d) => `<a class="chip-link ${d === days ? 'active' : ''}" href="#/workouts/${d}">${d}d</a>`).join('')}</div>
+    <div class="card"><div class="table-scroll"><table>
+      <tr><th>Completed</th><th>User</th><th>Workout</th><th class="num">Duration</th><th>Rating</th><th>Source</th><th></th></tr>
+      ${items.length ? items.map((c) => {
+        const u = store.byId.get(c.user_id) ?? {};
+        return `<tr class="rowlink" data-href="${userHref(c.user_id)}">
+          <td class="nowrap">${fmtDateTime(c.at)}<br><span style="color:var(--text-muted)">${ago(c.at)}</span></td>
+          <td><strong>${esc(displayName(u))}</strong><br><span style="color:var(--text-muted)">${esc(u.email ?? '')}</span></td>
+          <td>${esc(c.title)}</td>
+          <td class="num">${fmtDur(c.duration_sec)}</td>
+          <td>${c.rating ? '★'.repeat(c.rating) : '—'}</td>
+          <td><span class="pill">${esc(c.source)}</span></td>
+          <td>→</td></tr>`;
+      }).join('') : `<tr><td colspan="7"><div class="empty">No completed workouts in the last ${days} days.</div></td></tr>`}
+    </table></div></div>
+    ${raw.sessions != null ? `<div class="query-note">All time: ${raw.sessions} completed sessions + ${raw.scheduled} completed scheduled rows → ${store.completions.length} distinct workouts after de-duplication.</div>` : ''}`
+  );
+  bindRowLinks();
+}
 
 function viewUsers() {
   const q = (document.getElementById('userSearch')?.value ?? '').toLowerCase();
@@ -1459,7 +1546,9 @@ async function route() {
     }
   }
   if (page === 'users') viewUsers();
-  else if (page === 'user' && arg) viewUser(arg, 'chat', detail === 'message' ? targetMessageId : null);
+  else if (page === 'user' && arg) viewUser(arg, ['workouts', 'plans', 'trainer'].includes(detail) ? detail : 'chat', detail === 'message' ? targetMessageId : null);
+  else if (page === 'north-star') viewNorthStar(arg);
+  else if (page === 'workouts') viewWorkouts(arg);
   else if (page === 'conversations') viewConversations();
   else if (page === 'plans') viewPlans();
   else if (page === 'analyze' && arg === 'intents') viewAnalyzeIntents();

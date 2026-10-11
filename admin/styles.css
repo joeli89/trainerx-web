@@ -141,6 +141,18 @@ button { font: inherit; cursor: pointer; }
 .tile .delta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 .tile .delta.up { color: var(--good); }
 .tile .delta.down { color: var(--critical); }
+.tile.link { color: inherit; text-decoration: none; display: block; transition: border-color 0.15s, background 0.15s; }
+.tile.link:hover { border-color: var(--series-1); background: var(--surface-2); }
+.tile .tile-go { color: var(--text-muted); font-size: 12px; margin-left: 4px; }
+.tile.link:hover .tile-go { color: var(--series-1); }
+.week-picker { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
+.chip-link { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); font-size: 12px; text-decoration: none; }
+.chip-link b { color: var(--text); }
+.chip-link:hover { border-color: var(--series-1); }
+.chip-link.active { border-color: var(--series-1); color: var(--series-1); }
+.workout-list { max-width: 520px; }
+.workout-list .pill { margin: 2px 2px 2px 0; }
+td.nowrap { white-space: nowrap; }
 
 /* ---- cards / charts ---- */
 .card {

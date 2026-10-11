@@ -83,8 +83,8 @@ export async function loadCore() {
     }),
     fetchRows('user_streaks', { select: 'user_id,current_streak,longest_streak,last_active_date' }),
     fetchRows('messages', { select: 'user_id,role,created_at,is_trainer_initiated' }),
-    fetchRows('workout_sessions', { select: 'user_id,completed_at,status,scheduled_workout_id' }),
-    fetchRows('scheduled_workouts', { select: 'id,user_id,status,completed_at' }),
+    fetchRows('workout_sessions', { select: 'id,user_id,title,day_index,day_number,started_at,completed_at,status,rating,scheduled_workout_id,plan_id' }),
+    fetchRows('scheduled_workouts', { select: 'id,user_id,status,completed_at,actual_duration_sec,scheduled_date,plan_day_index,plan_id' }),
     fetchRows('plans', { select: 'id,user_id,created_at,active,plan_start_local_date' }),
     // Tolerate absence: the appstore_metrics migration/ingester may not have run yet.
     fetchRows('appstore_metrics', { select: 'date,downloads,page_views', order: ['date', 'asc'] }).catch(() => []),
@@ -107,17 +107,36 @@ export async function loadCore() {
     store.msgStats.set(m.user_id, s);
   }
 
-  // Completed workouts, deduped: sessions win; scheduled rows only count when
-  // no completed session points at them.
+  // Completed workouts, deduped. Sessions win. A scheduled row only counts
+  // when no completed session claims it — by id when the app linked them, or,
+  // since sessions rarely carry scheduled_workout_id, when the same user has
+  // no completed session within 3 hours of it.
   const claimedSched = new Set(
     sessions.filter((s) => s.completed_at && s.scheduled_workout_id).map((s) => s.scheduled_workout_id)
   );
+  const sessionTimes = new Map(); // user_id -> [ms]
+  for (const s of sessions) if (s.completed_at) {
+    if (!sessionTimes.has(s.user_id)) sessionTimes.set(s.user_id, []);
+    sessionTimes.get(s.user_id).push(Date.parse(s.completed_at));
+  }
+  const DEDUPE_MS = 3 * 3600 * 1000;
+  const nearSession = (w) => (sessionTimes.get(w.user_id) ?? []).some((t) => Math.abs(t - Date.parse(w.completed_at)) < DEDUPE_MS);
   store.completions = [
-    ...sessions.filter((s) => s.completed_at).map((s) => ({ user_id: s.user_id, at: s.completed_at })),
+    ...sessions.filter((s) => s.completed_at).map((s) => ({
+      id: s.id, source: 'session', user_id: s.user_id, at: s.completed_at, started_at: s.started_at,
+      title: s.title ?? ((s.day_index ?? s.day_number) != null ? `Day ${s.day_index ?? s.day_number}` : 'Workout'),
+      rating: s.rating ?? null, duration_sec: s.started_at && s.completed_at ? Math.max(0, Math.round((Date.parse(s.completed_at) - Date.parse(s.started_at)) / 1000)) : null,
+      plan_id: s.plan_id ?? null,
+    })),
     ...sched
-      .filter((w) => w.status === 'completed' && w.completed_at && !claimedSched.has(w.id))
-      .map((w) => ({ user_id: w.user_id, at: w.completed_at })),
-  ];
+      .filter((w) => w.status === 'completed' && w.completed_at && !claimedSched.has(w.id) && !nearSession(w))
+      .map((w) => ({
+        id: w.id, source: 'scheduled', user_id: w.user_id, at: w.completed_at, started_at: null,
+        title: w.plan_day_index != null ? `Plan day ${w.plan_day_index + 1}` : 'Scheduled workout',
+        rating: null, duration_sec: w.actual_duration_sec ?? null, plan_id: w.plan_id ?? null,
+      })),
+  ].sort((a, b) => (a.at < b.at ? 1 : -1));
+  store.completionsRaw = { sessions: sessions.filter((s) => s.completed_at).length, scheduled: sched.filter((w) => w.status === 'completed' && w.completed_at).length };
 
   store.planIndex = plans.map((p) => ({ ...p }));
   store.appstore = appstore;
@@ -155,6 +174,26 @@ export function wawc2Series(weeks = 8, userFilter = () => true) {
     out.push({ week: wk, value: n });
   }
   return out;
+}
+
+// The users behind a WAWC2 week: everyone who completed anything that week,
+// with their completions, flagged by whether they hit the >=2 bar.
+export function wawc2Week(wk, userFilter = () => true) {
+  const byUser = new Map();
+  for (const c of store.completions) {
+    if (weekKey(c.at) !== wk) continue;
+    if (!userFilter(store.byId.get(c.user_id) ?? {})) continue;
+    if (!byUser.has(c.user_id)) byUser.set(c.user_id, []);
+    byUser.get(c.user_id).push(c);
+  }
+  return [...byUser.entries()]
+    .map(([user_id, items]) => ({ user_id, items: items.sort((a, b) => (a.at < b.at ? -1 : 1)), qualifies: items.length >= 2 }))
+    .sort((a, b) => b.items.length - a.items.length || (a.items[0].at < b.items[0].at ? 1 : -1));
+}
+
+export function completionsSince(days, userFilter = () => true) {
+  const cutoff = new Date(Date.now() - days * 86400 * 1000).toISOString();
+  return store.completions.filter((c) => c.at >= cutoff && userFilter(store.byId.get(c.user_id) ?? {}));
 }
 
 // ---------------------------------------------------------------------------
