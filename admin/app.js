@@ -1524,6 +1524,14 @@ function viewLogin(step = 'email', email = '', err = '') {
   if (back) back.onclick = () => viewLogin('email', email);
 }
 
+// A dead session (refresh token rejected) should land on the login screen,
+// not on a data error that suggests a permissions problem.
+function handleSessionLost(e) {
+  if (!(e?.sessionLost || (!DEMO && !auth.session))) return false;
+  viewLogin('email', '', 'Your session expired — sign in again.');
+  return true;
+}
+
 async function route() {
   const hash = location.hash || '#/home';
   const [, page, arg, detail, targetMessageId] = hash.split('/');
@@ -1533,6 +1541,7 @@ async function route() {
     try {
       await loadIntentCore();
     } catch (error) {
+      if (handleSessionLost(error)) return;
       $app.innerHTML = `<div class="login-wrap"><div class="login-card"><h1>Couldn’t load data</h1><p class="error">${esc(error.message)}</p></div></div>`;
       return;
     }
@@ -1541,6 +1550,7 @@ async function route() {
     try {
       await loadCore();
     } catch (error) {
+      if (handleSessionLost(error)) return;
       $app.innerHTML = `<div class="login-wrap"><div class="login-card"><h1>Couldn’t load data</h1><p class="error">${esc(error.message)}</p></div></div>`;
       return;
     }
@@ -1569,6 +1579,7 @@ async function boot() {
     if (['conversations', 'analyze', 'build', 'intents', 'settings'].includes(initialPage)) await loadIntentCore();
     else await loadCore();
   } catch (e) {
+    if (handleSessionLost(e)) return;
     $app.innerHTML = `<div class="login-wrap"><div class="login-card">
       <h1>Couldn't load data</h1><p class="error">${esc(e.message)}</p>
       <p>If this is a permissions error, check that your account has <code>is_admin</code> and that the

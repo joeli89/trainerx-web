@@ -19,6 +19,7 @@ function saveSession(s) {
 }
 
 let session = loadSession();
+let refreshing = null; // in-flight refresh promise
 
 async function authFetch(path, body) {
   const res = await fetch(`${CFG.supabaseUrl}/auth/v1${path}`, {
@@ -49,9 +50,31 @@ export const auth = {
     saveSession(session);
     return session;
   },
-  async refresh() {
+  // Parallel queries that all 401 at once must share one refresh: Supabase
+  // rotates the refresh token on every use, so racing refreshes with the same
+  // token can invalidate the whole session.
+  refresh() {
+    if (!refreshing) refreshing = this._refresh().finally(() => { refreshing = null; });
+    return refreshing;
+  },
+  async _refresh() {
     if (!session?.refresh_token) throw new Error('No session');
-    const json = await authFetch('/token?grant_type=refresh_token', { refresh_token: session.refresh_token });
+    let json;
+    try {
+      json = await authFetch('/token?grant_type=refresh_token', { refresh_token: session.refresh_token });
+    } catch (e) {
+      // The server no longer recognises this refresh token (rotated by another
+      // tab, revoked by a sign-out elsewhere, or expired). The saved session is
+      // dead; drop it so the app shows the login screen instead of a data error.
+      if (/refresh token|invalid grant|not found/i.test(e.message)) {
+        session = null;
+        saveSession(null);
+        const err = new Error('Session expired — please sign in again');
+        err.sessionLost = true;
+        throw err;
+      }
+      throw e;
+    }
     session = { access_token: json.access_token, refresh_token: json.refresh_token, user: json.user, expires_at: json.expires_at };
     saveSession(session);
     return session;
