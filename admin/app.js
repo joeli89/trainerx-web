@@ -203,7 +203,7 @@ function shell(active, content) {
       <div class="brand">trainer<span>X</span> admin</div>
       <div class="nav-tree">
         ${navLink('home', 'Home', '#/home', 'home')}
-        ${navLink('signups', 'Sign-ups', '#/signups', 'signups')}
+        ${navLink('users', 'Users', '#/users', 'signups')}
         ${navLink('conversations', 'Conversations', '#/conversations', 'conversations')}
         <button class="nav-group ${active.startsWith('analyze-') ? 'active-parent' : ''}" data-nav-group="analyze" aria-expanded="${analyzeOpen}">
           ${icon('analyze')}<span>Analyze</span><span class="nav-chevron">${analyzeOpen ? '⌃' : '⌄'}</span>
@@ -491,7 +491,7 @@ function viewOverview() {
     <div class="tiles">
       <a class="tile link" href="#/north-star"><div class="label">WAWC₂ this week <span class="tile-go">→</span></div><div class="value">${thisWeek}</div>
         <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta >= 0 ? '+' : ''}${delta} vs last week</div></a>
-      <a class="tile link" href="#/signups"><div class="label">Total users <span class="tile-go">→</span></div><div class="value">${users.length}</div>
+      <a class="tile link" href="#/users"><div class="label">Total users <span class="tile-go">→</span></div><div class="value">${users.length}</div>
         <div class="delta">${newUsers7} new in 7d</div></a>
       <a class="tile link" href="#/workouts"><div class="label">Workouts completed · 7d <span class="tile-go">→</span></div><div class="value">${workouts7}</div>
         <div class="delta">${new Set(completions.filter((c) => c.at >= new Date(Date.now() - 7 * 86400 * 1000).toISOString()).map((c) => c.user_id)).size} people</div></a>
@@ -619,118 +619,125 @@ function viewWorkouts(daysArg) {
 }
 
 // ---------------------------------------------------------------------------
-// Sign-ups, grouped by day, newest first.
+// Users: every account, filterable, newest sign-ups first by default.
 
-function viewSignups(daysArg) {
-  const days = [7, 14, 30, 90, 365].includes(+daysArg) ? +daysArg : 30;
-  const cutoff = new Date(Date.now() - days * 86400 * 1000).toISOString();
-  const users = visibleProfiles().filter((u) => u.created_at && u.created_at >= cutoff).sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
-  const dayOf = (ts) => new Date(ts).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+const userFilters = { q: '', joined: 'all', onboarding: 'any', plan: 'any', workouts: 'any', pro: 'any', sort: 'joined' };
+
+function viewUsers() {
+  const F = userFilters;
+  const q = F.q.toLowerCase();
+  const joinedDays = F.joined === 'all' ? null : +F.joined;
+  const cutoff = joinedDays ? new Date(Date.now() - joinedDays * 86400 * 1000).toISOString() : null;
+  const workoutsBy = new Map();
+  for (const c of store.completions) workoutsBy.set(c.user_id, (workoutsBy.get(c.user_id) ?? 0) + 1);
+  const plansBy = new Map();
+  for (const pl of store.planIndex) plansBy.set(pl.user_id, (plansBy.get(pl.user_id) ?? 0) + 1);
+
+  const all = visibleProfiles().map((u) => {
+    const ms = store.msgStats.get(u.id);
+    const streak = store.streaks.get(u.id);
+    const lastAt = [ms?.lastAt, streak?.last_active_date].filter(Boolean).sort().pop() ?? null;
+    return { u, msgs: ms?.userCount ?? 0, workouts: workoutsBy.get(u.id) ?? 0, plans: plansBy.get(u.id) ?? 0, streak: streak?.current_streak ?? 0, lastAt };
+  });
+  const rows = all
+    .filter((r) => !q || `${r.u.name ?? ''} ${r.u.email ?? ''}`.toLowerCase().includes(q))
+    .filter((r) => !cutoff || (r.u.created_at && r.u.created_at >= cutoff))
+    .filter((r) => F.onboarding === 'any' || (F.onboarding === 'done') === !!r.u.onboarding_complete)
+    .filter((r) => F.plan === 'any' || (F.plan === 'yes') === r.plans > 0)
+    .filter((r) => F.workouts === 'any' || (F.workouts === 'yes') === r.workouts > 0)
+    .filter((r) => F.pro === 'any' || (F.pro === 'pro') === !!r.u.is_pro)
+    .sort((a, b) => {
+      if (F.sort === 'active') return (a.lastAt ?? '') < (b.lastAt ?? '') ? 1 : -1;
+      if (F.sort === 'workouts') return b.workouts - a.workouts;
+      if (F.sort === 'messages') return b.msgs - a.msgs;
+      return (a.u.created_at ?? '') < (b.u.created_at ?? '') ? 1 : -1;
+    });
+
+  const n = rows.length;
+  const onboarded = rows.filter((r) => r.u.onboarding_complete).length;
+  const planned = rows.filter((r) => r.plans > 0).length;
+  const trained = rows.filter((r) => r.workouts > 0).length;
+  const pct = (k) => (n ? `${Math.round((k / n) * 100)}%` : '—');
+
+  // sign-ups per day, over the joined window (capped at 30 days for the chart)
+  const chartDays = Math.min(joinedDays ?? 30, 30);
   const key = (ts) => String(ts).slice(0, 10);
-  // per-day series for the chart (last min(days,30) days)
-  const chartDays = Math.min(days, 30);
   const byDay = new Map();
-  for (const u of users) byDay.set(key(u.created_at), (byDay.get(key(u.created_at)) ?? 0) + 1);
+  for (const r of rows) if (r.u.created_at) byDay.set(key(r.u.created_at), (byDay.get(key(r.u.created_at)) ?? 0) + 1);
   const series = [];
   for (let i = chartDays - 1; i >= 0; i--) {
     const d = new Date(Date.now() - i * 86400 * 1000).toISOString().slice(0, 10);
     series.push({ week: d, value: byDay.get(d) ?? 0 });
   }
-  const workoutsBy = new Map();
-  for (const c of store.completions) workoutsBy.set(c.user_id, (workoutsBy.get(c.user_id) ?? 0) + 1);
-  const plansBy = new Set(store.planIndex.map((p) => p.user_id));
-  const onboarded = users.filter((u) => u.onboarding_complete).length;
-  const planned = users.filter((u) => plansBy.has(u.id)).length;
-  const trained = users.filter((u) => (workoutsBy.get(u.id) ?? 0) > 0).length;
-  const pct = (n) => (users.length ? `${Math.round((n / users.length) * 100)}%` : '—');
 
-  // group rows by day
-  const groups = [];
-  for (const u of users) {
-    const k = key(u.created_at);
-    if (!groups.length || groups[groups.length - 1].k !== k) groups.push({ k, label: dayOf(u.created_at), rows: [] });
-    groups[groups.length - 1].rows.push(u);
-  }
-  const row = (u) => {
-    const w = workoutsBy.get(u.id) ?? 0, m = store.msgStats.get(u.id)?.userCount ?? 0;
-    return `<tr class="rowlink" data-uid="${u.id}">
-      <td class="nowrap">${fmtTime(u.created_at)}</td>
-      <td><strong>${esc(displayName(u))}</strong> ${u.is_pro ? '<span class="pill pro">PRO</span>' : ''}${isTestAccount(u) ? ' <span class="pill warn">test</span>' : ''}<br><span style="color:var(--text-muted)">${esc(u.email ?? '')}</span></td>
-      <td>${esc(u.goal ?? '—')}</td>
-      <td>${u.onboarding_complete ? '<span class="pill good">done</span>' : '<span class="pill">incomplete</span>'}</td>
-      <td>${plansBy.has(u.id) ? '<span class="pill good">yes</span>' : '<span class="pill">no</span>'}</td>
-      <td class="num">${w}</td>
-      <td class="num">${m}</td>
+  const row = (r) => `<tr class="rowlink" data-uid="${r.u.id}">
+      <td class="nowrap">${F.sort === 'joined' ? fmtTime(r.u.created_at) : fmtDate(r.u.created_at)}</td>
+      <td><strong>${esc(displayName(r.u))}</strong> ${r.u.is_pro ? '<span class="pill pro">PRO</span>' : ''}${isTestAccount(r.u) ? ' <span class="pill warn">test</span>' : ''}<br><span style="color:var(--text-muted)">${esc(r.u.email ?? '')}</span></td>
+      <td>${r.u.goal ? `<span class="pill">${esc(r.u.goal)}</span>` : '—'}</td>
+      <td>${esc(r.u.fitness_level ?? '—')}</td>
+      <td>${r.u.onboarding_complete ? '<span class="pill good">done</span>' : '<span class="pill">incomplete</span>'}</td>
+      <td class="num">${r.plans}</td>
+      <td class="num">${r.workouts}</td>
+      <td class="num">${r.msgs}</td>
+      <td class="num">${r.streak}</td>
+      <td>${ago(r.lastAt)}</td>
       <td>→</td></tr>`;
-  };
-  shell(
-    'signups',
-    `<div class="page-title">Sign-ups</div>
-    <div class="page-sub">${users.length} accounts created in the last ${days} days, newest first. Rows open the user.</div>
-    <div class="week-picker">${[7, 14, 30, 90, 365].map((d) => `<a class="chip-link ${d === days ? 'active' : ''}" href="#/signups/${d}">${d}d</a>`).join('')}</div>
-    <div class="tiles">
-      <div class="tile"><div class="label">Sign-ups</div><div class="value">${users.length}</div></div>
-      <div class="tile"><div class="label">Finished onboarding</div><div class="value">${onboarded}</div><div class="delta">${pct(onboarded)}</div></div>
-      <div class="tile"><div class="label">Got a plan</div><div class="value">${planned}</div><div class="delta">${pct(planned)}</div></div>
-      <div class="tile"><div class="label">Completed a workout</div><div class="value">${trained}</div><div class="delta">${pct(trained)}</div></div>
-    </div>
-    <div class="card"><h3>Sign-ups per day<span class="sub">last ${chartDays} days</span></h3>
-      ${barChart({ data: series, labelFn: (d, i) => (i % (chartDays > 14 ? 3 : 2) === 0 ? d.week.slice(5) : ''), valueLabel: 'sign-ups' })}</div>
-    ${groups.length ? groups.map((g) => `<div class="card">
-      <h3>${esc(g.label)}<span class="sub">${g.rows.length} sign-up${g.rows.length === 1 ? '' : 's'}</span></h3>
-      <div class="table-scroll"><table>
-        <tr><th>Time</th><th>User</th><th>Goal</th><th>Onboarding</th><th>Plan</th><th class="num">Workouts</th><th class="num">Messages</th><th></th></tr>
-        ${g.rows.map(row).join('')}</table></div></div>`).join('')
-      : `<div class="card"><div class="empty">No sign-ups in the last ${days} days.</div></div>`}`
-  );
-  bindRowLinks();
-}
+  const header = `<tr><th>${F.sort === 'joined' ? 'Time' : 'Joined'}</th><th>User</th><th>Goal</th><th>Level</th><th>Onboarding</th><th class="num">Plans</th><th class="num">Workouts</th><th class="num">Messages</th><th class="num">Streak</th><th>Last active</th><th></th></tr>`;
 
-function viewUsers() {
-  const q = (document.getElementById('userSearch')?.value ?? '').toLowerCase();
-  const users = visibleProfiles()
-    .map((u) => {
-      const ms = store.msgStats.get(u.id);
-      const wk = store.completions.filter((c) => c.user_id === u.id).length;
-      const plans = store.planIndex.filter((p) => p.user_id === u.id).length;
-      const streak = store.streaks.get(u.id);
-      const lastAt = [ms?.lastAt, streak?.last_active_date].filter(Boolean).sort().pop() ?? null;
-      return { u, msgs: ms?.count ?? 0, workouts: wk, plans, streak: streak?.current_streak ?? 0, lastAt };
-    })
-    .filter((r) => !q || `${r.u.name ?? ''} ${r.u.email ?? ''}`.toLowerCase().includes(q))
-    .sort((a, b) => ((a.lastAt ?? '') < (b.lastAt ?? '') ? 1 : -1));
+  let tables;
+  if (F.sort === 'joined') {
+    const dayOf = (ts) => new Date(ts).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    const groups = [];
+    for (const r of rows) {
+      const k = r.u.created_at ? key(r.u.created_at) : '—';
+      if (!groups.length || groups[groups.length - 1].k !== k) groups.push({ k, label: r.u.created_at ? dayOf(r.u.created_at) : 'Unknown date', rows: [] });
+      groups[groups.length - 1].rows.push(r);
+    }
+    tables = groups.map((g) => `<div class="card"><h3>${esc(g.label)}<span class="sub">${g.rows.length} sign-up${g.rows.length === 1 ? '' : 's'}</span></h3>
+      <div class="table-scroll"><table>${header}${g.rows.map(row).join('')}</table></div></div>`).join('');
+  } else {
+    tables = `<div class="card"><div class="table-scroll"><table>${header}${rows.map(row).join('')}</table></div></div>`;
+  }
+  const sel = (name, label, opts) => `<label>${label}<br><select data-f="${name}">${opts.map(([v, t]) => `<option value="${v}" ${F[name] === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`;
 
   shell(
     'users',
     `<div class="page-title">Users</div>
-    <div class="page-sub">${users.length} shown${hideTest ? ' (internal & test accounts hidden)' : ''}</div>
-    <div class="toolbar"><input type="search" id="userSearch" placeholder="Search name or email…" value="${esc(q)}"/></div>
-    <div class="card"><div class="table-scroll"><table>
-      <tr><th>User</th><th>Joined</th><th>Goal</th><th>Level</th><th></th>
-        <th class="num">Streak</th><th class="num">Msgs</th><th class="num">Workouts</th><th class="num">Plans</th><th>Last active</th></tr>
-      ${users
-        .map(
-          (r) => `<tr class="rowlink" data-uid="${r.u.id}">
-        <td><strong>${esc(displayName(r.u))}</strong><br><span style="color:var(--text-muted)">${esc(r.u.email ?? '')}</span></td>
-        <td>${fmtDate(r.u.created_at)}</td>
-        <td>${r.u.goal ? `<span class="pill">${esc(r.u.goal)}</span>` : '—'}</td>
-        <td>${esc(r.u.fitness_level ?? '—')}</td>
-        <td>${r.u.is_pro ? '<span class="pill pro">PRO</span>' : ''}${r.u.onboarding_complete ? '' : ' <span class="pill warn">onboarding</span>'}</td>
-        <td class="num">${r.streak}</td><td class="num">${r.msgs}</td><td class="num">${r.workouts}</td><td class="num">${r.plans}</td>
-        <td>${ago(r.lastAt)}</td></tr>`
-        )
-        .join('')}
-    </table></div></div>`
+    <div class="page-sub">${n} of ${all.length} accounts${hideTest ? ' (internal & test hidden)' : ''}. Rows open the user.</div>
+    <div class="visibility-filters">
+      <label>Search<br><input type="search" id="userSearch" placeholder="Name or email…" value="${esc(F.q)}"/></label>
+      ${sel('joined', 'Joined', [['all', 'Any time'], ['7', 'Last 7 days'], ['14', 'Last 14 days'], ['30', 'Last 30 days'], ['90', 'Last 90 days'], ['365', 'Last year']])}
+      ${sel('onboarding', 'Onboarding', [['any', 'Any'], ['done', 'Finished'], ['incomplete', 'Not finished']])}
+      ${sel('plan', 'Plan', [['any', 'Any'], ['yes', 'Has a plan'], ['no', 'No plan']])}
+      ${sel('workouts', 'Workouts', [['any', 'Any'], ['yes', 'Completed ≥1'], ['no', 'None yet']])}
+      ${sel('pro', 'Tier', [['any', 'Any'], ['pro', 'Pro'], ['free', 'Free']])}
+      ${sel('sort', 'Sort', [['joined', 'Newest sign-up'], ['active', 'Last active'], ['workouts', 'Most workouts'], ['messages', 'Most messages']])}
+      <button class="btn secondary" id="userReset" type="button">Reset</button>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="label">Users</div><div class="value">${n}</div></div>
+      <div class="tile"><div class="label">Finished onboarding</div><div class="value">${onboarded}</div><div class="delta">${pct(onboarded)}</div></div>
+      <div class="tile"><div class="label">Got a plan</div><div class="value">${planned}</div><div class="delta">${pct(planned)}</div></div>
+      <div class="tile"><div class="label">Completed a workout</div><div class="value">${trained}</div><div class="delta">${pct(trained)}</div></div>
+    </div>
+    <div class="card"><h3>Sign-ups per day<span class="sub">last ${chartDays} days, matching filters</span></h3>
+      ${barChart({ data: series, labelFn: (d, i) => (i % (chartDays > 14 ? 3 : 2) === 0 ? d.week.slice(5) : ''), valueLabel: 'sign-ups' })}</div>
+    ${n ? tables : '<div class="card"><div class="empty">No users match these filters.</div></div>'}`
   );
   bindRowLinks();
   const inp = document.getElementById('userSearch');
   inp.oninput = () => {
     const pos = inp.selectionStart;
+    F.q = inp.value;
     viewUsers();
     const again = document.getElementById('userSearch');
     again.focus();
     again.setSelectionRange(pos, pos);
   };
+  document.querySelectorAll('.visibility-filters select[data-f]').forEach((el) => {
+    el.onchange = () => { F[el.dataset.f] = el.value; viewUsers(); };
+  });
+  document.getElementById('userReset').onclick = () => { Object.assign(F, { q: '', joined: 'all', onboarding: 'any', plan: 'any', workouts: 'any', pro: 'any', sort: 'joined' }); viewUsers(); };
 }
 
 // ---------------------------------------------------------------------------
@@ -1628,7 +1635,7 @@ async function route() {
   if (page === 'users') viewUsers();
   else if (page === 'user' && arg) viewUser(arg, ['workouts', 'plans', 'trainer'].includes(detail) ? detail : 'chat', detail === 'message' ? targetMessageId : null);
   else if (page === 'north-star') viewNorthStar(arg);
-  else if (page === 'signups') viewSignups(arg);
+  else if (page === 'signups') viewUsers();
   else if (page === 'workouts') viewWorkouts(arg);
   else if (page === 'conversations') viewConversations();
   else if (page === 'plans') viewPlans();
