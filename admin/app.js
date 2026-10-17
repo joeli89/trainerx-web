@@ -182,6 +182,7 @@ function shell(active, content) {
   const icon = (name) => {
     const paths = {
       home: '<path d="M3 10.5 10 4l7 6.5v7H6v-7"/><path d="M8.5 17v-4.5h3V17"/>',
+      signups: '<circle cx="8" cy="7" r="3"/><path d="M2.5 17c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M15 6v6M12 9h6"/>',
       conversations: '<path d="M4 5h12v9H9l-4 3v-3H4z"/><path d="M7 8h6M7 11h4"/>',
       analyze: '<path d="M4 16V9m6 7V4m6 12v-5"/>',
       intent: '<circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="2"/><path d="M10 1v3m9 6h-3"/>',
@@ -202,6 +203,7 @@ function shell(active, content) {
       <div class="brand">trainer<span>X</span> admin</div>
       <div class="nav-tree">
         ${navLink('home', 'Home', '#/home', 'home')}
+        ${navLink('signups', 'Sign-ups', '#/signups', 'signups')}
         ${navLink('conversations', 'Conversations', '#/conversations', 'conversations')}
         <button class="nav-group ${active.startsWith('analyze-') ? 'active-parent' : ''}" data-nav-group="analyze" aria-expanded="${analyzeOpen}">
           ${icon('analyze')}<span>Analyze</span><span class="nav-chevron">${analyzeOpen ? '⌃' : '⌄'}</span>
@@ -489,8 +491,8 @@ function viewOverview() {
     <div class="tiles">
       <a class="tile link" href="#/north-star"><div class="label">WAWC₂ this week <span class="tile-go">→</span></div><div class="value">${thisWeek}</div>
         <div class="delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta >= 0 ? '+' : ''}${delta} vs last week</div></a>
-      <div class="tile"><div class="label">Total users</div><div class="value">${users.length}</div>
-        <div class="delta">${newUsers7} new in 7d</div></div>
+      <a class="tile link" href="#/signups"><div class="label">Total users <span class="tile-go">→</span></div><div class="value">${users.length}</div>
+        <div class="delta">${newUsers7} new in 7d</div></a>
       <a class="tile link" href="#/workouts"><div class="label">Workouts completed · 7d <span class="tile-go">→</span></div><div class="value">${workouts7}</div>
         <div class="delta">${new Set(completions.filter((c) => c.at >= new Date(Date.now() - 7 * 86400 * 1000).toISOString()).map((c) => c.user_id)).size} people</div></a>
       <div class="tile"><div class="label">User messages · 7d</div><div class="value">${msgs7}</div></div>
@@ -612,6 +614,74 @@ function viewWorkouts(daysArg) {
       }).join('') : `<tr><td colspan="7"><div class="empty">No completed workouts in the last ${days} days.</div></td></tr>`}
     </table></div></div>
     ${raw.sessions != null ? `<div class="query-note">All time: ${raw.sessions} completed sessions + ${raw.scheduled} completed scheduled rows → ${store.completions.length} distinct workouts after de-duplication.</div>` : ''}`
+  );
+  bindRowLinks();
+}
+
+// ---------------------------------------------------------------------------
+// Sign-ups, grouped by day, newest first.
+
+function viewSignups(daysArg) {
+  const days = [7, 14, 30, 90, 365].includes(+daysArg) ? +daysArg : 30;
+  const cutoff = new Date(Date.now() - days * 86400 * 1000).toISOString();
+  const users = visibleProfiles().filter((u) => u.created_at && u.created_at >= cutoff).sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+  const dayOf = (ts) => new Date(ts).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  const key = (ts) => String(ts).slice(0, 10);
+  // per-day series for the chart (last min(days,30) days)
+  const chartDays = Math.min(days, 30);
+  const byDay = new Map();
+  for (const u of users) byDay.set(key(u.created_at), (byDay.get(key(u.created_at)) ?? 0) + 1);
+  const series = [];
+  for (let i = chartDays - 1; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400 * 1000).toISOString().slice(0, 10);
+    series.push({ week: d, value: byDay.get(d) ?? 0 });
+  }
+  const workoutsBy = new Map();
+  for (const c of store.completions) workoutsBy.set(c.user_id, (workoutsBy.get(c.user_id) ?? 0) + 1);
+  const plansBy = new Set(store.planIndex.map((p) => p.user_id));
+  const onboarded = users.filter((u) => u.onboarding_complete).length;
+  const planned = users.filter((u) => plansBy.has(u.id)).length;
+  const trained = users.filter((u) => (workoutsBy.get(u.id) ?? 0) > 0).length;
+  const pct = (n) => (users.length ? `${Math.round((n / users.length) * 100)}%` : '—');
+
+  // group rows by day
+  const groups = [];
+  for (const u of users) {
+    const k = key(u.created_at);
+    if (!groups.length || groups[groups.length - 1].k !== k) groups.push({ k, label: dayOf(u.created_at), rows: [] });
+    groups[groups.length - 1].rows.push(u);
+  }
+  const row = (u) => {
+    const w = workoutsBy.get(u.id) ?? 0, m = store.msgStats.get(u.id)?.userCount ?? 0;
+    return `<tr class="rowlink" data-uid="${u.id}">
+      <td class="nowrap">${fmtTime(u.created_at)}</td>
+      <td><strong>${esc(displayName(u))}</strong> ${u.is_pro ? '<span class="pill pro">PRO</span>' : ''}${isTestAccount(u) ? ' <span class="pill warn">test</span>' : ''}<br><span style="color:var(--text-muted)">${esc(u.email ?? '')}</span></td>
+      <td>${esc(u.goal ?? '—')}</td>
+      <td>${u.onboarding_complete ? '<span class="pill good">done</span>' : '<span class="pill">incomplete</span>'}</td>
+      <td>${plansBy.has(u.id) ? '<span class="pill good">yes</span>' : '<span class="pill">no</span>'}</td>
+      <td class="num">${w}</td>
+      <td class="num">${m}</td>
+      <td>→</td></tr>`;
+  };
+  shell(
+    'signups',
+    `<div class="page-title">Sign-ups</div>
+    <div class="page-sub">${users.length} accounts created in the last ${days} days, newest first. Rows open the user.</div>
+    <div class="week-picker">${[7, 14, 30, 90, 365].map((d) => `<a class="chip-link ${d === days ? 'active' : ''}" href="#/signups/${d}">${d}d</a>`).join('')}</div>
+    <div class="tiles">
+      <div class="tile"><div class="label">Sign-ups</div><div class="value">${users.length}</div></div>
+      <div class="tile"><div class="label">Finished onboarding</div><div class="value">${onboarded}</div><div class="delta">${pct(onboarded)}</div></div>
+      <div class="tile"><div class="label">Got a plan</div><div class="value">${planned}</div><div class="delta">${pct(planned)}</div></div>
+      <div class="tile"><div class="label">Completed a workout</div><div class="value">${trained}</div><div class="delta">${pct(trained)}</div></div>
+    </div>
+    <div class="card"><h3>Sign-ups per day<span class="sub">last ${chartDays} days</span></h3>
+      ${barChart({ data: series, labelFn: (d, i) => (i % (chartDays > 14 ? 3 : 2) === 0 ? d.week.slice(5) : ''), valueLabel: 'sign-ups' })}</div>
+    ${groups.length ? groups.map((g) => `<div class="card">
+      <h3>${esc(g.label)}<span class="sub">${g.rows.length} sign-up${g.rows.length === 1 ? '' : 's'}</span></h3>
+      <div class="table-scroll"><table>
+        <tr><th>Time</th><th>User</th><th>Goal</th><th>Onboarding</th><th>Plan</th><th class="num">Workouts</th><th class="num">Messages</th><th></th></tr>
+        ${g.rows.map(row).join('')}</table></div></div>`).join('')
+      : `<div class="card"><div class="empty">No sign-ups in the last ${days} days.</div></div>`}`
   );
   bindRowLinks();
 }
@@ -1558,6 +1628,7 @@ async function route() {
   if (page === 'users') viewUsers();
   else if (page === 'user' && arg) viewUser(arg, ['workouts', 'plans', 'trainer'].includes(detail) ? detail : 'chat', detail === 'message' ? targetMessageId : null);
   else if (page === 'north-star') viewNorthStar(arg);
+  else if (page === 'signups') viewSignups(arg);
   else if (page === 'workouts') viewWorkouts(arg);
   else if (page === 'conversations') viewConversations();
   else if (page === 'plans') viewPlans();
